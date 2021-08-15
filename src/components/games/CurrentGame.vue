@@ -7,8 +7,8 @@
       class="
         flex flex-col
         bg-gradient-to-tr
-        from-violet-400
-        to-pink-500
+        from-cyan-800
+        to-sky-900
         p-4
         rounded-b-md
       "
