@@ -1,24 +1,24 @@
 <template>
-  <div>
+  <div class="flex h-full">
     <box-wrapper>
-      <div class="flex flex-col justify-start items-start p-4">
-        <div class="text-xl text-bluegray-600 font-bold mb-1">{{ month }}</div>
-        <div class="flex flex-row justify-between -mx-1">
+      <div class="flex flex-col justify-start items-start w-full h-full">
+        <div class="flex items-center text-2xl text-bluegray-600 font-bold flex-1 ml-4">{{ month }}</div>
+        <div class="flex flex-row justify-between mx-1 mb-2">
           <div v-for="day in week" :key="day">
             <div
               class="
                 flex flex-col
                 justify-center
                 items-center
-                bg-truegray-200
+                bg-bluegray-200
                 rounded
                 px-6
                 py-2
-                shadow
-                m-1
+                w-20
+                mx-1 
                 cursor-pointer
               "
-              :class="(day.ofWeek === today) && 'bg-gradient-to-tr from-emerald-400 to-cyan-400 text-white'"
+              :class="(day.ofWeek === today) && 'bg-gradient-to-tl from-teal-400 to-sky-500 text-white'"
             >
               <div class="text-sm font-medium">{{ day.ofWeek }}</div>
               <div class="font-bold text-xl">{{ day.ofMonth }}</div>
@@ -46,8 +46,6 @@ for (let i = 0; i < 7; i++) {
     ofMonth: dayOfWeek.format("DD"),
   });
 }
-
-console.log(week);
 
 export default {
   components: {
