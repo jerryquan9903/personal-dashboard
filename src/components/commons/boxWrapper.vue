@@ -1,12 +1,15 @@
 <template>
   <div class="flex">
-    <div class="m-2 bg-white rounded-md w-auto">
+    <div
+      class="m-2 rounded-md w-auto bg-bluegray-600"
+    >
       <slot />
     </div>
   </div>
 </template>
 
 <script>
+
 export default {
   name: "box-wrapper",
 };

@@ -10,6 +10,7 @@
 <script>
 import Games from "./components/games/Games.vue";
 import Welcome from "./components/welcome/Welcome.vue";
+// import api from "./services/api";
 
 export default {
   name: "App",
@@ -25,18 +26,11 @@ export default {
   font-family: Roboto, Avenir, Helvetica Neue, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* text-align: center; */
-  color: #2c3e50;
   min-height: 100vh;
-  background: rgb(167, 243, 208);
-  background: rgb(167, 243, 208);
-  background: linear-gradient(
-    45deg,
-    rgba(167, 243, 208, 1) 15%,
-    rgba(125, 211, 252, 1) 100%
-  );
   padding: 0;
   margin: 0;
+  background-color: #1f2937;
+  color: #ffe;
 }
 
 #nav {
