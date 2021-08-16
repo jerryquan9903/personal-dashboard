@@ -20,7 +20,7 @@
               "
               :class="(day.ofWeek === today) && 'bg-gradient-to-tl from-teal-400 to-sky-500 text-bluegray-600'"
             >
-              <div class="text-sm font-medium">{{ day.ofWeek }}</div>
+              <div class="text-sm">{{ day.ofWeek }}</div>
               <div class="font-bold text-xl">{{ day.ofMonth }}</div>
             </div>
           </div>

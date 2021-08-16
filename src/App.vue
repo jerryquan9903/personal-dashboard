@@ -10,7 +10,6 @@
 <script>
 import Games from "./components/games/Games.vue";
 import Welcome from "./components/welcome/Welcome.vue";
-// import api from "./services/api";
 
 export default {
   name: "App",
@@ -26,6 +25,8 @@ export default {
   font-family: Roboto, Avenir, Helvetica Neue, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  -moz-font-smoothing: antialiased;
+  -o-font-smoothing: antialiased;
   min-height: 100vh;
   padding: 0;
   margin: 0;
@@ -50,12 +51,13 @@ export default {
   display: grid;
   min-height: 100vh;
   grid-template-areas:
-    "top"
-    "bottom"
-    "bottom"
-    "bottom"
-    "bottom";
+    "top top"
+    "bottom other"
+    "bottom other"
+    "bottom other"
+    "bottom other";
   grid-template-rows: 20% 20% 20% 20% 20%;
+  grid-template-columns: 50% 50%;
 }
 
 #grid-welcome {

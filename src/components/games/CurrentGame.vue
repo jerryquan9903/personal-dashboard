@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div class="w-full">
     <div class="font-bold text-xl w-full text-left py-2 px-3">
       Currently playing
     </div>
@@ -11,10 +11,11 @@
         to-sky-900
         p-4
         rounded-b-md
+        w-full
       "
     >
-      <div class="flex flex-col justify-center items-start w-96">
-        <div class="">
+      <div v-if="name" class="flex flex-row justify-start items-start">
+        <div class="w-3/5 mr-4">
           <img :src="image" class="rounded-lg border-4 border-black" />
         </div>
         <div class="flex flex-col justify-start items-start mt-2">
@@ -26,6 +27,22 @@
           >
             <div class="w-full mb-1 font-light pr-12">{{ item.label }}</div>
             <div class="w-full font-normal">{{ item.value }}</div>
+          </div>
+        </div>
+      </div>
+      <div v-else>
+        <div class="animate-pulse flex flex-row justify-start items-start">
+          <div class="rounded-lg w-3/5 h-52 bg-gray-200 mr-4"></div>
+          <div class="flex flex-col mt-2">
+            <div class="h-5 w-28 mb-4 rounded bg-gray-200"></div>
+            <div
+              class="grid grid-cols-2 gap-2"
+              v-for="num in skeleton"
+              :key="num"
+            >
+              <div class="h-4 rounded w-16 pr-8 mb-2 bg-gray-200"></div>
+              <div class="h-4 rounded w-28 bg-gray-200"></div>
+            </div>
           </div>
         </div>
       </div>
@@ -42,6 +59,7 @@ export default {
 
   data() {
     return {
+      skeleton: 5,
       name: null,
       image: null,
       data: null,
@@ -53,7 +71,7 @@ export default {
     // get last played game's info
     getCurrentGameInfo() {
       api
-        .get("http://127.0.0.1:5000/steam/last-played")
+        .get("games/last-played")
         .then((success) => {
           // set info to data()
           this.name = success.data.name;
@@ -66,10 +84,12 @@ export default {
         });
     },
 
+    // parse array returned from backend into displayable text
     parseGameInfo(info) {
       let parsed = info.map((item) => {
         let result = item;
 
+        // if the value is an array, convert it into a string
         if (Array.isArray(item.value)) {
           let string = "";
           item.value.forEach((val, index) => {
@@ -84,10 +104,26 @@ export default {
           result.value = dayjs(item.value).format("DD/MM/YYYY");
         }
 
+        // calculate last played value
         if (item.label === "Last played") {
-          result.value = dayjs.unix(item.value).format("DD/MM/YYYY");
+          let lastPlayed = dayjs.unix(item.value);
+
+          // set 01/01 of last year as reference point (so that the comparison always works)
+          let lastYear = dayjs(
+            (parseInt(dayjs().format("YYYY")) - 1).toString() + "/01/01"
+          );
+
+          // calculate the difference between now and last played
+          let diff =
+            dayjs().diff(lastYear, "day") - lastPlayed.diff(lastYear, "day");
+
+          // return values
+          if (diff == 0) result.value = "Today";
+          else if (diff == 1) result.value = "Yesterday";
+          else result.value = dayjs.unix(item.value).format("DD/MM/YYYY");
         }
 
+        // calculate total time played
         if (item.label === "Time played") {
           if (item.value >= 60)
             result.value =
@@ -101,21 +137,17 @@ export default {
         return result;
       });
 
-
       return parsed;
     },
   },
 
   beforeMount() {
     this.getCurrentGameInfo();
-    setInterval(this.getCurrentGameInfo, 300000);
+    setInterval(this.getCurrentGameInfo, 600000);
   },
 
   beforeUnmount() {
     clearInterval(this.getCurrentGameInfo);
-  }
+  },
 };
 </script>
-
-<style>
-</style>
