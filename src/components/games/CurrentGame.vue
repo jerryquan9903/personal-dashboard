@@ -15,8 +15,8 @@
       "
     >
       <div v-if="name" class="flex flex-row justify-start items-start">
-        <div class="w-3/5 mr-4">
-          <img :src="image" class="rounded-lg border-4 border-black" />
+        <div class="mr-4">
+          <img :src="image" class="w-40 rounded-lg border-4 border-black" />
         </div>
         <div class="flex flex-col justify-start items-start mt-2">
           <div class="font-medium text-xl mb-2">{{ name }}</div>
@@ -30,9 +30,11 @@
           </div>
         </div>
       </div>
+
+      <!--Skeleton-->
       <div v-else>
         <div class="animate-pulse flex flex-row justify-start items-start">
-          <div class="rounded-lg w-3/5 h-52 bg-gray-200 mr-4"></div>
+          <div class="rounded-lg w-40 h-60 bg-gray-200 mr-4"></div>
           <div class="flex flex-col mt-2">
             <div class="h-5 w-28 mb-4 rounded bg-gray-200"></div>
             <div
@@ -40,7 +42,7 @@
               v-for="num in skeleton"
               :key="num"
             >
-              <div class="h-4 rounded w-16 pr-8 mb-2 bg-gray-200"></div>
+              <div class="h-4 rounded w-20 pr-8 mb-2 bg-gray-200"></div>
               <div class="h-4 rounded w-28 bg-gray-200"></div>
             </div>
           </div>
@@ -59,7 +61,7 @@ export default {
 
   data() {
     return {
-      skeleton: 5,
+      skeleton: 3,
       name: null,
       image: null,
       data: null,
@@ -73,11 +75,11 @@ export default {
       api
         .get("games/last-played")
         .then((success) => {
+        
           // set info to data()
           this.name = success.data.name;
           this.image = success.data.image;
           this.data = this.parseGameInfo(success.data.info);
-          this.id = success.data.id;
         })
         .catch((e) => {
           console.log(e);
@@ -125,11 +127,11 @@ export default {
 
         // calculate total time played
         if (item.label === "Time played") {
-          if (item.value >= 60)
+          if (item.value >= 3600)
             result.value =
-              Math.floor(item.value / 60).toString() +
+              Math.floor(item.value / 3600).toString() +
               "h " +
-              (item.value % 60).toString() +
+              (Math.floor(item.value / 60) % 60).toString() +
               "m";
           else result.value += " minutes";
         }

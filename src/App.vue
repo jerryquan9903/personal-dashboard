@@ -27,10 +27,8 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   -moz-font-smoothing: antialiased;
   -o-font-smoothing: antialiased;
-  min-height: 100vh;
   padding: 0;
   margin: 0;
-  background-color: #1f2937;
   color: #ffe;
 }
 
@@ -51,13 +49,13 @@ export default {
   display: grid;
   min-height: 100vh;
   grid-template-areas:
-    "top top"
-    "bottom other"
-    "bottom other"
-    "bottom other"
-    "bottom other";
+    "top top top"
+    "bottom other other"
+    "bottom other other"
+    "bottom other other"
+    "bottom other other";
   grid-template-rows: 20% 20% 20% 20% 20%;
-  grid-template-columns: 50% 50%;
+  grid-template-columns: 35% 35% 30%;
 }
 
 #grid-welcome {
