@@ -1,10 +1,13 @@
 <template>
   <box-wrapper>
-    <CurrentGame />
+    <CurrentGame @open-details="openGameDetails($event)" />
   </box-wrapper>
   <box-wrapper>
     <PlayingNext />
   </box-wrapper>
+  <div >
+    ALO
+  </div>
 </template>
 
 <script>
@@ -20,10 +23,16 @@ export default {
   },
 
   data() {
-    return {};
+    return {
+      openDetails: false,
+    };
   },
+
+  methods: {
+    openGameDetails: function(isOpen) {
+      console.log("IT'S OPEN");
+      this.openDetails = isOpen;
+    }
+  }
 };
 </script>
-
-<style>
-</style>

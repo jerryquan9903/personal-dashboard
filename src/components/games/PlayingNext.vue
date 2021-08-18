@@ -6,25 +6,24 @@
     <div class="p-4 bg-gradient-to-tr from-cyan-800 to-sky-900 rounded-b-md">
       <div class="grid grid-cols-3 gap-4">
         <template v-for="game in nextGames" :key="game">
-          <div class="relative">
+          <div
+            class="
+              flex flex-col
+              transition
+              duration-500
+              ease-in-out
+              transform
+              hover:scale-105
+              hover:shadow-md
+              cursor-pointer
+            "
+            @click="getGameInfoFull(game.id)"
+          >
             <img
               :src="game.image"
-              class="rounded-md shadow-md border-4 border-black"
+              class="rounded-t-md shadow-md border-t-4 border-l-4 border-r-4 border-black"
             />
-            <div
-              class="
-                absolute
-                bottom-0
-                left-0
-                pl-2
-                pb-1
-                pt-2
-                text-sm
-                w-full
-                rounded-b-md
-                name-gradient
-              "
-            >
+            <div class="text-xs w-full h-full rounded-b-md bg-black px-2 py-1">
               {{ game.name }}
             </div>
           </div>
@@ -35,6 +34,7 @@
 </template>
 
 <script>
+import getGameDetails from '../../functions/getGameDetails';
 import api from "../../services/api";
 
 export default {
@@ -43,6 +43,11 @@ export default {
     return {
       nextGames: null,
     };
+  },
+  methods: {
+    getGameInfoFull: function(id) {
+      getGameDetails(id);
+    }
   },
   beforeMount() {
     api
@@ -67,4 +72,4 @@ export default {
     rgba(255, 255, 255, 0) 100%
   );
 }
-</style>
+</style>    

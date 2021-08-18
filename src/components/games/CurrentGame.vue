@@ -15,10 +15,22 @@
       "
     >
       <div v-if="name" class="flex flex-row justify-start items-start">
-        <div class="mr-4">
+        <div
+          class="
+            mr-4
+            transition
+            duration-500
+            ease-in-out
+            transform
+            hover:scale-105
+            hover:shadow-md
+            cursor-pointer
+          "
+          @click="getGameInfoFull()"
+        >
           <img :src="image" class="w-40 rounded-lg border-4 border-black" />
         </div>
-        <div class="flex flex-col justify-start items-start mt-2">
+        <div class="flex flex-col justify-start items-start mt-1">
           <div class="font-medium text-xl mb-2">{{ name }}</div>
           <div
             class="grid grid-cols-2 gap-2 text-sm font-light w-full"
@@ -55,6 +67,7 @@
 <script>
 import dayjs from "dayjs";
 import api from "../../services/api";
+import getGameDetails from "../../functions/getGameDetails";
 
 export default {
   name: "current-game",
@@ -69,17 +82,25 @@ export default {
     };
   },
 
+  emits: ['details', 'open-details'],
+
   methods: {
+    getGameInfoFull: function() {
+      let gameDetails = getGameDetails(this.id);
+      this.$emit('details', gameDetails);
+      this.$emit('openDetails', true);
+    },
+
     // get last played game's info
-    getCurrentGameInfo() {
+    getGameInfo: function() {
       api
         .get("games/last-played")
         .then((success) => {
-        
           // set info to data()
           this.name = success.data.name;
           this.image = success.data.image;
           this.data = this.parseGameInfo(success.data.info);
+          this.id = success.data.id;
         })
         .catch((e) => {
           console.log(e);
@@ -87,53 +108,64 @@ export default {
     },
 
     // parse array returned from backend into displayable text
-    parseGameInfo(info) {
+    parseGameInfo: function(info) {
       let parsed = info.map((item) => {
         let result = item;
 
-        // if the value is an array, convert it into a string
-        if (Array.isArray(item.value)) {
-          let string = "";
-          item.value.forEach((val, index) => {
-            if (index === item.value.length - 1) string += val;
-            else string += val + ", ";
-          });
+        switch (item.label) {
+          case "Genres":
+          case "Developers": {
+            let split = item.value.split(";");
+            let fieldArray = split.slice(0, split.length - 1);
 
-          result.value = string;
-        }
+            // format string
+            result.value = fieldArray
+              .map((item, index) => {
+                if (index === fieldArray.length - 1) return item;
+                else return item + ", ";
+              })
+              .join();
+            break;
+          }
 
-        if (item.label === "Release date") {
-          result.value = dayjs(item.value).format("DD/MM/YYYY");
-        }
+          case "Release date": {
+            result.value = dayjs(item.value).format("DD/MM/YYYY");
+            break;
+          }
 
-        // calculate last played value
-        if (item.label === "Last played") {
-          let lastPlayed = dayjs.unix(item.value);
+          case "Last played": {
+            let lastPlayed = dayjs.unix(item.value);
 
-          // set 01/01 of last year as reference point (so that the comparison always works)
-          let lastYear = dayjs(
-            (parseInt(dayjs().format("YYYY")) - 1).toString() + "/01/01"
-          );
+            // set 01/01 of last year as reference point (so that the comparison always works)
+            let lastYear = dayjs(
+              (parseInt(dayjs().format("YYYY")) - 1).toString() + "/01/01"
+            );
 
-          // calculate the difference between now and last played
-          let diff =
-            dayjs().diff(lastYear, "day") - lastPlayed.diff(lastYear, "day");
+            // calculate the difference between now and last played
+            let diff =
+              dayjs().diff(lastYear, "day") - lastPlayed.diff(lastYear, "day");
 
-          // return values
-          if (diff == 0) result.value = "Today";
-          else if (diff == 1) result.value = "Yesterday";
-          else result.value = dayjs.unix(item.value).format("DD/MM/YYYY");
-        }
+            // return values
+            if (diff == 0) result.value = "Today";
+            else if (diff == 1) result.value = "Yesterday";
+            else result.value = dayjs.unix(item.value).format("DD/MM/YYYY");
 
-        // calculate total time played
-        if (item.label === "Time played") {
-          if (item.value >= 3600)
-            result.value =
-              Math.floor(item.value / 3600).toString() +
-              "h " +
-              (Math.floor(item.value / 60) % 60).toString() +
-              "m";
-          else result.value += " minutes";
+            break;
+          }
+
+          case "Time played": {
+            if (item.value >= 3600)
+              result.value =
+                Math.floor(item.value / 3600).toString() +
+                "h " +
+                (Math.floor(item.value / 60) % 60).toString() +
+                "m";
+            else result.value += " minutes";
+            break;
+          }
+
+          default:
+            break;
         }
 
         return result;
@@ -144,12 +176,12 @@ export default {
   },
 
   beforeMount() {
-    this.getCurrentGameInfo();
-    setInterval(this.getCurrentGameInfo, 600000);
+    this.getGameInfo();
+    setInterval(this.getGameInfo, 600000);
   },
 
   beforeUnmount() {
-    clearInterval(this.getCurrentGameInfo);
+    clearInterval(this.getGameInfo);
   },
 };
 </script>
