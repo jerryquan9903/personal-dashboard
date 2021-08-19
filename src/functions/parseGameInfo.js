@@ -53,7 +53,7 @@ function parseGameInfo(info) {
             "h " +
             (Math.floor(item.value / 60) % 60).toString() +
             "m";
-        else result.value += " minutes";
+        else result.value = Math.floor(item.value / 60) + " minutes";
         break;
       }
 

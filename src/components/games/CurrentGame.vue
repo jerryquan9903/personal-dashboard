@@ -1,14 +1,14 @@
 <template>
   <div class="w-full">
-    <div class="font-bold text-xl w-full text-left py-2 px-3">
+    <div class="font-medium text-xl w-full text-left py-2 px-3">
       Currently playing
     </div>
     <div
       class="
         flex flex-col
         bg-gradient-to-tr
-        from-cyan-800
-        to-sky-900
+        from-teal-600
+        to-sky-700
         p-4
         rounded-b-md
         w-full
@@ -31,7 +31,7 @@
           <img
             :src="image"
             class="w-48 h-64 object-cover rounded-lg border-4 border-black"
-            @load="setLoaded()"
+            @load="setLoaded(true)"
           />
         </div>
         <div class="flex flex-col justify-start items-start mt-1">
@@ -86,8 +86,8 @@ export default {
   },
   emits: ["details"],
   methods: {
-    setLoaded() {
-      this.loaded = true;
+    setLoaded(value) {
+      this.loaded = value;
     },
 
     getGameInfoFull() {

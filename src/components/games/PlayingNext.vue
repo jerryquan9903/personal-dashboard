@@ -1,13 +1,13 @@
 <template>
   <div class="">
-    <div class="font-bold text-xl w-full text-left py-2 px-3">
+    <div class="font-medium text-xl w-full text-left py-2 px-3">
       Planning to play
     </div>
-    <div class="p-4 bg-gradient-to-tr from-cyan-800 to-sky-900 rounded-b-md">
+    <div class="p-4 bg-gradient-to-tr from-teal-600 to-sky-700 rounded-b-md">
       <div class="grid grid-cols-3 gap-4">
         <template v-for="game in nextGames" :key="game">
           <div
-            class=" 
+            class="
               flex flex-col
               transition
               duration-250

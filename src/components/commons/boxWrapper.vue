@@ -1,7 +1,7 @@
 <template>
   <div class="flex">
     <div
-      class="m-2 rounded-md w-full bg-bluegray-600"
+      class="m-2 rounded-md w-full bg-bluegray-700 shadow-xl"
     >
       <slot />
     </div>
