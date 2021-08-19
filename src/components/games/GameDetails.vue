@@ -7,7 +7,7 @@
         @load="setLoaded(true)"
       />
       <div class="flex flex-col h-128">
-        <div class="text-3xl font-medium mb-4">{{ gameDetails.name }}</div>
+        <div class="text-2xl font-medium mb-4">{{ gameDetails.name }}</div>
         <div class="pl-1 font-medium">Details</div>
         <div class="mb-4 mt-1 bg-bluegray-800 rounded-md px-3 pt-2 pb-1">
           <div
@@ -16,7 +16,7 @@
             :key="item"
           >
             <div class="w-full font-light pb-1 pr-12">{{ item.label }}</div>
-            <div class="w-full font-normal">{{ item.value }}</div>
+            <div class="w-full font-normal pb-1">{{ item.value }}</div>
           </div>
         </div>
         <div class="pl-1 font-medium">Description</div>
@@ -38,8 +38,8 @@
     <div v-show="!loaded">
       <div class="animate-pulse flex flex-row items-start">
         <div class="w-96 h-128 rounded-lg bg-bluegray-200 mr-4"></div>
-        <div class="flex flex-col h-128 w-112">
-          <div class="w-64 h-9 mb-4 bg-gray-200 rounded"></div>
+        <div class="flex flex-col h-128 w-144">
+          <div class="w-64 h-8 mb-4 bg-gray-200 rounded"></div>
           <div class="pl-1 w-20 h-6 font-medium bg-gray-200 rounded"></div>
           <div class="mb-4 mt-1 bg-bluegray-800 rounded-md px-3 pt-2 pb-1">
             <div
@@ -47,8 +47,8 @@
               v-for="num in skeleton"
               :key="num"
             >
-              <div class="h-5 w-3/5 rounded mb-1 bg-bluegray-200"></div>
-              <div class="h-5 w-2/5 rounded bg-bluegray-200"></div>
+              <div class="h-5 w-1/4 rounded mb-1 bg-bluegray-200"></div>
+              <div class="h-5 w-3/4 rounded bg-bluegray-200"></div>
             </div>
           </div>
           <div class="pl-1 w-28 h-6 font-medium bg-gray-200 rounded"></div>
@@ -80,7 +80,7 @@ export default {
     return {
       gameDetails: null,
       loaded: false,
-      skeleton: 5,
+      skeleton: 6,
     };
   },
   methods: {
@@ -110,6 +110,6 @@ export default {
 <style scoped>
 .info-grid {
   display: grid;
-  grid-template-columns: 40% 60%;
+  grid-template-columns: 25% 75%;
 }
 </style>

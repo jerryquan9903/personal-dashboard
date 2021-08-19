@@ -21,7 +21,7 @@
         "
         @click.self="closeGameDetails()"
       >
-        <div class="max-w-4xl">
+        <div class="max-w-5xl">
           <box-wrapper>
             <GameDetails :id="gameId" />
           </box-wrapper>

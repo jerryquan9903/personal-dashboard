@@ -2,22 +2,16 @@ import dayjs from "dayjs";
 
 // parse array returned from backend into displayable text
 function parseGameInfo(info) {
-  let parsed = info.map((item) => {
+  let filtered = info.filter((item) => item.value !== 0);
+  let parsed = filtered.map((item) => {
     let result = item;
 
     switch (item.label) {
       case "Genre":
       case "Developer": {
         let split = item.value.split(";");
-        let fieldArray = split.slice(0, split.length - 1);
 
-        // format string
-        result.value = fieldArray
-          .map((item, index) => {
-            if (index === fieldArray.length - 1) return item;
-            else return item + ", ";
-          })
-          .join();
+        result.value = split.slice(0, split.length - 1).join().replace(/,/g, ", ");
         break;
       }
 

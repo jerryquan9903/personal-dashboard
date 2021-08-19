@@ -3,7 +3,9 @@
     <div class="font-medium text-xl w-full text-left py-2 px-3">
       Planning to play
     </div>
-    <div class="p-4 bg-gradient-to-tr from-teal-600 to-sky-700 rounded-b-md">
+    <div
+      class="h-full p-4 bg-gradient-to-tr from-teal-600 to-sky-700 rounded-b-md"
+    >
       <div class="grid grid-cols-3 gap-4">
         <template v-for="game in nextGames" :key="game">
           <div
