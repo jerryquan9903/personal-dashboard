@@ -7,10 +7,10 @@
       <div class="grid grid-cols-3 gap-4">
         <template v-for="game in nextGames" :key="game">
           <div
-            class="
+            class=" 
               flex flex-col
               transition
-              duration-500
+              duration-250
               ease-in-out
               transform
               hover:scale-105
@@ -21,9 +21,17 @@
           >
             <img
               :src="game.image"
-              class="rounded-t-md shadow-md border-t-4 border-l-4 border-r-4 border-black"
+              class="
+                w-36
+                h-48
+                mx-auto
+                rounded-t-md
+                shadow-md
+                object-cover
+                border-t-4 border-l-4 border-r-4 border-black
+              "
             />
-            <div class="text-xs w-full h-full rounded-b-md bg-black px-2 py-1">
+            <div class="text-xs w-36 mx-auto rounded-b-md bg-black px-2 py-1">
               {{ game.name }}
             </div>
           </div>
@@ -34,7 +42,6 @@
 </template>
 
 <script>
-import getGameDetails from '../../functions/getGameDetails';
 import api from "../../services/api";
 
 export default {
@@ -44,10 +51,11 @@ export default {
       nextGames: null,
     };
   },
+  emits: ["details", "open-details"],
   methods: {
-    getGameInfoFull: function(id) {
-      getGameDetails(id);
-    }
+    getGameInfoFull: function (id) {
+      this.$emit("details", [id, true]);
+    },
   },
   beforeMount() {
     api

@@ -30,7 +30,14 @@ module.exports = {
       white: colors.white,
       black: colors.black,
     },
-    extend: {},
+    extend: {
+      width: {
+        '128': '32rem',
+      },
+      height: {
+        '128': '32rem',
+      }
+    },
   },
   variants: {
     extend: {},
