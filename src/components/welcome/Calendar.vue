@@ -1,5 +1,5 @@
 <template>
-  <div class="flex h-full">
+  <div class="flex flex-1 h-full">
     <box-wrapper>
       <div class="flex flex-col justify-start items-start w-full h-full">
         <div class="flex items-center text-4xl font-bold flex-1 ml-6">{{ month }}</div>

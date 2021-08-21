@@ -1,21 +1,25 @@
 <template>
   <div id="app-grid" class="p-2">
-    <div id="grid-welcome" class="h-full">
+    <div id="grid-welcome" class="flex flex-row h-full">
       <Welcome />
     </div>
     <div id="grid-games" class="h-full"><Games /></div>
+    <div id="grid-youtube" class="h-full"><YouTube /></div>
+    <div id="grid-other"></div>
   </div>
 </template>
 
 <script>
-import Games from "./components/games/Games.vue";
-import Welcome from "./components/welcome/Welcome.vue";
+import Games from "./components/games/Games";
+import Welcome from "./components/welcome/Welcome";
+import YouTube from "./components/youtube/YouTube";
 
 export default {
   name: "App",
   components: {
     Welcome,
     Games,
+    YouTube,
   },
 };
 </script>
@@ -49,20 +53,28 @@ export default {
   display: grid;
   min-height: 100vh;
   grid-template-areas:
-    "top top top"
-    "bottom other other"
-    "bottom other other"
-    "bottom other other"
-    "bottom other other";
+    "welcome welcome other"
+    "games youtube other"
+    "games youtube other"
+    "games another other"
+    "games another other";
   grid-template-rows: 20% 20% 20% 20% 20%;
-  grid-template-columns: 35% 35% 30%;
+  grid-template-columns: 35% 30% 35%;
 }
 
-#grid-welcome {
-  grid-area: top;
+#app-grid > #grid-welcome {
+  grid-area: welcome;
 }
 
-#grid-games {
-  grid-area: bottom;
+#app-grid > #grid-games {
+  grid-area: games;
+}
+
+#app-grid > #grid-youtube {
+  grid-area: youtube;
+}
+
+#app-grid > #grid-other {
+  grid-area: other;
 }
 </style>

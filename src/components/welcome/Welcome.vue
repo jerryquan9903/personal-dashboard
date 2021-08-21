@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-row h-full">
+  <div class="flex flex-row w-full h-full">
     <box-wrapper>
       <div class="flex justify-center items-center px-6 h-full">
         <div class="text-8xl font-bold">{{ time }}</div>

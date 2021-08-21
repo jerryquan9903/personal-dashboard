@@ -15,7 +15,7 @@
             v-for="item in gameDetails.info"
             :key="item"
           >
-            <div class="w-full font-light pb-1 pr-12">{{ item.label }}</div>
+            <div class="w-full font-light pb-1">{{ item.label }}</div>
             <div class="w-full font-normal pb-1">{{ item.value }}</div>
           </div>
         </div>
@@ -37,21 +37,21 @@
     </div>
     <div v-show="!loaded">
       <div class="animate-pulse flex flex-row items-start">
-        <div class="w-96 h-128 rounded-lg bg-bluegray-200 mr-4"></div>
+        <div class="w-96 h-128 rounded-lg bg-bluegray-300 mr-4"></div>
         <div class="flex flex-col h-128 w-144">
-          <div class="w-64 h-8 mb-4 bg-gray-200 rounded"></div>
-          <div class="pl-1 w-20 h-6 font-medium bg-gray-200 rounded"></div>
+          <div class="w-64 h-8 mb-4 bg-gray-300 rounded"></div>
+          <div class="pl-1 w-20 h-6 font-medium bg-gray-300 rounded"></div>
           <div class="mb-4 mt-1 bg-bluegray-800 rounded-md px-3 pt-2 pb-1">
             <div
               class="info-grid w-full text-sm"
               v-for="num in skeleton"
               :key="num"
             >
-              <div class="h-5 w-1/4 rounded mb-1 bg-bluegray-200"></div>
-              <div class="h-5 w-3/4 rounded bg-bluegray-200"></div>
+              <div class="h-5 w-1/4 rounded mb-1 bg-bluegray-300"></div>
+              <div class="h-5 w-3/4 rounded bg-bluegray-300"></div>
             </div>
           </div>
-          <div class="pl-1 w-28 h-6 font-medium bg-gray-200 rounded"></div>
+          <div class="pl-1 w-28 h-6 font-medium bg-gray-300 rounded"></div>
           <div
             class="
               text-sm

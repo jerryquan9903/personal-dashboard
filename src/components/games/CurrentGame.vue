@@ -50,16 +50,16 @@
       <!--Skeleton-->
       <div v-show="!loaded">
         <div class="animate-pulse flex flex-row justify-start items-start">
-          <div class="rounded-lg w-48 h-64 bg-bluegray-200 mr-4"></div>
+          <div class="rounded-lg w-48 h-64 bg-bluegray-300 mr-4"></div>
           <div class="flex flex-col mt-2">
-            <div class="h-5 w-28 mb-4 rounded bg-bluegray-200"></div>
+            <div class="h-5 w-28 mb-4 rounded bg-bluegray-300"></div>
             <div
               class="grid grid-cols-2 gap-2"
               v-for="num in skeleton"
               :key="num"
             >
-              <div class="h-4 rounded w-20 pr-8 mb-2 bg-bluegray-200"></div>
-              <div class="h-4 rounded w-28 bg-bluegray-200"></div>
+              <div class="h-4 rounded w-20 pr-8 mb-2 bg-bluegray-300"></div>
+              <div class="h-4 rounded w-28 bg-bluegray-300"></div>
             </div>
           </div>
         </div>
@@ -113,7 +113,7 @@ export default {
 
   beforeMount() {
     this.getGameInfo();
-    setInterval(this.getGameInfo, 600000);
+    setInterval(this.getGameInfo, 1800000);
   },
 
   beforeUnmount() {

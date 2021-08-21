@@ -11,6 +11,7 @@ function parseGameInfo(info) {
       case "Developer": {
         let split = item.value.split(";");
 
+        // remove last element (no value), join, then add space after comma
         result.value = split.slice(0, split.length - 1).join().replace(/,/g, ", ");
         break;
       }
@@ -41,6 +42,7 @@ function parseGameInfo(info) {
       }
 
       case "Play time": {
+        // convert seconds to hours & minutes, or minutes only if less than an hour
         if (item.value >= 3600)
           result.value =
             Math.floor(item.value / 3600).toString() +

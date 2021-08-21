@@ -1,10 +1,12 @@
 <template>
+  <div class="flex flex-col h-full">
   <box-wrapper>
     <CurrentGame @details="openGameDetails($event)" />
   </box-wrapper>
   <box-wrapper>
     <PlayingNext @details="openGameDetails($event)" />
   </box-wrapper>
+  </div>
   <transition name="fade">
     <div v-show="openDetails">
       <div
