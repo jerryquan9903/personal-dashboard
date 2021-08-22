@@ -32,6 +32,7 @@ module.exports = {
     },
     extend: {
       width: {
+        '30': '7.5rem',
         '104': '26rem',
         '112': '28rem',
         '120': '30rem',
@@ -40,6 +41,7 @@ module.exports = {
         '144': '36rem',
       },
       height: {
+        '30': '7.5rem',
         '104': '26rem',
         '112': '28rem',
         '120': '30rem',

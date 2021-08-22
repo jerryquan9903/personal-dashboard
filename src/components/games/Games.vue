@@ -1,17 +1,14 @@
 <template>
-  <div class="flex flex-col h-full">
-  <box-wrapper>
+  <div class="flex flex-col h-full rounded bg-bluegray-700 outer-shadow">
     <CurrentGame @details="openGameDetails($event)" />
-  </box-wrapper>
-  <box-wrapper>
     <PlayingNext @details="openGameDetails($event)" />
-  </box-wrapper>
   </div>
   <transition name="fade">
     <div v-show="openDetails">
       <div
         class="
           fixed
+          z-50
           top-1/2
           left-1/2
           w-screen
@@ -19,14 +16,14 @@
           transform
           -translate-x-1/2 -translate-y-1/2
           bg-dark
-          flex justify-center items-center
+          flex
+          justify-center
+          items-center
         "
         @click.self="closeGameDetails()"
       >
         <div class="max-w-5xl">
-          <box-wrapper>
-            <GameDetails :id="gameId" />
-          </box-wrapper>
+          <GameDetails :id="gameId" />
         </div>
       </div>
     </div>
@@ -34,14 +31,12 @@
 </template>
 
 <script>
-import boxWrapper from "../commons/boxWrapper.vue";
-import CurrentGame from "./CurrentGame.vue";
-import PlayingNext from "./PlayingNext.vue";
-import GameDetails from "./GameDetails.vue";
+import CurrentGame from "./CurrentGame";
+import PlayingNext from "./PlayingNext";
+import GameDetails from "./GameDetails";
 
 export default {
   components: {
-    boxWrapper,
     CurrentGame,
     PlayingNext,
     GameDetails,
@@ -74,11 +69,11 @@ export default {
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.25s ease;
+  z-index: 50;
 }
 
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
 }
-
 </style>

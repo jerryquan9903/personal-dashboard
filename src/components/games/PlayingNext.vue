@@ -1,42 +1,68 @@
 <template>
-  <div class="flex flex-col h-full">
-    <div class="font-medium text-xl w-full text-left py-2 px-3">
+  <div class="flex flex-col h-full flex-1">
+    <div
+      class="
+        font-medium
+        text-xl
+        w-full
+        text-left
+        py-2
+        px-3
+        border-b border-bluegray-800
+      "
+    >
       Planning to play
     </div>
     <div
-      class="h-full grid place-items-center p-4 bg-gradient-to-tr from-teal-600 to-sky-700 rounded-b-md"
+      class="flex flex-col justify-start items-center my-2 flex-1 rounded-md"
     >
       <div v-show="loaded" class="grid grid-cols-1">
         <template v-for="(display, index) in allNextGames" :key="display">
           <transition name="fade" class="row-start-1 col-start-1">
-            <div v-show="index === page" class="grid grid-cols-3 gap-5">
+            <div v-show="index === page" class="grid grid-cols-3 gap-2 mx-2">
               <template v-for="game in display" :key="game">
                 <div
                   class="
                     flex flex-col
+                    justify-center
+                    items-center
                     transition
                     duration-250
                     ease-in-out
                     transform
                     hover:scale-105
                     cursor-pointer
+                    relative
                   "
                   @click="getGameInfoFull(game.id)"
                 >
                   <img
                     :src="game.image"
                     class="
-                      w-36
-                      h-48
-                      rounded-t-md
+                      w-full
+                      mx-auto
+                      rounded-sm
                       object-cover
-                      border-t-4 border-l-4 border-r-4 border-black
+                      deep-shadow
                     "
                   />
                   <div
-                    class="text-xs w-36 mx-auto rounded-b-md bg-black px-2 py-1"
+                    class="
+                      flex flex-col-reverse
+                      absolute
+                      top-0
+                      bottom-0
+                      left-0
+                      right-0
+                      image-gradient
+                      rounded-b-sm
+                      px-2
+                      py-1
+                    "
                   >
-                    {{ game.name }}
+                    <div class="text-xs font-medium outer-shadow">
+                      {{ game.name }}
+                    </div>
                   </div>
                 </div>
               </template>
@@ -46,49 +72,10 @@
       </div>
       <!--Skeleton-->
       <div v-show="!loaded">
-        <div class="animate-pulse grid grid-cols-3 gap-4">
-          <div class="w-36 mx-auto">
-            <div
-              class="
-                h-48
-                rounded-t-md
-                border-t-4 border-l-4 border-r-4 border-black
-                bg-bluegray-300
-              "
-            ></div>
-            <div class="h-10 rounded-b-md bg-black px-2 py-1">
-              <div class="h-3 w-full bg-bluegray-300 mb-1 rounded"></div>
-              <div class="h-3 w-1/3 bg-bluegray-300 mb-1 rounded"></div>
-            </div>
-          </div>
-          <div class="w-36 mx-auto">
-            <div
-              class="
-                h-48
-                rounded-t-md
-                border-t-4 border-l-4 border-r-4 border-black
-                bg-bluegray-300
-              "
-            ></div>
-            <div class="h-10 rounded-b-md bg-black px-2 py-1">
-              <div class="h-3 w-full bg-bluegray-300 mb-1 rounded"></div>
-              <div class="h-3 w-1/3 bg-bluegray-300 mb-1 rounded"></div>
-            </div>
-          </div>
-          <div class="w-36 mx-auto">
-            <div
-              class="
-                h-48
-                rounded-t-md
-                border-t-4 border-l-4 border-r-4 border-black
-                bg-bluegray-300
-              "
-            ></div>
-            <div class="h-10 rounded-b-md bg-black px-2 py-1">
-              <div class="h-3 w-full bg-bluegray-300 mb-1 rounded"></div>
-              <div class="h-3 w-1/3 bg-bluegray-300 mb-1 rounded"></div>
-            </div>
-          </div>
+        <div class="animate-pulse grid grid-cols-3 gap-2">
+          <div class="w-36 h-48 rounded-sm bg-bluegray-300"></div>
+          <div class="w-36 h-48 rounded-sm bg-bluegray-300"></div>
+          <div class="w-36 h-48 rounded-sm bg-bluegray-300"></div>
         </div>
       </div>
     </div>
@@ -132,8 +119,8 @@ export default {
       .then((success) => {
         let dataWithSmallerImage = success.data.map((game) => {
           let smallerImage = game.image.replace("t_1080p", "t_720p");
-          return {...game, image: smallerImage};
-        })
+          return { ...game, image: smallerImage };
+        });
 
         let splitted = [];
 
@@ -161,10 +148,14 @@ export default {
   background: rgb(0, 0, 0);
   background: linear-gradient(
     0deg,
-    rgba(0, 0, 0, 1) 0%,
-    rgba(0, 0, 0, 0.5) 66%,
+    rgba(0, 0, 0, 0.8) 0%,
+    rgba(0, 0, 0, 0.4) 66%,
     rgba(255, 255, 255, 0) 100%
   );
+}
+
+.image-gradient {
+  background: linear-gradient(0deg, #00000088 30%, #00000012 100%);
 }
 
 .fade-enter-active,

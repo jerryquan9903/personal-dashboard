@@ -1,10 +1,8 @@
 <template>
-  <div id="app-grid" class="p-2">
-    <div id="grid-welcome" class="flex flex-row h-full">
-      <Welcome />
-    </div>
-    <div id="grid-games" class="h-full"><Games /></div>
-    <div id="grid-youtube" class="h-full"><YouTube /></div>
+  <div id="app-grid">
+    <div id="grid-welcome" class="flex flex-row h-full"><Welcome /></div>
+    <div id="grid-games" class="flex flex-col h-full"><Games /></div>
+    <div id="grid-youtube" class="flex flex-col h-full"><YouTube /></div>
     <div id="grid-other"></div>
   </div>
 </template>
@@ -31,8 +29,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   -moz-font-smoothing: antialiased;
   -o-font-smoothing: antialiased;
-  padding: 0;
-  margin: 0;
   color: #ffe;
 }
 
@@ -51,15 +47,18 @@ export default {
 
 #app-grid {
   display: grid;
-  min-height: 100vh;
   grid-template-areas:
     "welcome welcome other"
     "games youtube other"
     "games youtube other"
     "games another other"
     "games another other";
-  grid-template-rows: 20% 20% 20% 20% 20%;
-  grid-template-columns: 35% 30% 35%;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 6fr 7fr 6fr;
+  gap: 1rem;
+  padding: 1rem;
+  min-height: 100vh;
+  justify-items: stretch;
 }
 
 #app-grid > #grid-welcome {

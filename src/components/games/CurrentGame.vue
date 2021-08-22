@@ -1,20 +1,23 @@
 <template>
-  <div class="w-full">
-    <div class="font-medium text-xl w-full text-left py-2 px-3">
-      Currently playing
-    </div>
+  <div class="flex flex-col h-full">
     <div
       class="
-        flex flex-col
-        bg-gradient-to-tr
-        from-teal-600
-        to-sky-700
-        p-4
-        rounded-b-md
+        font-medium
+        text-xl
         w-full
+        text-left
+        py-2
+        px-3
+        border-b border-bluegray-800
       "
     >
-      <div v-show="loaded" class="flex flex-row justify-start items-start">
+      Currently playing
+    </div>
+    <div class="flex flex-col flex-1 justify-start items-start m-2 h-full">
+      <div
+        v-show="loaded"
+        class="flex flex-row justify-start items-start w-full h-full"
+      >
         <div
           class="
             mr-4
@@ -25,23 +28,25 @@
             hover:scale-105
             hover:shadow-md
             cursor-pointer
+            h-full
+            w-1/2
           "
           @click="getGameInfoFull()"
         >
           <img
             :src="image"
-            class="w-48 h-64 object-cover rounded-lg border-4 border-black"
+            class="object-cover rounded-sm deep-shadow max-h-full"
             @load="setLoaded(true)"
           />
         </div>
-        <div class="flex flex-col justify-start items-start mt-1">
+        <div class="flex flex-col justify-start items-start w-1/2">
           <div class="font-medium text-xl mb-2">{{ name }}</div>
           <div
             class="grid grid-cols-2 gap-2 text-sm font-light w-full"
             v-for="item in data"
             :key="item"
           >
-            <div class="w-full mb-1 font-light pr-12">{{ item.label }}</div>
+            <div class="w-full mb-1 font-light pr-4">{{ item.label }}</div>
             <div class="w-full font-normal">{{ item.value }}</div>
           </div>
         </div>
@@ -50,7 +55,7 @@
       <!--Skeleton-->
       <div v-show="!loaded">
         <div class="animate-pulse flex flex-row justify-start items-start">
-          <div class="rounded-lg w-48 h-64 bg-bluegray-300 mr-4"></div>
+          <div class="rounded-sm w-48 h-64 bg-bluegray-300 mr-4"></div>
           <div class="flex flex-col mt-2">
             <div class="h-5 w-28 mb-4 rounded bg-bluegray-300"></div>
             <div
@@ -58,8 +63,8 @@
               v-for="num in skeleton"
               :key="num"
             >
-              <div class="h-4 rounded w-20 pr-8 mb-2 bg-bluegray-300"></div>
-              <div class="h-4 rounded w-28 bg-bluegray-300"></div>
+              <div class="h-4 rounded w-20 pr-12 mb-2 bg-bluegray-300"></div>
+              <div class="h-4 rounded w-24 mb-2 bg-bluegray-300"></div>
             </div>
           </div>
         </div>
@@ -108,7 +113,7 @@ export default {
         .catch((e) => {
           console.log(e);
         });
-    },    
+    },
   },
 
   beforeMount() {
@@ -121,3 +126,10 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.outer-container img {
+  max-height: 100%;
+  height: auto;
+}
+</style>

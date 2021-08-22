@@ -1,15 +1,15 @@
 <template>
-  <div class="p-4" v-if="gameDetails">
+  <div class="p-4 rounded bg-bluegray-700 shadow-sm" v-if="gameDetails">
     <div v-show="loaded" class="flex flex-row items-start max-h-1/2">
       <img
         :src="gameDetails.image"
-        class="w-96 h-128 object-cover rounded-lg border-4 border-black mr-4"
+        class="w-96 h-128 object-cover rounded deep-shadow mr-4"
         @load="setLoaded(true)"
       />
       <div class="flex flex-col h-128">
         <div class="text-2xl font-medium mb-4">{{ gameDetails.name }}</div>
         <div class="pl-1 font-medium">Details</div>
-        <div class="mb-4 mt-1 bg-bluegray-800 rounded-md px-3 pt-2 pb-1">
+        <div class="mb-4 mt-1 bg-bluegray-800 rounded px-3 pt-2 pb-1">
           <div
             class="info-grid text-sm"
             v-for="item in gameDetails.info"
@@ -28,7 +28,7 @@
             custom-scrollbar
             mt-1
             bg-bluegray-800
-            rounded-md
+            rounded
             p-3
           "
           v-html="'<div>' + gameDetails.desc + '</div>'"
