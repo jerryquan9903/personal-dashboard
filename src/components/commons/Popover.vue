@@ -27,18 +27,25 @@
         leave-to-class="translate-y-1 opacity-0"
       >
         <PopoverPanel
-          class="absolute z-10 left-0 max-w-sm px-4 mt-2 sm:px-0 lg:max-w-3xl"
+          class="
+            absolute
+            z-10
+            top-full
+            left-0
+            max-w-md
+            px-0
+            mt-2
+          "
           :class="menuWidth"
         >
           <div
             class="
               overflow-hidden
-              rounded
-              deep-shadow
+              rounded-sm
               ring-1 ring-black ring-opacity-5
             "
           >
-            <div class="bg-bluegray-800 p-2 lg:grid-cols-2">
+            <div class="bg-background-dark h-full p-2 lg:grid-cols-2">
               <slot name="content" />
             </div>
           </div>

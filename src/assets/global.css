@@ -15,10 +15,6 @@ body::-webkit-scrollbar {
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
 
-.deep-shadow {
-  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
-}
-
 .element-hover {
   display: none;
 }
@@ -35,4 +31,20 @@ body::-webkit-scrollbar {
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
+}
+
+.text-card {
+  color: #1e263a;
+}
+
+.bg-card {
+  background-color: #1e263a;
+}
+
+.bg-card-content {
+  background-color: #141824;
+}
+
+.bg-card-light {
+  background-color: #293553;
 }

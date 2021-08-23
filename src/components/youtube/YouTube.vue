@@ -1,6 +1,7 @@
 <template>
   <div class="w-full h-full">
-    <div class="flex flex-col p-2 h-full rounded bg-bluegray-700 outer-shadow">
+    <div class="flex flex-col p-2 h-full rounded bg-background outer-shadow">
+      <!-- Search bar and channel view/remove -->
       <div class="flex flex-row">
         <div class="w-1/5 relative">
           <Popover
@@ -34,19 +35,18 @@
                     flex flex-row
                     items-center
                     w-full
-                    py-3
+                    py-1
                     px-1
-                    h-8
                     rounded-sm
                     transition-colors
                     duration-200
-                    bg-bluegray-800
-                    hover:bg-bluegray-700
+                    bg-background-dark
+                    hover:bg-background
                     text-sm
                     adjacent-hover
                   "
                 >
-                  <div class="pl-1 text-sm font-medium">
+                  <div class="pl-1 py-1 text-sm font-medium">
                     {{ item.name }}
                   </div>
                   <div class="flex flex-1 flex-row justify-end element-hover">
@@ -96,7 +96,7 @@
               class="
                 w-4/5
                 h-full
-                bg-bluegray-800
+                bg-background-dark
                 outline-none
                 text-sm
                 pl-2
@@ -117,8 +117,8 @@
                     cursor-pointer
                     transition-colors
                     duration-100
-                    bg-emerald-500
-                    hover:bg-emerald-600
+                    bg-blue-500
+                    hover:bg-blue-600
                   "
                 >
                   Search
@@ -128,6 +128,11 @@
           </div>
         </div>
       </div>
+
+      <!-- YouTube video info -->
+      <div v-if="testVideo">
+        <Video :data="testVideo" />
+      </div>
     </div>
   </div>
 </template>
@@ -136,12 +141,18 @@
 import api from "../../services/api";
 import Dropdown from "../commons/Dropdown";
 import Popover from "../commons/Popover";
+import Video from "./Video";
 
 export default {
-  components: { Dropdown, Popover },
+  components: {
+    Dropdown,
+    Popover,
+    Video,
+  },
   data() {
     return {
       newVideos: null,
+      testVideo: null,
       listChannels: null,
       searchDropdown: false,
     };
@@ -168,7 +179,10 @@ export default {
     api
       .get("/youtube/get-new-videos")
       .then((success) => {
-        if (Array.isArray(success.data)) this.newVideos = success.data;
+        if (Array.isArray(success.data)) {
+          this.newVideos = success.data;
+          this.testVideo = success.data[0];
+        }
       })
       .catch((e) => {
         console.log(e);

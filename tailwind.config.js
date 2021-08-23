@@ -5,6 +5,11 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     colors: {
+      background: {
+        light: '#293553',
+        DEFAULT: '#1e263a',
+        dark: '#141824',
+      },
       bluegray: colors.blueGray,
       coolgray: colors.coolGray,
       gray: colors.gray,

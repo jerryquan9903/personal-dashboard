@@ -9,7 +9,7 @@
         px-6
         h-full
         rounded
-        bg-bluegray-700
+        bg-background
         outer-shadow
       "
     >

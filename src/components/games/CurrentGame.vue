@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col h-full rounded bg-bluegray-700 outer-shadow mb-4">
+  <div class="flex flex-col h-full rounded bg-background outer-shadow mb-4">
     <div
       class="
         font-medium
@@ -8,7 +8,7 @@
         text-left
         py-2
         px-3
-        border-b border-bluegray-800
+        border-b border-coolgray-900
       "
     >
       Currently playing
@@ -35,7 +35,7 @@
         >
           <img
             :src="image"
-            class="object-cover rounded-sm deep-shadow max-h-full"
+            class="object-cover rounded-sm outer-shadow max-h-full"
             @load="setLoaded(true)"
           />
         </div>

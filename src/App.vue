@@ -24,12 +24,12 @@ export default {
 
 <style>
 #app {
-  font-family: Roboto, Avenir, Helvetica Neue, sans-serif;
+  font-family: SF Pro Display, Roboto, Avenir, Helvetica Neue, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -moz-font-smoothing: antialiased;
   -o-font-smoothing: antialiased;
-  color: #ffe;
+  color: rgb(245, 245, 241);
 }
 
 #nav {
@@ -76,4 +76,5 @@ export default {
 #app-grid > #grid-other {
   grid-area: other;
 }
+
 </style>

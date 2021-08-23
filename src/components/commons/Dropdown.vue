@@ -32,7 +32,7 @@
             top-full
             mt-2
             origin-top-left
-            bg-bluegray-800
+            bg-background
             divide-y divide-bluegray-700
             rounded-sm
             shadow-lg
@@ -46,7 +46,7 @@
               <MenuItem v-slot="{ active }">
                 <button
                   :class="[
-                    active ? 'bg-bluegray-700' : '',
+                    active ? 'bg-background' : '',
                     'group flex rounded-sm items-center w-full px-2 py-2 text-sm',
                   ]"
                 >

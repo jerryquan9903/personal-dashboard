@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-1 w-full h-full rounded bg-bluegray-700 outer-shadow">
+  <div class="flex flex-1 w-full h-full rounded bg-background outer-shadow">
     <div class="flex flex-col justify-start items-start w-full h-full">
       <div class="flex items-center text-4xl font-bold flex-1 ml-6">
         {{ month }}
@@ -12,7 +12,7 @@
                 flex flex-col flex-1
                 justify-center
                 items-center
-                bg-bluegray-800
+                bg-background-dark
                 rounded
                 px-6
                 py-2
@@ -21,7 +21,7 @@
               "
               :class="
                 day.ofWeek === today &&
-                'bg-gradient-to-tl from-teal-400 to-sky-500 text-bluegray-600'
+                'bg-gradient-to-tl from-teal-400 to-sky-500 text-card'
               "
             >
               <div class="text-sm">{{ day.ofWeek }}</div>

@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col h-full flex-1 rounded bg-bluegray-700 outer-shadow">
+  <div class="flex flex-col h-full flex-1 rounded bg-background outer-shadow">
     <div
       class="
         font-medium
@@ -8,18 +8,18 @@
         text-left
         py-2
         px-3
-        border-b border-bluegray-800
+        border-b border-coolgray-900
       "
     >
       Planning to play
     </div>
     <div
-      class="flex flex-col justify-start items-center my-2 flex-1 rounded-md"
+      class="flex flex-col justify-start items-center m-2 flex-1 rounded-md"
     >
       <div v-show="loaded" class="grid grid-cols-1">
         <template v-for="(display, index) in allNextGames" :key="display">
           <transition name="fade" class="row-start-1 col-start-1">
-            <div v-show="index === page" class="grid grid-cols-3 gap-2 mx-2">
+            <div v-show="index === page" class="grid grid-cols-3 gap-2">
               <template v-for="game in display" :key="game">
                 <div
                   class="
@@ -43,7 +43,7 @@
                       mx-auto
                       rounded-sm
                       object-cover
-                      deep-shadow
+                      outer-shadow
                     "
                   />
                   <div

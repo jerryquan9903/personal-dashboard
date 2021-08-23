@@ -1,15 +1,15 @@
 <template>
-  <div class="p-4 rounded bg-bluegray-700 shadow-sm" v-if="gameDetails">
+  <div class="p-4 rounded bg-background shadow-sm" v-if="gameDetails">
     <div v-show="loaded" class="flex flex-row items-start max-h-1/2">
       <img
         :src="gameDetails.image"
-        class="w-96 h-128 object-cover rounded deep-shadow mr-4"
+        class="w-96 h-128 object-cover rounded outer-shadow mr-4"
         @load="setLoaded(true)"
       />
       <div class="flex flex-col h-128">
         <div class="text-2xl font-medium mb-4">{{ gameDetails.name }}</div>
         <div class="pl-1 font-medium">Details</div>
-        <div class="mb-4 mt-1 bg-bluegray-800 rounded px-3 pt-2 pb-1">
+        <div class="mb-4 mt-1 bg-background-dark rounded px-3 pt-2 pb-1">
           <div
             class="info-grid text-sm"
             v-for="item in gameDetails.info"
@@ -27,7 +27,7 @@
             overflow-x-hidden overflow-y-scroll
             custom-scrollbar
             mt-1
-            bg-bluegray-800
+            bg-background-dark
             rounded
             p-3
           "
@@ -41,7 +41,7 @@
         <div class="flex flex-col h-128 w-144">
           <div class="w-64 h-8 mb-4 bg-gray-300 rounded"></div>
           <div class="pl-1 w-20 h-6 font-medium bg-gray-300 rounded"></div>
-          <div class="mb-4 mt-1 bg-bluegray-800 rounded-md px-3 pt-2 pb-1">
+          <div class="mb-4 mt-1 bg-background rounded-md px-3 pt-2 pb-1">
             <div
               class="info-grid w-full text-sm"
               v-for="num in skeleton"
@@ -57,7 +57,7 @@
               text-sm
               font-light
               mt-1
-              bg-bluegray-800
+              bg-background
               rounded-md
               p-3
               flex-1
