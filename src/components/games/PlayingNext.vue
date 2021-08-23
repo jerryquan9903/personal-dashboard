@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col h-full flex-1">
+  <div class="flex flex-col h-full flex-1 rounded bg-bluegray-700 outer-shadow">
     <div
       class="
         font-medium
@@ -99,12 +99,6 @@ export default {
     getGameInfoFull(id) {
       this.$emit("details", [id, true]);
     },
-    splitGameData(data) {
-      let splitted = [];
-      for (let i = 0; i < data.length; i += 3) {
-        splitted.push(data.slice(i, i + 3));
-      }
-    },
     cycleGames() {
       if (this.page === this.allNextGames.length - 1) this.page = 0;
       else this.page += 1;
@@ -117,6 +111,7 @@ export default {
     api
       .get("games/next-games")
       .then((success) => {
+        // change image to smaller size
         let dataWithSmallerImage = success.data.map((game) => {
           let smallerImage = game.image.replace("t_1080p", "t_720p");
           return { ...game, image: smallerImage };
@@ -124,6 +119,7 @@ export default {
 
         let splitted = [];
 
+        // split data into multiple arrays with 3 games each
         for (let i = 0; i < dataWithSmallerImage.length; i += 3) {
           splitted.push(success.data.slice(i, i + 3));
         }
@@ -158,13 +154,5 @@ export default {
   background: linear-gradient(0deg, #00000088 30%, #00000012 100%);
 }
 
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 1s ease;
-}
 
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-}
 </style>    

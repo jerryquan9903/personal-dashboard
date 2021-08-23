@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col h-full rounded bg-bluegray-700 outer-shadow">
+  <div class="flex flex-col h-full">
     <CurrentGame @details="openGameDetails($event)" />
     <PlayingNext @details="openGameDetails($event)" />
   </div>

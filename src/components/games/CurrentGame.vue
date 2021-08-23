@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col h-full">
+  <div class="flex flex-col h-full rounded bg-bluegray-700 outer-shadow mb-4">
     <div
       class="
         font-medium
@@ -13,7 +13,7 @@
     >
       Currently playing
     </div>
-    <div class="flex flex-col flex-1 justify-start items-start m-2 h-full">
+    <div class="flex flex-col flex-1 justify-start items-start m-4 h-full">
       <div
         v-show="loaded"
         class="flex flex-row justify-start items-start w-full h-full"
@@ -29,7 +29,7 @@
             hover:shadow-md
             cursor-pointer
             h-full
-            w-1/2
+            w-5/12
           "
           @click="getGameInfoFull()"
         >
@@ -39,7 +39,7 @@
             @load="setLoaded(true)"
           />
         </div>
-        <div class="flex flex-col justify-start items-start w-1/2">
+        <div class="flex flex-col justify-start items-start w-7/12">
           <div class="font-medium text-xl mb-2">{{ name }}</div>
           <div
             class="grid grid-cols-2 gap-2 text-sm font-light w-full"

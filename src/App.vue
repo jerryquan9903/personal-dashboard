@@ -54,10 +54,10 @@ export default {
     "games another other"
     "games another other";
   grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
-  grid-template-columns: 6fr 7fr 6fr;
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 1rem;
   padding: 1rem;
-  min-height: 100vh;
+  height: 100vh;
   justify-items: stretch;
 }
 

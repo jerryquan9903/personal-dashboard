@@ -5,7 +5,7 @@
         {{ month }}
       </div>
       <div class="flex flex-row justify-between mb-2 px-1 w-full">
-        <div class="grid grid-cols-7 auto-cols-max w-full">
+        <div class="flex justify-evenly w-full">
           <template v-for="day in week" :key="day">
             <div
               class="
