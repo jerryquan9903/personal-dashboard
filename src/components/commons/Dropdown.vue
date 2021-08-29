@@ -10,9 +10,7 @@
           text-sm
           rounded-r-sm
           focus:outline-none
-          focus-visible:ring-2
-          focus-visible:ring-white
-          focus-visible:ring-opacity-75
+          focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75
         "
       >
         <slot />
@@ -50,7 +48,7 @@
                     'group flex rounded-sm items-center w-full px-2 py-2 text-sm',
                   ]"
                 >
-                  {{item.name}}
+                  {{ item.name }}
                 </button>
               </MenuItem>
             </div>

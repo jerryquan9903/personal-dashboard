@@ -11,9 +11,7 @@
           text-white
           rounded-sm
           focus:outline-none
-          focus-visible:ring-2
-          focus-visible:ring-white
-          focus-visible:ring-opacity-75
+          focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75
         "
       >
         <slot name="button" />
@@ -27,25 +25,11 @@
         leave-to-class="translate-y-1 opacity-0"
       >
         <PopoverPanel
-          class="
-            absolute
-            z-10
-            top-full
-            left-0
-            max-w-md
-            px-0
-            mt-2
-          "
-          :class="menuWidth"
+          class="absolute z-10 mt-2 flex overflow-y-scroll overflow-x-hidden custom-scrollbar"
+          :class="panelStyle"
         >
-          <div
-            class="
-              overflow-hidden
-              rounded-sm
-              ring-1 ring-black ring-opacity-5
-            "
-          >
-            <div class="bg-background-dark h-full p-2 lg:grid-cols-2">
+          <div class="overflow-hidden w-full h-full">
+            <div class="flex flex-col bg-background-dark w-full h-full p-2">
               <slot name="content" />
             </div>
           </div>
@@ -60,7 +44,7 @@ import { Popover, PopoverButton, PopoverPanel } from "@headlessui/vue";
 
 export default {
   components: { Popover, PopoverButton, PopoverPanel },
-  props: ["menuWidth", "data"],
+  props: ["panelStyle"],
   data() {
     return {};
   },

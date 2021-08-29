@@ -1,20 +1,12 @@
 <template>
   <div class="p-4 rounded bg-background shadow-sm" v-if="gameDetails">
     <div v-show="loaded" class="flex flex-row items-start max-h-1/2">
-      <img
-        :src="gameDetails.image"
-        class="w-96 h-128 object-cover rounded outer-shadow mr-4"
-        @load="setLoaded(true)"
-      />
+      <img :src="gameDetails.image" class="w-96 h-128 object-cover rounded outer-shadow mr-4" @load="setLoaded(true)" />
       <div class="flex flex-col h-128">
         <div class="text-2xl font-medium mb-4">{{ gameDetails.name }}</div>
         <div class="pl-1 font-medium">Details</div>
         <div class="mb-4 mt-1 bg-background-dark rounded px-3 pt-2 pb-1">
-          <div
-            class="info-grid text-sm"
-            v-for="item in gameDetails.info"
-            :key="item"
-          >
+          <div class="info-grid text-sm" v-for="item in gameDetails.info" :key="item">
             <div class="w-full font-light pb-1">{{ item.label }}</div>
             <div class="w-full font-normal pb-1">{{ item.value }}</div>
           </div>
@@ -37,32 +29,18 @@
     </div>
     <div v-show="!loaded">
       <div class="animate-pulse flex flex-row items-start">
-        <div class="w-96 h-128 rounded-lg bg-bluegray-300 mr-4"></div>
+        <div class="w-96 h-128 rounded bg-bluegray-300 mr-4"></div>
         <div class="flex flex-col h-128 w-144">
           <div class="w-64 h-8 mb-4 bg-gray-300 rounded"></div>
           <div class="pl-1 w-20 h-6 font-medium bg-gray-300 rounded"></div>
-          <div class="mb-4 mt-1 bg-background rounded-md px-3 pt-2 pb-1">
-            <div
-              class="info-grid w-full text-sm"
-              v-for="num in skeleton"
-              :key="num"
-            >
+          <div class="mb-4 mt-1 bg-background-dark rounded-md px-3 pt-2 pb-1">
+            <div class="info-grid w-full text-sm" v-for="num in skeleton" :key="num">
               <div class="h-5 w-1/4 rounded mb-1 bg-bluegray-300"></div>
               <div class="h-5 w-3/4 rounded bg-bluegray-300"></div>
             </div>
           </div>
           <div class="pl-1 w-28 h-6 font-medium bg-gray-300 rounded"></div>
-          <div
-            class="
-              text-sm
-              font-light
-              mt-1
-              bg-background
-              rounded-md
-              p-3
-              flex-1
-            "
-          ></div>
+          <div class="text-sm font-light mt-1 bg-background-dark rounded-md p-3 flex-1"></div>
         </div>
       </div>
     </div>

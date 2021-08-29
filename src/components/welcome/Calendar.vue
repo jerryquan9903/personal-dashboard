@@ -19,10 +19,7 @@
                 mx-1
                 cursor-pointer
               "
-              :class="
-                day.ofWeek === today &&
-                'bg-gradient-to-tl from-teal-400 to-sky-500 text-card'
-              "
+              :class="day.ofWeek === today && 'bg-emerald-600 outer-shadow text-card'"
             >
               <div class="text-sm">{{ day.ofWeek }}</div>
               <div class="font-bold text-xl">{{ day.ofMonth }}</div>
