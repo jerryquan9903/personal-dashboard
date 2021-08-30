@@ -1,7 +1,7 @@
 <template>
-  <div class="flex flex-1 w-full h-full rounded bg-background outer-shadow">
+  <div class="flex w-full h-full rounded bg-background outer-shadow">
     <div class="flex flex-col justify-start items-start w-full h-full">
-      <div class="flex items-center text-4xl font-bold flex-1 ml-6">
+      <div class="flex items-center text-2xl font-bold flex-1 ml-4">
         {{ month }}
       </div>
       <div class="flex flex-row justify-between mb-2 px-1 w-full">
@@ -14,7 +14,6 @@
                 items-center
                 bg-background-dark
                 rounded
-                px-6
                 py-2
                 mx-1
                 cursor-pointer

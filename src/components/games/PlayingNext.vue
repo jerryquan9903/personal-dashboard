@@ -50,9 +50,9 @@
       <!--Skeleton-->
       <div v-show="!loaded">
         <div class="animate-pulse grid grid-cols-3 gap-2 h-full">
-          <div class="w-36 h-48 rounded-sm bg-bluegray-300"></div>
-          <div class="w-36 h-48 rounded-sm bg-bluegray-300"></div>
-          <div class="w-36 h-48 rounded-sm bg-bluegray-300"></div>
+          <div class="w-36 h-48 rounded-sm bg-bluegray-500"></div>
+          <div class="w-36 h-48 rounded-sm bg-bluegray-500"></div>
+          <div class="w-36 h-48 rounded-sm bg-bluegray-500"></div>
         </div>
       </div>
     </div>

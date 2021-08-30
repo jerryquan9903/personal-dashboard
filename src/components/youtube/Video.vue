@@ -1,6 +1,6 @@
 <template>
   <a
-    class="flex flex-row items-start w-full rounded bg-background-light p-2 outer-shadow cursor-pointer"
+    class="flex flex-row items-start w-full rounded-sm bg-background-light p-2 outer-shadow cursor-pointer"
     :href="'https://youtube.com/watch?v=' + id"
     target="_blank"
   >
@@ -9,7 +9,7 @@
     </div>
     <div class="flex flex-1 flex-col justify-center items-start">
       <div class="text-sm font-medium mb-1">{{ name }}</div>
-      <div class="text-sm">{{ published }}</div>
+      <div class="text-xs">{{ published }}</div>
     </div>
   </a>
 </template>

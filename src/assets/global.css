@@ -15,11 +15,11 @@ body::-webkit-scrollbar {
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
 
-.element-hover {
+.child-hover {
   display: none;
 }
 
-.adjacent-hover:hover .element-hover {
+.parent-hover:hover .child-hover {
   display: flex;
 }
 
@@ -68,4 +68,11 @@ body::-webkit-scrollbar {
 
 .bg-card-light {
   background-color: #293553;
+}
+
+.absolute-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }

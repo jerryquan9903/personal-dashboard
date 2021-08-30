@@ -48,17 +48,15 @@ export default {
 #app-grid {
   display: grid;
   grid-template-areas:
-    "welcome welcome other"
-    "games youtube other"
-    "games youtube other"
-    "games another other"
-    "games another other";
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
-  grid-template-columns: 1fr 1fr 1fr;
+    "welcome welcome lother other"
+    "games youtube youtube other"
+    "games another another other";
+  grid-template-rows: 2fr 4fr 6fr;
+  grid-template-columns: 6fr 4fr 2fr 6fr;
   gap: 1rem;
   padding: 1rem;
-  height: 100vh;
-  justify-items: stretch;
+  min-height: 100vh;
+  /* justify-items: stretch; */
 }
 
 #app-grid > #grid-welcome {
@@ -73,7 +71,4 @@ export default {
   grid-area: youtube;
 }
 
-#app-grid > #grid-other {
-  grid-area: other;
-}
 </style>

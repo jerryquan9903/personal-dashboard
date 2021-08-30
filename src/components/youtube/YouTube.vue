@@ -4,7 +4,7 @@
       <!-- Search bar and channel view/remove -->
       <div class="flex flex-row">
         <div class="w-1/5 relative">
-          <Popover :panelStyle="'w-112 max-h-96 outer-shadow rounded-sm'">
+          <Popover :panelStyle="'w-112 max-h-48 outer-shadow rounded-sm'">
             <template v-slot:button>
               <div
                 class="
@@ -27,7 +27,7 @@
               </div>
             </template>
             <template v-slot:content>
-              <template v-for="(item, index) in listChannels" :key="item">
+              <template v-for="(channel, index) in listChannels" :key="channel.id">
                 <div
                   class="
                     flex flex-row
@@ -38,19 +38,20 @@
                     bg-background-dark
                     hover:bg-background
                     text-sm
-                    adjacent-hover
+                    parent-hover
                   "
                 >
+                  <img :src="channel.thumbnail" class="w-6 h-6 rounded-full mr-2" />
                   <div class="pl-1 py-1 text-sm font-medium">
-                    {{ item.name }}
+                    {{ channel.name }}
                   </div>
-                  <div class="flex flex-1 flex-row justify-end element-hover">
+                  <div class="flex flex-1 flex-row justify-end child-hover">
                     <a
                       class="
                         px-2
                         py-1
                         transition-colors
-                        duration-100
+                        duration-200
                         bg-rose-500
                         hover:bg-rose-600
                         text-xs
@@ -58,7 +59,7 @@
                         mr-1
                         cursor-pointer
                       "
-                      :href="'https://youtube.com/channel/' + item.id"
+                      :href="'https://youtube.com/channel/' + channel.id"
                       target="_blank"
                     >
                       Open on YouTube
@@ -68,14 +69,14 @@
                         px-2
                         py-1
                         transition-colors
-                        duration-100
+                        duration-200
                         bg-rose-500
                         hover:bg-rose-600
                         text-xs
                         rounded-sm
                         cursor-pointer
                       "
-                      @click="removeChannel(item.id, index)"
+                      @click="removeChannel(channel.id, index)"
                     >
                       Remove
                     </div>
@@ -91,6 +92,7 @@
               class="w-4/5 h-full bg-background-dark outline-none text-sm pl-2 rounded-l-sm"
               type="text"
               placeholder="Search channel..."
+              v-model="searchQuery"
             />
             <div class="w-1/5">
               <Menu as="div" class="flex justify-center">
@@ -104,7 +106,7 @@
                       text-sm
                       cursor-pointer
                       transition-colors
-                      duration-100
+                      duration-200
                       bg-blue-500
                       hover:bg-blue-600
                     "
@@ -134,57 +136,59 @@
                       shadow-lg
                       ring-1 ring-black ring-opacity-5
                       focus:outline-none
+                      overflow-y-scroll
+                      max-h-48
+                      custom-scrollbar
                     "
                   >
                     <div v-show="searchResult.length > 0">
                       <template v-for="channel in searchResult" :key="channel.id">
-                        <MenuItem v-slot="{ active }">
-                          <div
-                            :class="[
-                              active ? 'bg-background' : '',
-                              'group flex flex-row rounded-sm items-center w-full px-2 py-2 text-sm cursor-pointer',
-                            ]"
-                          >
-                            <img :src="channel.thumbnail" />
-                            <div>{{ item.name }}</div>
-                          </div>
-                        </MenuItem>
+                        <div class="p-1">
+                          <MenuItem v-slot="{ active }">
+                            <div
+                              :class="[
+                                active ? 'bg-background' : '',
+                                'group flex flex-row w-full rounded-sm items-center w-full p-2 text-sm cursor-pointer parent-hover',
+                              ]"
+                            >
+                              <img :src="channel.thumbnail" class="w-6 h-6 rounded-full mr-2" />
+                              <div class="text-sm flex-1">{{ channel.name }}</div>
+                              <div
+                                class="
+                                  flex
+                                  justify-end
+                                  px-2
+                                  py-1
+                                  transition-colors
+                                  duration-200
+                                  bg-rose-500
+                                  hover:bg-rose-600
+                                  text-xs
+                                  rounded-sm
+                                  mr-1
+                                  cursor-pointer
+                                  child-hover
+                                "
+                                @click="insertChannel(channel.id)"
+                              >
+                                Add to channel list
+                              </div>
+                            </div>
+                          </MenuItem>
+                        </div>
                       </template>
                     </div>
+                    <div v-show="searchQuery.length === 0" class="py-2 w-full text-center">
+                      Please enter your search query.
+                    </div>
                     <div
-                      v-show="searchResult.length === 0"
+                      v-show="searchResult.length === 0 && searchQuery.length > 0"
                       class="flex flex-row w-full justify-center items-center py-2"
                     >
                       <span class="mr-2">Searching...</span>
                       <div class="h-6 w-6 relative">
-                        <div
-                          class="
-                            rounded-full
-                            h-4
-                            w-4
-                            bg-background-dark
-                            absolute
-                            top-1/2
-                            left-1/2
-                            transform
-                            -translate-x-1/2 -translate-y-1/2
-                            z-40
-                          "
-                        />
-                        <div
-                          class="
-                            h-6
-                            w-6
-                            absolute
-                            bg-background
-                            rounded-full
-                            top-1/2
-                            left-1/2
-                            transform
-                            -translate-x-1/2 -translate-y-1/2
-                            z-20
-                          "
-                        />
+                        <div class="rounded-full h-4 w-4 bg-background-dark absolute-center z-40" />
+                        <div class="h-6 w-6 absolute-center bg-background rounded-full z-20" />
                         <div
                           class="
                             rounded-tr-full
@@ -209,7 +213,7 @@
       </div>
 
       <!-- YouTube video info -->
-      <div class="relative">
+      <div class="flex-1 relative">
         <template v-for="(video, index) in newVideos" :key="video">
           <transition name="scroll">
             <div
@@ -228,6 +232,25 @@
             </div>
           </transition>
         </template>
+      </div>
+
+      <div class="flex flex-row-reverse w-full">
+        <div
+          class="
+            px-3
+            py-2
+            transition-colors
+            duration-200
+            bg-rose-500
+            hover:bg-rose-600
+            text-xs
+            rounded-sm
+            cursor-pointer
+          "
+          @click="feelingLucky()"
+        >
+          I'm Feeling Lucky
+        </div>
       </div>
     </div>
   </div>
@@ -258,6 +281,7 @@ export default {
       newVideoOnShow: 0,
       listChannels: null,
       searchResult: [],
+      searchQuery: "",
     };
   },
   methods: {
@@ -275,7 +299,7 @@ export default {
       return dayjs(releaseDate).fromNow();
     },
 
-    // GET new videos, putting them into the database
+    // Also replace old videos in the database
     getNewVideos() {
       api
         .get("/youtube/get-new-videos")
@@ -295,29 +319,57 @@ export default {
       else this.newVideoOnShow++;
     },
 
-    searchChannels(query) {
-      if (query)
+    searchChannels() {
+      if (this.searchQuery.length > 0)
         api
-          .get(`/youtube/search-channels?query=${query}`)
+          .get(`/youtube/search-channels?query=${this.searchQuery}`)
           .then((success) => {
             this.searchResult = [...success.data];
           })
           .catch((e) => console.log(e));
     },
+
+    insertChannel(id) {
+      api
+        .post("/youtube/insert-channel", { id: id })
+        .then(() => {
+          this.searchQuery = "";
+          this.getChannels();
+        })
+        .catch((e) => console.log(e));
+    },
+
+    getChannels() {
+      api
+        .get("/youtube/get-channels")
+        .then((success) => {
+          let sorted = [...success.data].sort(function (a, b) {
+            return a.name.localeCompare(b.name);
+          });
+          this.listChannels = sorted;
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    },
+
+    feelingLucky() {
+      api
+        .get("/youtube/feeling-lucky")
+        .then((success) => {
+          window.open("https://youtube.com/watch?v=" + success.data.videoId);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    },
   },
   beforeMount() {
     this.getNewVideos();
-    api
-      .get("/youtube/get-channels")
-      .then((success) => {
-        this.listChannels = success.data;
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+    this.getChannels();
 
     setInterval(this.getNewVideos, 3600000);
-    setInterval(this.cycleNewVideo, 10000);
+    setInterval(this.cycleNewVideo, 6000);
   },
   beforeUnmount() {
     clearInterval(this.getNewVideos);
