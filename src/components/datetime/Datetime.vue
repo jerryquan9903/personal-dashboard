@@ -14,7 +14,7 @@ import Calendar from "./Calendar.vue";
 let initTime = dayjs().format("HH:mm");
 
 export default {
-  name: "welcome",
+  name: "datetime",
 
   components: {
     Calendar,

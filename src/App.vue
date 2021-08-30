@@ -1,6 +1,6 @@
 <template>
   <div id="app-grid">
-    <div id="grid-welcome" class="flex flex-row h-full"><Welcome /></div>
+    <div id="grid-datetime" class="flex flex-row h-full"><Datetime /></div>
     <div id="grid-games" class="flex flex-col h-full"><Games /></div>
     <div id="grid-youtube" class="flex flex-col h-full"><YouTube /></div>
     <div id="grid-other"></div>
@@ -9,13 +9,13 @@
 
 <script>
 import Games from "./components/games/Games";
-import Welcome from "./components/welcome/Welcome";
+import Datetime from "./components/datetime/Datetime";
 import YouTube from "./components/youtube/YouTube";
 
 export default {
   name: "App",
   components: {
-    Welcome,
+    Datetime,
     Games,
     YouTube,
   },
@@ -48,19 +48,19 @@ export default {
 #app-grid {
   display: grid;
   grid-template-areas:
-    "welcome welcome lother other"
+    "datetime datetime weather weather"
     "games youtube youtube other"
     "games another another other";
   grid-template-rows: 2fr 4fr 6fr;
-  grid-template-columns: 6fr 4fr 2fr 6fr;
+  grid-template-columns: 6fr 5fr 1fr 6fr;
   gap: 1rem;
   padding: 1rem;
   min-height: 100vh;
   /* justify-items: stretch; */
 }
 
-#app-grid > #grid-welcome {
-  grid-area: welcome;
+#app-grid > #grid-datetime {
+  grid-area: datetime;
 }
 
 #app-grid > #grid-games {
