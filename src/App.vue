@@ -3,15 +3,14 @@
     <div id="grid-datetime" class="flex flex-row h-full"><Datetime /></div>
     <div id="grid-weather" class="flex flex-row h-full"><Weather /></div>
     <div id="grid-games" class="flex flex-col h-full"><Games /></div>
-    <div id="grid-youtube" class="flex flex-col h-full"><YouTube /></div>
-    <div id="grid-other"></div>
+    <div id="grid-media" class="flex flex-col h-full"><SocialMedia /></div>
   </div>
 </template>
 
 <script>
 import Games from "./components/games/Games";
 import Datetime from "./components/datetime/Datetime";
-import YouTube from "./components/youtube/YouTube";
+import SocialMedia from "./components/media/SocialMedia";
 import Weather from "./components/weather/Weather";
 
 export default {
@@ -19,7 +18,7 @@ export default {
   components: {
     Datetime,
     Games,
-    YouTube,
+    SocialMedia,
     Weather
   },
 };
@@ -52,10 +51,9 @@ export default {
   display: grid;
   grid-template-areas:
     "datetime datetime weather other"
-    "games youtube youtube other"
-    "games youtube youtube other"
+    "games media media other"
     "games another another other";
-  grid-template-rows: 2fr 1fr 3fr 6fr;
+  grid-template-rows: 2fr 6fr 4fr;
   grid-template-columns: 8fr 5fr 3fr 8fr;
   gap: 1rem;
   padding: 1rem;
@@ -71,8 +69,8 @@ export default {
   grid-area: games;
 }
 
-#app-grid > #grid-youtube {
-  grid-area: youtube;
+#app-grid > #grid-media {
+  grid-area: media;
 }
 
 #app-grid > #grid-weather {

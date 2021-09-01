@@ -36,22 +36,17 @@ body::-webkit-scrollbar {
 }
 
 /* Scroll animation */
-.scroll-enter-active {
-  left: 0;
-  transition: all 1.5s ease-in-out;
-}
-
+.scroll-enter-active,
 .scroll-leave-active {
-  right: 0;
-  transition: all 1.5s ease-in-out;
+  transition: transform 1.5s ease-in-out;
 }
 
 .scroll-enter-from {
-  left: calc(100% + 1rem);
+  transform: translateX(calc(100% + 1rem));
 }
 
 .scroll-leave-to {
-  right: calc(100% + 1rem);
+  transform: translateX(calc(-100% - 1rem));
 }
 
 .text-card {

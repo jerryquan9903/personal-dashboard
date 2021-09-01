@@ -7,23 +7,16 @@
       </div>
       <div v-show="loaded" class="flex flex-row justify-start items-start w-full h-full">
         <div
-          class="
-            mr-4
-            transition
-            duration-250
-            ease-in-out
-            transform
-            hover:scale-105
-            hover:shadow-md
-            cursor-pointer
-            h-full
-            w-5/12
-          "
+          class="mr-3 transition duration-250 ease-in-out transform hover:scale-105 cursor-pointer h-full w-1/2"
           @click="getGameInfoFull()"
         >
-          <img :src="image" class="object-cover rounded-sm outer-shadow max-h-full" @load="setLoaded(true)" />
+          <img
+            :src="image"
+            class="object-cover rounded-sm hover:shadow-md outer-shadow max-w-full"
+            @load="setLoaded(true)"
+          />
         </div>
-        <div class="flex flex-col justify-start items-start w-7/12">
+        <div class="flex flex-col justify-start items-start w-1/2">
           <div class="font-medium text-xl mb-2">{{ name }}</div>
           <div class="current-grid text-sm font-light w-full" v-for="item in data" :key="item">
             <div class="mb-1 font-light pr-0">{{ item.label }}</div>

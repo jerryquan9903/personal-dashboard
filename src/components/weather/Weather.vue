@@ -3,6 +3,7 @@
 </template>
 
 <script>
+import api from "../../services/api";
 export default {
   data() {
     return {
@@ -11,21 +12,24 @@ export default {
   },
   methods: {
     getWeather() {
-      
+      api
+        .get(`/weather/get-weather?lat=${this.geolocation.latitude}&lon=${this.geolocation.longitude}`)
+        .then((success) => {
+          console.log(success.data);
+        })
+        .catch((e) => console.log(e));
     },
     getLocation() {
-      let location = navigator.geolocation.getCurrentPosition((position) => {
-        return {
-          latitude: position.coords.latitude,
-          longtitude: position.coords.longitude,
-        };
-      });
-
-      return location;
+      return new Promise((success) => navigator.geolocation.getCurrentPosition(success));
     },
   },
-  beforeMount() {
-    this.geolocation = this.getLocation();
+  beforeMount: async function() {
+    const location = await this.getLocation();
+    this.geolocation = {
+      latitude: location.coords.latitude,
+      longitude: location.coords.longitude
+    }
+    this.getWeather();
   },
 };
 </script>
