@@ -1,6 +1,7 @@
 <template>
   <div id="app-grid">
     <div id="grid-datetime" class="flex flex-row h-full"><Datetime /></div>
+    <div id="grid-weather" class="flex flex-row h-full"><Weather /></div>
     <div id="grid-games" class="flex flex-col h-full"><Games /></div>
     <div id="grid-youtube" class="flex flex-col h-full"><YouTube /></div>
     <div id="grid-other"></div>
@@ -11,6 +12,7 @@
 import Games from "./components/games/Games";
 import Datetime from "./components/datetime/Datetime";
 import YouTube from "./components/youtube/YouTube";
+import Weather from "./components/weather/Weather";
 
 export default {
   name: "App",
@@ -18,6 +20,7 @@ export default {
     Datetime,
     Games,
     YouTube,
+    Weather
   },
 };
 </script>
@@ -48,11 +51,12 @@ export default {
 #app-grid {
   display: grid;
   grid-template-areas:
-    "datetime datetime weather weather"
+    "datetime datetime weather other"
+    "games youtube youtube other"
     "games youtube youtube other"
     "games another another other";
-  grid-template-rows: 2fr 4fr 6fr;
-  grid-template-columns: 6fr 5fr 1fr 6fr;
+  grid-template-rows: 2fr 1fr 3fr 6fr;
+  grid-template-columns: 8fr 5fr 3fr 8fr;
   gap: 1rem;
   padding: 1rem;
   min-height: 100vh;
@@ -69,6 +73,10 @@ export default {
 
 #app-grid > #grid-youtube {
   grid-area: youtube;
+}
+
+#app-grid > #grid-weather {
+  grid-area: weather;
 }
 
 </style>

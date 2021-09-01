@@ -33,7 +33,7 @@
       </div>
 
       <!--Skeleton-->
-      <div v-show="!loaded && !noGames">
+      <div v-show="!loaded && !noLastPlayed">
         <div class="animate-pulse flex flex-row justify-start items-start">
           <div class="rounded-sm w-48 h-64 bg-bluegray-500 mr-4"></div>
           <div class="flex flex-col mt-2">

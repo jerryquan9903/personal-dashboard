@@ -216,10 +216,7 @@
       <div class="flex-1 relative">
         <template v-for="(video, index) in newVideos" :key="video">
           <transition name="scroll">
-            <div
-              v-show="index === newVideoOnShow"
-              class="absolute z-0 top-0 w-full flex flex-col mt-4 transition-scroll"
-            >
+            <div v-if="index === newVideoOnShow" class="absolute z-0 top-0 w-full flex flex-col mt-4 transition-scroll">
               <div class="text-xs pl-2 mb-1 text-bluegray-400">
                 <span class="font-medium">{{ video.channel }}</span>
                 <span class="italic">
@@ -290,6 +287,8 @@ export default {
         .post("/youtube/remove-channel", { id: id })
         .then(() => {
           this.listChannels.splice(index, 1);
+          this.getChannels();
+          this.getNewVideos();
         })
         .catch((e) => {
           console.log(e);
@@ -335,6 +334,7 @@ export default {
         .then(() => {
           this.searchQuery = "";
           this.getChannels();
+          this.getNewVideos();
         })
         .catch((e) => console.log(e));
     },
