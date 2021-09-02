@@ -22,7 +22,7 @@
                   "
                   @click="getGameInfoFull(game.id)"
                 >
-                  <img :src="game.image" class="w-full mx-auto rounded-sm object-cover outer-shadow" />
+                  <img :src="game.image" class="w-full mx-auto rounded-sm object-cover outer-shadow game-cover-ratio" />
                   <div
                     class="
                       flex flex-col-reverse

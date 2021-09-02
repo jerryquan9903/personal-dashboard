@@ -7,12 +7,12 @@
       </div>
       <div v-show="loaded" class="flex flex-row justify-start items-start w-full h-full">
         <div
-          class="mr-3 transition duration-250 ease-in-out transform hover:scale-105 cursor-pointer h-full w-1/2"
+          class="mr-3 transition duration-250 ease-in-out transform hover:scale-105 cursor-pointer w-1/2"
           @click="getGameInfoFull()"
         >
           <img
             :src="image"
-            class="object-cover rounded-sm hover:shadow-md outer-shadow max-w-full"
+            class="object-cover rounded-sm hover:shadow-md outer-shadow max-w-full game-cover-ratio"
             @load="setLoaded(true)"
           />
         </div>

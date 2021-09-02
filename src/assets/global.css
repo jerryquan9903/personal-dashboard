@@ -71,3 +71,7 @@ body::-webkit-scrollbar {
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+.game-cover-ratio {
+  aspect-ratio: 3 / 4;
+}
