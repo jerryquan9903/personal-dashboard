@@ -11,6 +11,21 @@ body::-webkit-scrollbar {
   border-radius: 9999px;
 }
 
+.custom-scrollbar-x::-webkit-scrollbar {
+  height: 0.2rem;
+
+}
+
+.custom-scrollbar-x::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 9999px;
+}
+
+.custom-scrollbar-x::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 9999px;
+}
+
 .outer-shadow {
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
@@ -22,7 +37,6 @@ body::-webkit-scrollbar {
 .parent-hover:hover .child-hover {
   display: flex;
 }
-
 
 /* Fade animation */
 .fade-enter-active,
@@ -38,6 +52,7 @@ body::-webkit-scrollbar {
 .fade-fast-enter-active,
 .fade-fast-leave-active {
   transition: opacity 0.25s ease;
+  z-index: 500;
 }
 
 .fade-fast-enter-from,
