@@ -3,12 +3,12 @@
     <CurrentGame @details="openGameDetails($event)" />
     <PlayingNext @details="openGameDetails($event)" />
   </div>
-  <transition name="fade">
+  <transition name="fade-fast">
     <div v-show="openDetails">
       <div
         class="
           fixed
-          z-50
+          z-overlay
           top-1/2
           left-1/2
           w-screen
@@ -60,20 +60,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.bg-dark {
-  background-color: rgba(0, 0, 0, 0.5);
-}
-
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.25s ease;
-  z-index: 50;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-}
-</style>

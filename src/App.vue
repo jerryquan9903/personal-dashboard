@@ -52,7 +52,7 @@ export default {
   grid-template-areas:
     "datetime datetime weather other"
     "games media media other"
-    "games another another other";
+    "games media media other";
   grid-template-rows: 2fr 6fr 4fr;
   grid-template-columns: 8fr 5fr 3fr 8fr;
   gap: 1rem;

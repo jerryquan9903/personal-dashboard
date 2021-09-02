@@ -212,10 +212,10 @@
     </div>
 
     <!-- YouTube video info -->
-    <div class="flex-1 relative grid grid-cols-1">
+    <div class="flex-1 grid grid-cols-1">
       <template v-for="(video, index) in newVideos" :key="video">
         <transition name="scroll" class="row-start-1 col-start-1">
-          <div v-if="index === newVideoOnShow" class="z-0 w-full flex flex-col mt-4 transition-scroll">
+          <div v-if="index === newVideoOnShow" class="w-full flex flex-col mt-4 transition-scroll">
             <div class="text-xs pl-2 mb-1 text-bluegray-400">
               <span class="font-medium">{{ video.channel }}</span>
               <span class="italic">
@@ -352,7 +352,7 @@ export default {
     this.getChannels();
 
     setInterval(this.getNewVideos, 3600000);
-    setInterval(this.cycleNewVideo, 10000);
+    setInterval(this.cycleNewVideo, 8000);
   },
   beforeUnmount() {
     clearInterval(this.getNewVideos);

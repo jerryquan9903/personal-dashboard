@@ -35,6 +35,16 @@ body::-webkit-scrollbar {
   opacity: 0;
 }
 
+.fade-fast-enter-active,
+.fade-fast-leave-active {
+  transition: opacity 0.25s ease;
+}
+
+.fade-fast-enter-from,
+.fade-fast-leave-to {
+  opacity: 0;
+}
+
 /* Scroll animation */
 .scroll-enter-active,
 .scroll-leave-active {
@@ -63,6 +73,10 @@ body::-webkit-scrollbar {
 
 .bg-card-light {
   background-color: #293553;
+}
+
+.bg-dark {
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .absolute-center {
