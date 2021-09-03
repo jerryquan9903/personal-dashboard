@@ -12,12 +12,11 @@ body::-webkit-scrollbar {
 }
 
 .custom-scrollbar-x::-webkit-scrollbar {
-  height: 0.2rem;
-
+  height: 0;
 }
 
 .custom-scrollbar-x::-webkit-scrollbar-thumb {
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.2);
   border-radius: 9999px;
 }
 
@@ -49,16 +48,7 @@ body::-webkit-scrollbar {
   opacity: 0;
 }
 
-.fade-fast-enter-active,
-.fade-fast-leave-active {
-  transition: opacity 0.25s ease;
-  z-index: 500;
-}
 
-.fade-fast-enter-from,
-.fade-fast-leave-to {
-  opacity: 0;
-}
 
 /* Scroll animation */
 .scroll-enter-active,

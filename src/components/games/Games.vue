@@ -8,7 +8,7 @@
       <div
         class="
           fixed
-          z-overlay
+          z-200
           top-1/2
           left-1/2
           w-screen
@@ -60,3 +60,16 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.fade-fast-enter-active,
+.fade-fast-leave-active {
+  transition: opacity 0.25s ease;
+  z-index: 200;
+}
+
+.fade-fast-enter-from,
+.fade-fast-leave-to {
+  opacity: 0;
+}
+</style>

@@ -1,18 +1,18 @@
 <template>
   <div class="w-full h-full relative">
     <div
-      class="absolute bg-background outer-shadow overflow-hidden z-overlay p-2"
+      class="absolute bg-background outer-shadow overflow-hidden z-100 p-2"
       :class="zoom ? 'rounded-b left-0 zoom-in-all' : 'rounded inset-0 zoom-out-all'"
     >
     <transition name="fade-fast">
-      <div v-if="now" v-show="zoom">
+      <div v-if="now" v-show="zoom" class="h-full">
         <Forecast :hourly="hourly.slice(0, 24)" :daily="daily" />
       </div>
       </transition>
     </div>
     <div
       v-if="now"
-      class="bg-cover bg-right cursor-pointer absolute top-0 left-0 bottom-0 z-overlay"
+      class="bg-cover bg-right cursor-pointer absolute top-0 left-0 bottom-0 z-100"
       :class="zoom ? 'rounded-t zoom-in-bg' : 'rounded zoom-out-bg'"
       :style="{ backgroundImage: 'url(' + image + ')' }"
       @click="zoomWeather(true)"
@@ -20,7 +20,7 @@
       <div class="flex flex-row w-full h-full rounded bg-gradient overflow-hidden">
         <div class="flex flex-col flex-1 h-full p-2 weather-text text-sm font-medium">
           <div>{{ city + ", " + country }}</div>
-          <div class="flex flex-1 items-center text-5xl font-bold">{{ now.temp.toFixed(0) + "°C" }}</div>
+          <h3 class="flex flex-1 items-center text-5xl font-bold">{{ now.temp.toFixed(0) + "°C" }}</h3>
           <div>{{ now.desc }}</div>
         </div>
         <transition name="fade-delay">
@@ -42,7 +42,7 @@
       </div>
     </div>
     <transition name="fade-fast">
-      <div v-show="zoom" class="fixed z-60 top-0 left-0 w-screen h-screen bg-dark" @click="zoomWeather(false)" />
+      <div v-show="zoom" class="fixed z-90 top-0 left-0 w-screen h-screen bg-dark" @click="zoomWeather(false)" />
     </transition>
   </div>
 </template>
@@ -87,7 +87,7 @@ export default {
         .catch((e) => console.log(e));
     },
     getWeatherImage() {
-      let commonUrl = process.env.BASE_URL + "weather/";
+      let commonUrl = process.env.BASE_URL + "weather/banners/";
       let imageName = "";
       let switchId = this.now.condId.toString()[0];
 
@@ -163,7 +163,7 @@ export default {
 
 .zoom-in-all {
   right: -24rem;
-  bottom: -20rem;
+  bottom: -24rem;
   top: 100%;
   transition-duration: 0.25s;
   transition-property: right, bottom, top;
@@ -202,6 +202,16 @@ export default {
 
 .fade-delay-enter-from,
 .fade-delay-leave-to {
+  opacity: 0;
+}
+
+.fade-fast-enter-active,
+.fade-fast-leave-active {
+  transition: opacity 0.25s ease;
+}
+
+.fade-fast-enter-from,
+.fade-fast-leave-to {
   opacity: 0;
 }
 </style>

@@ -31,7 +31,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   -moz-font-smoothing: antialiased;
   -o-font-smoothing: antialiased;
-  color: rgb(238, 238, 227);
+  color:  #f3f3e4;
 }
 
 #nav {
