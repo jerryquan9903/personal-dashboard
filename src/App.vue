@@ -9,9 +9,9 @@
 
 <script>
 import Games from "./components/games/Games";
-import Datetime from "./components/datetime/Datetime";
+import Datetime from "./components/top/Datetime";
 import SocialMedia from "./components/media/SocialMedia";
-import Weather from "./components/weather/Weather";
+import Weather from "./components/top/Weather";
 
 export default {
   name: "App",
@@ -50,11 +50,11 @@ export default {
 #app-grid {
   display: grid;
   grid-template-areas:
-    "datetime datetime weather other"
-    "games media media other"
-    "games media media other";
+    "datetime datetime datetime weather covid brother"
+    "games media media other other other"
+    "games media media other other other";
   grid-template-rows: 2fr 6fr 4fr;
-  grid-template-columns: 8fr 5fr 3fr 8fr;
+  grid-template-columns: 6fr 6fr 2fr 3fr 3fr 4fr;
   gap: 1rem;
   padding: 1rem;
   min-height: 100vh;

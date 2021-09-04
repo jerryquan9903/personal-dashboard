@@ -238,6 +238,7 @@
         I'm Feeling Lucky
       </div>
     </div>
+
   </div>
 </template>
 
@@ -347,6 +348,13 @@ export default {
         });
     },
   },
+  // mounted() {
+  //   let twitterScript = document.createElement('twitter');
+  //   twitterScript.setAttribute("src", "https://platform.twitter.com/widgets.js");
+  //   twitterScript.setAttribute("async", true);
+  //   twitterScript.setAttribute("charset", "utf-8");
+  //   document.head.appendChild(twitterScript);
+  // },
   beforeMount() {
     this.getNewVideos();
     this.getChannels();

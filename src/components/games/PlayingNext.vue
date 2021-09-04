@@ -5,7 +5,7 @@
       <div v-show="loaded" class="grid grid-cols-1">
         <template v-for="(display, index) in allNextGames" :key="display">
           <transition name="fade" class="row-start-1 col-start-1">
-            <div v-show="index === page" class="grid grid-cols-3 gap-2">
+            <div v-show="index === page" class="grid grid-cols-2 gap-2">
               <template v-for="game in display" :key="game">
                 <div
                   class="
@@ -49,8 +49,7 @@
       </div>
       <!--Skeleton-->
       <div v-show="!loaded">
-        <div class="animate-pulse grid grid-cols-3 gap-2 h-full">
-          <div class="w-36 h-48 rounded-sm bg-bluegray-500"></div>
+        <div class="animate-pulse grid grid-cols-2 gap-2 h-full">
           <div class="w-36 h-48 rounded-sm bg-bluegray-500"></div>
           <div class="w-36 h-48 rounded-sm bg-bluegray-500"></div>
         </div>
@@ -97,8 +96,8 @@ export default {
         let splitted = [];
 
         // split data into multiple arrays with 3 games each
-        for (let i = 0; i < dataWithSmallerImage.length; i += 3) {
-          splitted.push(success.data.slice(i, i + 3));
+        for (let i = 0; i < dataWithSmallerImage.length; i += 2) {
+          splitted.push(success.data.slice(i, i + 2));
         }
 
         this.allNextGames = splitted;

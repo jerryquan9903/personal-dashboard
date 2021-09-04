@@ -48,6 +48,13 @@ body::-webkit-scrollbar {
   opacity: 0;
 }
 
+.bg-gradient {
+  background: #00000022;
+}
+
+.bg-gradient-dark {
+  background: #00000088;
+}
 
 
 /* Scroll animation */
@@ -66,6 +73,10 @@ body::-webkit-scrollbar {
 
 .text-card {
   color: #ffffff;
+}
+
+.text-shadow {
+  text-shadow: 0px 1px 2px #222;
 }
 
 .bg-card {

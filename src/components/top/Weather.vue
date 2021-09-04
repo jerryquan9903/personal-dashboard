@@ -2,29 +2,32 @@
   <div class="w-full h-full relative">
     <div
       class="absolute bg-background outer-shadow overflow-hidden z-100 p-2"
-      :class="zoom ? 'rounded-b left-0 zoom-in-all' : 'rounded inset-0 zoom-out-all'"
+      :class="zoom ? 'rounded-b zoom-in-all' : 'rounded zoom-out-all'"
     >
-    <transition name="fade-fast">
-      <div v-if="now" v-show="zoom" class="h-full">
-        <Forecast :hourly="hourly.slice(0, 24)" :daily="daily" />
-      </div>
+      <transition name="fade-fast">
+        <div v-if="now" v-show="forecastDelay" class="absolute top-1/4 inset-x-0 bottom-0">
+          <Forecast :hourly="hourly.slice(0, 24)" :daily="daily" />
+        </div>
       </transition>
     </div>
     <div
       v-if="now"
-      class="bg-cover bg-right cursor-pointer absolute top-0 left-0 bottom-0 z-100"
+      class="bg-cover bg-right cursor-pointer absolute inset-0 z-100"
       :class="zoom ? 'rounded-t zoom-in-bg' : 'rounded zoom-out-bg'"
       :style="{ backgroundImage: 'url(' + image + ')' }"
       @click="zoomWeather(true)"
     >
-      <div class="flex flex-row w-full h-full rounded bg-gradient overflow-hidden">
-        <div class="flex flex-col flex-1 h-full p-2 weather-text text-sm font-medium">
+      <div
+        class="flex absolute inset-0 flex-row w-full h-full rounded bg-gradient overflow-hidden"
+        :class="zoom ? 'zoom-in-children' : 'zoom-out-children'"
+      >
+        <div class="flex flex-col flex-1 h-full p-2 text-shadow text-sm font-medium">
           <div>{{ city + ", " + country }}</div>
           <h3 class="flex flex-1 items-center text-5xl font-bold">{{ now.temp.toFixed(0) + "°C" }}</h3>
           <div>{{ now.desc }}</div>
         </div>
         <transition name="fade-delay">
-          <div v-show="zoomDelay" class="p-2 weather-text text-sm flex flex-col items-end font-light">
+          <div v-show="zoomDelay" class="p-2 text-shadow text-sm flex flex-col items-end font-light">
             <div class="text-2xl font-bold flex-1">
               {{ today.temp.max.toFixed(0) + "°C / " + today.temp.min.toFixed(0) + "°C" }}
             </div>
@@ -63,12 +66,12 @@ export default {
       country: null,
       now: null,
       today: null,
-      hourly: null,
       daily: null,
       image: null,
       weatherInterval: null,
       zoom: false,
-      zoomDelay: false,
+      zoomDelay: false, // delay for today's weather to the right
+      forecastDelay: false, // delay animation for forecast
     };
   },
   methods: {
@@ -80,7 +83,7 @@ export default {
           this.country = success.data.country;
           this.now = success.data.current;
           this.today = success.data.daily[0];
-          this.hourly = success.data.hourly;
+          this.hourly = success.data.hourly.slice(1);
           this.daily = success.data.daily.slice(1);
           this.getWeatherImage();
         })
@@ -130,11 +133,16 @@ export default {
       return new Promise((success) => navigator.geolocation.getCurrentPosition(success));
     },
     zoomWeather(value) {
-      this.zoom = value;
-
       // delay a bit so that text does not appear wrapped
-      if (value) setTimeout(() => (this.zoomDelay = value), 100);
-      else this.zoomDelay = value;
+      if (value) {
+        this.zoom = value;
+        setTimeout(() => (this.zoomDelay = value), 100);
+        setTimeout(() => (this.forecastDelay = value), 250);
+      } else {
+        this.forecastDelay = value;
+        setTimeout(() => (this.zoom = value), 250);
+        setTimeout(() => (this.zoomDelay = value), 250);
+      }
     },
   },
   beforeMount: async function () {
@@ -153,51 +161,57 @@ export default {
 </script>
 
 <style scoped>
-.bg-gradient {
-  background: #00000022;
-}
-
-.weather-text {
-  text-shadow: 0px 1px 2px #222;
-}
-
 .zoom-in-all {
-  right: -24rem;
-  bottom: -24rem;
-  top: 100%;
   transition-duration: 0.25s;
-  transition-property: right, bottom, top;
+  transition-property: width, height;
   transition-timing-function: ease-in-out;
+  width: 300%;
+  height: 400%;
 }
 
 .zoom-out-all {
-  right: 0;
-  bottom: 0;
-  top: 0;
   transition-duration: 0.25s;
-  transition-property: right, bottom, top;
+  transition-property: width, height;
   transition-timing-function: ease-in-out;
+  width: 100%;
+  height: 100%;
 }
 
 .zoom-in-bg {
-  right: -24rem;
   border-radius: 0.25rem 0.25rem 0 0;
   transition-duration: 0.25s;
-  transition-property: right, border-radius;
+  transition-property: width, border-radius;
   transition-timing-function: ease-in-out;
+  width: 300%;
 }
 
 .zoom-out-bg {
-  right: 0;
   border-radius: 0.25rem;
   transition-duration: 0.25s;
-  transition-property: right, border-radius;
+  transition-property: width, border-radius;
   transition-timing-function: ease-in-out;
+  width: 100%;
 }
+/* .zoom-in-children {
+  transition-duration: 0.25s;
+  transition-property: transform, border-radius;
+  transition-timing-function: ease-in-out;
+  transform: scaleX(calc(1 / 3));
+  transform-origin: left;
+}
+
+.zoom-out-children {
+  transition-duration: 0.25s;
+  transition-property: transform, border-radius;
+  transition-timing-function: ease-in-out;
+  transform: scaleX(1);
+  transform-origin: left;
+} */
 
 .fade-delay-enter-active,
 .fade-delay-leave-active {
   transition: opacity 0.15s ease;
+  transform: translateZ(0);
 }
 
 .fade-delay-enter-from,
@@ -208,6 +222,7 @@ export default {
 .fade-fast-enter-active,
 .fade-fast-leave-active {
   transition: opacity 0.25s ease;
+  transform: translateZ(0);
 }
 
 .fade-fast-enter-from,

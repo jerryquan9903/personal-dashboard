@@ -1,39 +1,23 @@
 <template>
-  <div class="flex flex-col h-full rounded bg-background outer-shadow mb-4">
-    <div class="font-medium text-xl w-full text-left py-2 px-3 border-b border-coolgray-900">Currently playing</div>
-    <div class="flex flex-col flex-1 justify-start items-start m-2 h-full">
+  <div class="flex flex-col h-full rounded bg-background outer-shadow mb-4 text-shadow">
+    <div class="font-medium text-xl w-full text-left rounded-t border-b border-coolgray-900 py-2 px-3">
+      Currently playing
+    </div>
+    <div class="flex flex-col flex-1 justify-start items-start p-2 h-full rounded-b">
       <div v-show="noLastPlayed" class="italic text-xs mb-2 text-orange-500">
         You are not currently playing any games. Here is one you haven't completed.
       </div>
-      <div v-show="loaded" class="flex flex-row justify-start items-start w-full h-full">
+      <div class="flex flex-row justify-start items-start w-full h-full">
         <div
-          class="mr-3 transition duration-250 ease-in-out transform hover:scale-105 cursor-pointer w-1/2"
+          class="w-full bg-cover bg-center rounded cursor-pointer outer-shadow"
+          :style="{ backgroundImage: 'url(' + image + ')' }"
           @click="getGameInfoFull()"
         >
-          <img
-            :src="image"
-            class="object-cover rounded-sm hover:shadow-md outer-shadow max-w-full game-cover-ratio"
-            @load="setLoaded(true)"
-          />
-        </div>
-        <div class="flex flex-col justify-start items-start w-1/2">
-          <div class="font-medium text-xl mb-2">{{ name }}</div>
-          <div class="current-grid text-sm font-light w-full" v-for="item in data" :key="item">
-            <div class="mb-1 font-light pr-0">{{ item.label }}</div>
-            <div class="font-normal">{{ item.value }}</div>
-          </div>
-        </div>
-      </div>
-
-      <!--Skeleton-->
-      <div v-show="!loaded && !noLastPlayed">
-        <div class="animate-pulse flex flex-row justify-start items-start">
-          <div class="rounded-sm w-48 h-64 bg-bluegray-500 mr-4"></div>
-          <div class="flex flex-col mt-2">
-            <div class="h-5 w-28 mb-4 rounded bg-bluegray-500"></div>
-            <div class="grid grid-cols-2 gap-2" v-for="num in skeleton" :key="num">
-              <div class="h-4 rounded w-20 pr-12 mb-2 bg-bluegray-500"></div>
-              <div class="h-4 rounded w-24 mb-2 bg-bluegray-500"></div>
+          <div class="w-full h-full bg-gradient-dark flex flex-col justify-start items-start p-2 rounded">
+            <div class="font-medium text-xl mb-2">{{ name }}</div>
+            <div class="current-grid text-sm font-light w-full" v-for="item in data" :key="item">
+              <div class="mb-1 font-light pr-0">{{ item.label }}</div>
+              <div class="font-normal">{{ item.value }}</div>
             </div>
           </div>
         </div>
@@ -50,9 +34,7 @@ export default {
   name: "current-game",
   data() {
     return {
-      loaded: false,
       noLastPlayed: false,
-      skeleton: 5,
       name: null,
       image: null,
       data: null,

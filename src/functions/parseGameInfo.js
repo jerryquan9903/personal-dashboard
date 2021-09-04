@@ -16,7 +16,7 @@ function parseGameInfo(info) {
         break;
       }
 
-      case "Release date": {
+      case "Released": {
         result.value = dayjs(item.value).format("DD/MM/YYYY");
         break;
       }
