@@ -3,7 +3,7 @@
     <!-- Search bar and channel view/remove -->
     <div class="flex flex-row">
       <div class="w-1/5 relative">
-        <Popover :panelStyle="'w-112 max-h-48 outer-shadow rounded-sm'">
+        <Popover :panelStyle="'w-112 max-h-40 outer-shadow rounded-sm'">
           <template v-slot:button>
             <div
               class="
@@ -136,7 +136,7 @@
                     ring-1 ring-black ring-opacity-5
                     focus:outline-none
                     overflow-y-scroll
-                    max-h-48
+                    max-h-40
                     custom-scrollbar
                   "
                 >

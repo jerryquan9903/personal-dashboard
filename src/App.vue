@@ -2,6 +2,8 @@
   <div id="app-grid">
     <div id="grid-datetime" class="flex flex-row h-full"><Datetime /></div>
     <div id="grid-weather" class="flex flex-row h-full"><Weather /></div>
+    <div id="grid-covid" class="flex flex-row h-full"><Covid /></div>
+    <div id="grid-cats" class="flex flex-row h-full"><Cats /></div>
     <div id="grid-games" class="flex flex-col h-full"><Games /></div>
     <div id="grid-media" class="flex flex-col h-full"><SocialMedia /></div>
   </div>
@@ -12,6 +14,8 @@ import Games from "./components/games/Games";
 import Datetime from "./components/top/Datetime";
 import SocialMedia from "./components/media/SocialMedia";
 import Weather from "./components/top/Weather";
+import Covid from "./components/top/Covid";
+import Cats from "./components/top/Cats";
 
 export default {
   name: "App",
@@ -19,7 +23,9 @@ export default {
     Datetime,
     Games,
     SocialMedia,
-    Weather
+    Weather,
+    Covid,
+    Cats
   },
 };
 </script>
@@ -50,7 +56,7 @@ export default {
 #app-grid {
   display: grid;
   grid-template-areas:
-    "datetime datetime datetime weather covid brother"
+    "datetime datetime datetime weather covid cats"
     "games media media other other other"
     "games media media other other other";
   grid-template-rows: 2fr 6fr 4fr;
@@ -75,6 +81,14 @@ export default {
 
 #app-grid > #grid-weather {
   grid-area: weather;
+}
+
+#app-grid > #grid-covid {
+  grid-area: covid;
+}
+
+#app-grid > #grid-cats {
+  grid-area: cats;
 }
 
 </style>

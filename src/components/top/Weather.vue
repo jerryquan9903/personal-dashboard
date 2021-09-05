@@ -1,10 +1,10 @@
 <template>
-  <div class="w-full h-full relative">
+  <div class="w-full h-full relative rounded">
     <div
-      class="absolute bg-background outer-shadow overflow-hidden z-100 p-2"
-      :class="zoom ? 'rounded-b zoom-in-all' : 'rounded zoom-out-all'"
+      class="absolute bg-background rounded overflow-hidden z-100 p-2"
+      :class="zoom ? 'zoom-in-all outer-shadow' : 'zoom-out-all'"
     >
-      <transition name="fade-fast">
+      <transition name="fade-superfast">
         <div v-if="now" v-show="forecastDelay" class="absolute top-1/4 inset-x-0 bottom-0">
           <Forecast :hourly="hourly.slice(0, 24)" :daily="daily" />
         </div>
@@ -12,7 +12,7 @@
     </div>
     <div
       v-if="now"
-      class="bg-cover bg-right cursor-pointer absolute inset-0 z-100"
+      class="bg-cover bg-right outer-shadow cursor-pointer absolute inset-0 z-100"
       :class="zoom ? 'rounded-t zoom-in-bg' : 'rounded zoom-out-bg'"
       :style="{ backgroundImage: 'url(' + image + ')' }"
       @click="zoomWeather(true)"
@@ -24,9 +24,9 @@
         <div class="flex flex-col flex-1 h-full p-2 text-shadow text-sm font-medium">
           <div>{{ city + ", " + country }}</div>
           <h3 class="flex flex-1 items-center text-5xl font-bold">{{ now.temp.toFixed(0) + "°C" }}</h3>
-          <div>{{ now.desc }}</div>
+          <div class="text-xs font-normal">{{ now.desc.replace("with", "w/") }}</div>
         </div>
-        <transition name="fade-delay">
+        <transition name="fade-superfast">
           <div v-show="zoomDelay" class="p-2 text-shadow text-sm flex flex-col items-end font-light">
             <div class="text-2xl font-bold flex-1">
               {{ today.temp.max.toFixed(0) + "°C / " + today.temp.min.toFixed(0) + "°C" }}
@@ -140,8 +140,8 @@ export default {
         setTimeout(() => (this.forecastDelay = value), 250);
       } else {
         this.forecastDelay = value;
-        setTimeout(() => (this.zoom = value), 250);
-        setTimeout(() => (this.zoomDelay = value), 250);
+        setTimeout(() => (this.zoom = value), 150);
+        setTimeout(() => (this.zoomDelay = value), 150);
       }
     },
   },
@@ -192,30 +192,15 @@ export default {
   transition-timing-function: ease-in-out;
   width: 100%;
 }
-/* .zoom-in-children {
-  transition-duration: 0.25s;
-  transition-property: transform, border-radius;
-  transition-timing-function: ease-in-out;
-  transform: scaleX(calc(1 / 3));
-  transform-origin: left;
-}
 
-.zoom-out-children {
-  transition-duration: 0.25s;
-  transition-property: transform, border-radius;
-  transition-timing-function: ease-in-out;
-  transform: scaleX(1);
-  transform-origin: left;
-} */
-
-.fade-delay-enter-active,
-.fade-delay-leave-active {
+.fade-superfast-enter-active,
+.fade-superfast-leave-active {
   transition: opacity 0.15s ease;
   transform: translateZ(0);
 }
 
-.fade-delay-enter-from,
-.fade-delay-leave-to {
+.fade-superfast-enter-from,
+.fade-superfast-leave-to {
   opacity: 0;
 }
 
