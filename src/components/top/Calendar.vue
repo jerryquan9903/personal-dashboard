@@ -1,5 +1,5 @@
 <template>
-  <div class="flex w-5/6 h-full rounded bg-background outer-shadow">
+  <div class="flex w-4/6 h-full rounded bg-background outer-shadow">
     <div class="flex flex-col justify-start items-start w-full h-full">
       <div class="flex items-center text-2xl font-bold flex-1 ml-4">
         {{ month }}

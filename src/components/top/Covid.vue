@@ -10,7 +10,7 @@
         :style="backgroundImage"
       >
         <div class="w-full h-full p-2 text-shadow flex flex-col items-center bg-gradient-dark" :style="normalHeight">
-          <div class="text-2xl font-medium mt-4 text-pink-400">{{ covid.totalCases.toLocaleString() }}</div>
+          <div class="text-2xl font-medium mt-4 text-red-400">{{ covid.totalCases.toLocaleString() }}</div>
           <div class="text-sm">total cases</div>
           <div class="text-2xl font-medium mt-4 text-blue-400">{{ covid.totalDeaths.toLocaleString() }}</div>
           <div class="text-sm">total deaths</div>
@@ -26,7 +26,7 @@
         :class="hover ? 'z-100' : 'z-0'"
         ref="normalDiv"
       >
-        <div class="text-3xl font-bold text-red-400">{{ covid.newCases.toLocaleString() }}</div>
+        <div class="text-3xl font-bold">{{ covid.newCases.toLocaleString() }}</div>
         <div class="text-sm">COVID-19 cases today</div>
       </div>
     </a>

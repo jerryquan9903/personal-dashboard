@@ -1,11 +1,11 @@
 <template>
   <div class="flex flex-col h-full flex-1 rounded bg-background outer-shadow">
     <div class="font-medium text-xl w-full text-left py-2 px-3 border-b border-coolgray-900">Planning to play</div>
-    <div class="flex flex-col justify-start items-center m-2 flex-1 rounded-md">
+    <div class="flex flex-col justify-start items-center m-3 flex-1 rounded-md">
       <div v-show="loaded" class="grid grid-cols-1">
         <template v-for="(display, index) in allNextGames" :key="display">
           <transition name="fade" class="row-start-1 col-start-1">
-            <div v-show="index === page" class="grid grid-cols-2 gap-2">
+            <div v-show="index === page" class="grid grid-cols-2 gap-3">
               <template v-for="game in display" :key="game">
                 <div
                   class="
@@ -19,6 +19,7 @@
                     hover:scale-105
                     cursor-pointer
                     relative
+                    rounded-sm
                   "
                   @click="getGameInfoFull(game.id)"
                 >

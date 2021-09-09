@@ -5,7 +5,7 @@
   >
     <div class="w-full h-full bg-gradient-dark px-2 py-1">
       <div class="font-medium text-shadow">Did you know?</div>
-      <div class="text-xs font-light text-shadow">{{ catFact }}</div>
+      <div class="text-xs font-light text-shadow max-h-20 overflow-scroll custom-scrollbar">{{ catFact }}</div>
     </div>
   </div>
 </template>
@@ -17,8 +17,6 @@ export default {
   data() {
     return {
       catFact: "",
-      onChangingFact: false,
-      showIndex: 1,
       catFactId: -1,
       catFactInterval: null,
       backgroundImage: {
@@ -28,8 +26,9 @@ export default {
   },
   methods: {
     getCatFact() {
-      let newFactId = this.catFactId;
-      while (newFactId === this.catFactId) newFactId = Math.floor(Math.random() * catFacts.length);
+      let newFactId;
+      do newFactId = Math.floor(Math.random() * catFacts.length);
+      while (newFactId === this.catFactId);
 
       this.catFact = catFacts[newFactId] + ".";
     },

@@ -294,7 +294,6 @@ export default {
         .then((success) => {
           if (Array.isArray(success.data)) {
             this.newVideos = success.data;
-            this.testVideo = success.data[0];
           }
         })
         .catch((e) => {

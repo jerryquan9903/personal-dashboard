@@ -1,26 +1,29 @@
 <template>
   <div class="flex flex-col h-full rounded bg-background outer-shadow mb-4 text-shadow">
-    <div class="font-medium text-xl w-full text-left rounded-t border-b border-coolgray-900 py-2 px-3">
-      Currently playing
-    </div>
-    <div class="flex flex-col flex-1 justify-start items-start p-2 h-full rounded-b">
+    <div class="font-medium text-xl w-full text-left rounded-t py-2 px-3">Currently playing</div>
+    <div class="flex flex-col flex-1 justify-start items-start h-full rounded-b">
       <div v-show="noLastPlayed" class="italic text-xs mb-2 text-orange-500">
         You are not currently playing any games. Here is one you haven't completed.
       </div>
-      <div class="flex flex-row justify-start items-start w-full h-full">
-        <div
+      <div
+        class="w-full h-full rounded-b bg-cover bg-center cursor-pointer"
+        :style="{ backgroundImage: 'url(' + image + ')' }"
+        @click="getGameInfoFull()"
+      >
+        <!-- card-style current game -->
+        <!-- <div
           class="w-full bg-cover bg-center rounded cursor-pointer outer-shadow"
           :style="{ backgroundImage: 'url(' + image + ')' }"
           @click="getGameInfoFull()"
-        >
-          <div class="w-full h-full bg-gradient-dark flex flex-col justify-start items-start p-2 rounded">
-            <div class="font-medium text-xl mb-2">{{ name }}</div>
-            <div class="current-grid text-sm font-light w-full" v-for="item in data" :key="item">
-              <div class="mb-1 font-light pr-0">{{ item.label }}</div>
-              <div class="font-normal">{{ item.value }}</div>
-            </div>
+        > -->
+        <div class="w-full h-full bg-gradient-dark flex flex-col justify-start items-start p-2 rounded-b">
+          <div class="font-medium text-lg mb-2">{{ name }}</div>
+          <div class="current-grid text-sm font-light w-full" v-for="item in data" :key="item">
+            <div class="mb-1 font-light pr-0">{{ item.label }}</div>
+            <div class="font-normal">{{ item.value }}</div>
           </div>
         </div>
+        <!-- </div> -->
       </div>
     </div>
   </div>

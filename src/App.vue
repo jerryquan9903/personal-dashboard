@@ -6,6 +6,7 @@
     <div id="grid-cats" class="flex flex-row h-full"><Cats /></div>
     <div id="grid-games" class="flex flex-col h-full"><Games /></div>
     <div id="grid-media" class="flex flex-col h-full"><SocialMedia /></div>
+    <div id="grid-manga" class="flex flex-col h-full"><Manga /></div>
   </div>
 </template>
 
@@ -16,6 +17,7 @@ import SocialMedia from "./components/media/SocialMedia";
 import Weather from "./components/top/Weather";
 import Covid from "./components/top/Covid";
 import Cats from "./components/top/Cats";
+import Manga from "./components/manga/Manga";
 
 export default {
   name: "App",
@@ -25,7 +27,8 @@ export default {
     SocialMedia,
     Weather,
     Covid,
-    Cats
+    Cats,
+    Manga
   },
 };
 </script>
@@ -57,9 +60,9 @@ export default {
   display: grid;
   grid-template-areas:
     "datetime datetime datetime weather covid cats"
-    "games media media other other other"
+    "games media media manga manga manga"
     "games media media other other other";
-  grid-template-rows: 2fr 6fr 4fr;
+  grid-template-rows: 2fr 5fr 5fr;
   grid-template-columns: 6fr 6fr 2fr 3fr 3fr 4fr;
   gap: 1rem;
   padding: 1rem;
@@ -89,6 +92,10 @@ export default {
 
 #app-grid > #grid-cats {
   grid-area: cats;
+}
+
+#app-grid > #grid-manga {
+  grid-area: manga;
 }
 
 </style>

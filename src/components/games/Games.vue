@@ -9,12 +9,10 @@
         class="
           fixed
           z-200
-          top-1/2
-          left-1/2
+          top-0
+          left-0
           w-screen
           h-screen
-          transform
-          -translate-x-1/2 -translate-y-1/2
           bg-dark
           flex
           justify-center

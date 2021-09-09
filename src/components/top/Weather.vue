@@ -12,15 +12,12 @@
     </div>
     <div
       v-if="now"
-      class="bg-cover bg-right outer-shadow cursor-pointer absolute inset-0 z-100"
-      :class="zoom ? 'rounded-t zoom-in-bg' : 'rounded zoom-out-bg'"
+      class="bg-cover bg-right outer-shadow absolute inset-0 z-100"
+      :class="zoom ? 'rounded-t zoom-in-bg' : 'rounded zoom-out-bg cursor-pointer'"
       :style="{ backgroundImage: 'url(' + image + ')' }"
       @click="zoomWeather(true)"
     >
-      <div
-        class="flex absolute inset-0 flex-row w-full h-full rounded bg-gradient overflow-hidden"
-        :class="zoom ? 'zoom-in-children' : 'zoom-out-children'"
-      >
+      <div class="flex absolute inset-0 flex-row w-full h-full rounded bg-gradient overflow-hidden">
         <div class="flex flex-col flex-1 h-full p-2 text-shadow text-sm font-medium">
           <div>{{ city + ", " + country }}</div>
           <h3 class="flex flex-1 items-center text-5xl font-bold">{{ now.temp.toFixed(0) + "°C" }}</h3>

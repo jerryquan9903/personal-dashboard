@@ -35,7 +35,7 @@
           <div class="pl-1 w-20 h-6 font-medium bg-bluegray-500 rounded"></div>
           <div class="mb-4 mt-1 bg-background-dark rounded-md px-3 pt-2 pb-1">
             <div class="info-grid w-full text-sm" v-for="num in skeleton" :key="num">
-              <div class="h-5 w-1/4 rounded mb-1 bg-bluegray-500"></div>
+              <div class="h-5 w-3/4 rounded mb-1 bg-bluegray-500"></div>
               <div class="h-5 w-3/4 rounded bg-bluegray-500"></div>
             </div>
           </div>
