@@ -6,10 +6,10 @@
         @mouseenter="mouseEnter()"
         @mouseleave="hover = false"
         class="absolute inset-0 outer-shadow rounded overflow-hidden bg-cover bg-top"
-        :class="hover ? 'z-100 zoom-in-all' : 'z-0 h-0 zoom-out-all'"
+        :class="hover ? 'z-100 zoom-in-all' : 'z-10 h-0 zoom-out-all'"
         :style="backgroundImage"
       >
-        <div class="w-full h-full p-2 text-shadow flex flex-col items-center bg-gradient-dark" :style="normalHeight">
+        <div class="w-full h-full p-2 text-shadow flex flex-col items-center bg-mask" :style="normalHeight">
           <div class="text-2xl font-medium mt-4 text-red-400">{{ covid.totalCases.toLocaleString() }}</div>
           <div class="text-sm">total cases</div>
           <div class="text-2xl font-medium mt-4 text-blue-400">{{ covid.totalDeaths.toLocaleString() }}</div>
@@ -23,7 +23,7 @@
         @mouseenter="mouseEnter()"
         @mouseleave="hover = false"
         class="absolute inset-0 flex flex-col justify-center rounded items-center h-full p-2 text-shadow"
-        :class="hover ? 'z-100' : 'z-0'"
+        :class="hover ? 'z-100' : 'z-10'"
         ref="normalDiv"
       >
         <div class="text-3xl font-bold">{{ covid.newCases.toLocaleString() }}</div>

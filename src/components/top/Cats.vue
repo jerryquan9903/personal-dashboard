@@ -1,9 +1,9 @@
 <template>
   <div
-    class="w-full h-full bg-background rounded outer-shadow bg-center bg-cover overflow-y-hidden"
+    class="w-full h-full bg-coffee-800 rounded outer-shadow bg-center bg-cover overflow-y-hidden"
     :style="backgroundImage"
   >
-    <div class="w-full h-full bg-gradient-dark px-2 py-1">
+    <div class="w-full h-full bg-mask px-2 py-1">
       <div class="font-medium text-shadow">Did you know?</div>
       <div class="text-xs font-light text-shadow max-h-20 overflow-scroll custom-scrollbar">{{ catFact }}</div>
     </div>

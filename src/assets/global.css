@@ -48,12 +48,16 @@ body::-webkit-scrollbar {
   opacity: 0;
 }
 
-.bg-gradient {
-  background: #00000022;
+.bg-mask-light {
+  background-color: #1B130E33;
 }
 
-.bg-gradient-dark {
-  background: #00000088;
+.bg-mask {
+  background-color: #1B130E66;
+}
+
+.bg-mask-dark {
+  background-color: #35261DAA;
 }
 
 
@@ -102,6 +106,6 @@ body::-webkit-scrollbar {
   transform: translate(-50%, -50%);
 }
 
-.game-cover-ratio {
+.cover-ratio {
   aspect-ratio: 3 / 4;
 }

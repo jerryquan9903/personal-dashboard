@@ -1,17 +1,17 @@
 <template>
-  <div class="w-full flex flex-col p-2 rounded bg-background outer-shadow overflow-hidden">
+  <div class="w-full flex flex-col p-2 rounded bg-coffee-800 outer-shadow overflow-hidden">
     <!-- Search bar and channel view/remove -->
     <div class="flex flex-row">
       <div class="w-1/5 relative">
-        <Popover :panelStyle="'w-112 max-h-40 outer-shadow rounded-sm'">
+        <Popover :panelStyle="'w-120 max-h-40 outer-shadow rounded-sm'">
           <template v-slot:button>
             <div
               class="
                 outer-shadow
                 transition-colors
                 duration-200
-                bg-amber-500
-                hover:bg-amber-600
+                bg-oldrose-500
+                hover:bg-oldrose-600
                 text-sm
                 px-3
                 py-2
@@ -20,6 +20,7 @@
                 text-center
                 rounded-sm
                 cursor-pointer
+                font-medium
               "
             >
               Channels
@@ -34,25 +35,26 @@
                   w-full
                   p-1
                   rounded-sm
-                  bg-background-dark
+                  bg-coffee-900
                   hover:bg-background
                   text-sm
                   parent-hover
                 "
               >
                 <img :src="channel.thumbnail" class="w-6 h-6 rounded-full mr-2" />
-                <div class="pl-1 py-1 text-sm font-medium">
+                <div class="p-1 text-sm font-medium hover:w-1/2 truncate">
                   {{ channel.name }}
                 </div>
-                <div class="flex flex-1 flex-row justify-end child-hover">
+                <div class="flex flex-1 flex-row justify-end child-hover font-medium">
                   <a
                     class="
+                      flex flex-nowrap
                       px-2
                       py-1
                       transition-colors
                       duration-200
-                      bg-rose-500
-                      hover:bg-rose-600
+                      bg-oldrose-500
+                      hover:bg-oldrose-600
                       text-xs
                       rounded-sm
                       mr-1
@@ -61,7 +63,7 @@
                     :href="'https://youtube.com/channel/' + channel.id"
                     target="_blank"
                   >
-                    Open on YouTube
+                    View
                   </a>
                   <div
                     class="
@@ -69,8 +71,8 @@
                       py-1
                       transition-colors
                       duration-200
-                      bg-rose-500
-                      hover:bg-rose-600
+                      bg-oldrose-500
+                      hover:bg-oldrose-600
                       text-xs
                       rounded-sm
                       cursor-pointer
@@ -88,7 +90,7 @@
       <div class="flex flex-col w-4/5 relative z-10">
         <div class="flex flex-row w-full h-full outer-shadow rounded-md">
           <input
-            class="w-4/5 h-full bg-background-dark outline-none text-sm pl-2 rounded-l-sm"
+            class="w-4/5 h-full bg-coffee-900 outline-none text-sm pl-2 rounded-l-sm"
             type="text"
             placeholder="Search channel..."
             v-model="searchQuery"
@@ -106,8 +108,9 @@
                     cursor-pointer
                     transition-colors
                     duration-200
-                    bg-blue-500
-                    hover:bg-blue-600
+                    bg-oldrose-500
+                    hover:bg-oldrose-600
+                    font-medium
                   "
                   @click="searchChannels()"
                 >
@@ -130,7 +133,7 @@
                     top-full
                     mt-2
                     origin-top-left
-                    bg-background-dark
+                    bg-coffee-900
                     rounded-sm
                     shadow-lg
                     ring-1 ring-black ring-opacity-5
@@ -160,8 +163,8 @@
                                 py-1
                                 transition-colors
                                 duration-200
-                                bg-rose-500
-                                hover:bg-rose-600
+                                bg-oldrose-500
+                                hover:bg-oldrose-600
                                 text-xs
                                 rounded-sm
                                 mr-1
@@ -186,8 +189,8 @@
                   >
                     <span class="mr-2">Searching...</span>
                     <div class="h-6 w-6 relative">
-                      <div class="rounded-full h-4 w-4 bg-background-dark absolute-center z-40" />
-                      <div class="h-6 w-6 absolute-center bg-background rounded-full z-20" />
+                      <div class="rounded-full h-4 w-4 bg-coffee-900 absolute-center z-40" />
+                      <div class="h-6 w-6 absolute-center bg-coffee-800 rounded-full z-20" />
                       <div
                         class="
                           rounded-tr-full
@@ -197,7 +200,7 @@
                           z-30
                           bottom-1/2
                           left-1/2
-                          bg-background-light
+                          bg-coffee-700
                           loading-spin
                         "
                       />
@@ -216,9 +219,9 @@
       <template v-for="(video, index) in newVideos" :key="video">
         <transition name="scroll" class="row-start-1 col-start-1">
           <div v-if="index === newVideoOnShow" class="w-full flex flex-col mt-4 transition-scroll">
-            <div class="text-xs pl-2 mb-1 text-bluegray-400">
+            <div class="text-xs pl-2 mb-1 text-oldrose-500">
               <span class="font-medium">{{ video.channel }}</span>
-              <span class="italic">
+              <span class="">
                 released a new video
                 <b>·</b>
                 {{ getDateDifference(video.publishedAt) }}
@@ -232,13 +235,23 @@
 
     <div class="flex flex-row-reverse w-full mt-4">
       <div
-        class="px-3 py-2 transition-colors duration-200 bg-rose-500 hover:bg-rose-600 text-xs rounded-sm cursor-pointer"
+        class="
+          px-3
+          py-2
+          font-medium
+          transition-colors
+          duration-200
+          bg-oldrose-500
+          hover:bg-oldrose-600
+          text-xs
+          rounded-sm
+          cursor-pointer
+        "
         @click="feelingLucky()"
       >
         I'm Feeling Lucky
       </div>
     </div>
-
   </div>
 </template>
 

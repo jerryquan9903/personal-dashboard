@@ -1,5 +1,5 @@
 <template>
-  <div class="flex w-4/6 h-full rounded bg-background outer-shadow">
+  <div class="flex w-4/5 h-full rounded bg-coffee-800 outer-shadow">
     <div class="flex flex-col justify-start items-start w-full h-full">
       <div class="flex items-center text-2xl font-bold flex-1 ml-4">
         {{ month }}
@@ -12,13 +12,13 @@
                 flex flex-col flex-1
                 justify-center
                 items-center
-                bg-background-dark
+                bg-coffee-900
                 rounded
                 py-2
                 mx-1
                 cursor-pointer
               "
-              :class="day.ofWeek === today && 'bg-emerald-600 outer-shadow text-card'"
+              :class="day.ofWeek === today && 'bg-oldrose-500'"
             >
               <div class="text-sm">{{ day.ofWeek }}</div>
               <div class="font-bold text-xl">{{ day.ofMonth }}</div>

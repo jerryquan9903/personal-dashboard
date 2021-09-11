@@ -1,11 +1,11 @@
 <template>
-  <div class="flex flex-col h-full flex-1 rounded bg-background outer-shadow">
-    <div class="font-medium text-xl w-full text-left py-2 px-3 border-b border-coolgray-900">Planning to play</div>
-    <div class="flex flex-col justify-start items-center m-3 flex-1 rounded-md">
+  <div class="flex flex-col h-full flex-1 rounded bg-coffee-800 outer-shadow">
+    <div class="font-medium text-xl w-full text-left py-2 px-3 border-b border-coffee-900">Planning to play</div>
+    <div class="flex flex-col justify-start items-center m-2 flex-1 rounded-md">
       <div v-show="loaded" class="grid grid-cols-1">
         <template v-for="(display, index) in allNextGames" :key="display">
           <transition name="fade" class="row-start-1 col-start-1">
-            <div v-show="index === page" class="grid grid-cols-2 gap-3">
+            <div v-show="index === page" class="grid grid-cols-2 gap-2">
               <template v-for="game in display" :key="game">
                 <div
                   class="
@@ -23,22 +23,19 @@
                   "
                   @click="getGameInfoFull(game.id)"
                 >
-                  <img :src="game.image" class="w-full mx-auto rounded-sm object-cover outer-shadow game-cover-ratio" />
+                  <img :src="game.image" class="w-full mx-auto rounded object-cover outer-shadow cover-ratio" />
                   <div
                     class="
                       flex flex-col-reverse
                       absolute
-                      top-0
-                      bottom-0
-                      left-0
-                      right-0
+                      inset-0
                       image-gradient
-                      rounded-b-sm
+                      rounded-b
                       px-2
                       py-1
                     "
                   >
-                    <div class="text-xs font-medium outer-shadow">
+                    <div class="text-xs font-medium text-shadow">
                       {{ game.name }}
                     </div>
                   </div>
@@ -124,6 +121,6 @@ export default {
 }
 
 .image-gradient {
-  background: linear-gradient(0deg, #00000088 30%, #00000012 100%);
+  background: linear-gradient(0deg, #35261D99 30%, #35261D66 100%);
 }
 </style>    

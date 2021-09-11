@@ -1,7 +1,7 @@
 <template>
   <div class="w-full h-full relative rounded">
     <div
-      class="absolute bg-background rounded overflow-hidden z-100 p-2"
+      class="absolute bg-coffee-800 rounded overflow-hidden z-100 p-2"
       :class="zoom ? 'zoom-in-all outer-shadow' : 'zoom-out-all'"
     >
       <transition name="fade-superfast">
@@ -17,7 +17,10 @@
       :style="{ backgroundImage: 'url(' + image + ')' }"
       @click="zoomWeather(true)"
     >
-      <div class="flex absolute inset-0 flex-row w-full h-full rounded bg-gradient overflow-hidden">
+      <div
+        class="flex absolute inset-0 flex-row w-full h-full bg-mask-light overflow-hidden"
+        :class="zoom ? ' rounded-t' : 'rounded'"
+      >
         <div class="flex flex-col flex-1 h-full p-2 text-shadow text-sm font-medium">
           <div>{{ city + ", " + country }}</div>
           <h3 class="flex flex-1 items-center text-5xl font-bold">{{ now.temp.toFixed(0) + "°C" }}</h3>

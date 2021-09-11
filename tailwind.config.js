@@ -2,13 +2,45 @@ const colors = require('tailwindcss/colors')
 
 module.exports = {
   purge: { content: ['./public/**/*.html', './src/**/*.vue'] },
-  darkMode: false, // or 'media' or 'class'
+  darkMode: 'class', // or 'media' or 'class'
   theme: {
     colors: {
-      background: {
-        light: '#293553',
-        DEFAULT: '#1e263a',
-        dark: '#141824',
+      coffee: {
+        50: "#B8917A",
+        100: "#B0866D",
+        200: "#A97B60",
+        300: "#9F7156",
+        400: "#855E47",
+        500: "#694A38",
+        600: "#50382B",
+        700: "#35261D",
+        800: "#281C15",
+        900: "#1B130E",
+        1000: "#0D0907"
+      },
+      cornsilk: {
+        50: "#FAF9F0",
+        100: "#EFEBCE",
+        200: "#E6E0B2",
+        300: "#DCD493",
+        400: "#D2C774",
+        500: "#C8BB56",
+        600: "#B9AA3C",
+        700: "#9A8EB2",
+        800: "#7B7228",
+        900: "#5C551E",
+      },
+      oldrose: {
+        50: "#E0B8BA",
+        100: "#D49B9E",
+        200: "#CB8589",
+        300: "#C27074",
+        400: "#BC6266",
+        500: "#AB494E",
+        600: "#8F3D41",
+        700: "#723134",
+        800: "#562527",
+        900: "#39181A"
       },
       bluegray: colors.blueGray,
       coolgray: colors.coolGray,

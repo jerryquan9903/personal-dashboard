@@ -28,19 +28,20 @@ export default {
     Weather,
     Covid,
     Cats,
-    Manga
+    Manga,
   },
 };
 </script>
 
 <style>
 #app {
-  font-family: SF Pro Text, Roboto, Avenir, Helvetica Neue, sans-serif;
+  font-family: Roboto Slab, SF Pro Text, Roboto, Avenir, Helvetica Neue, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -moz-font-smoothing: antialiased;
   -o-font-smoothing: antialiased;
-  color:  #f3f3e4;
+    color: #efebce;
+  background: #0d0907;
 }
 
 #nav {
@@ -59,13 +60,13 @@ export default {
 #app-grid {
   display: grid;
   grid-template-areas:
-    "datetime datetime datetime weather covid cats"
+    "datetime datetime weather weather covid cats"
     "games media media manga manga manga"
     "games media media other other other";
   grid-template-rows: 2fr 5fr 5fr;
-  grid-template-columns: 6fr 6fr 2fr 3fr 3fr 4fr;
-  gap: 1rem;
-  padding: 1rem;
+  grid-template-columns: 6fr 7fr 1fr 2fr 3fr 5fr;
+  gap: 0.5rem;
+  padding: 0.5rem;
   min-height: 100vh;
   /* justify-items: stretch; */
 }
@@ -97,5 +98,4 @@ export default {
 #app-grid > #grid-manga {
   grid-area: manga;
 }
-
 </style>

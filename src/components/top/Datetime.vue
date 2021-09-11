@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-row w-full">
-    <div class="flex mr-4 justify-center items-center px-6 h-full rounded bg-background outer-shadow w-1/3">
+    <div class="flex mr-2 justify-center items-center px-6 h-full rounded bg-coffee-800 outer-shadow w-1/3">
       <div class="text-7xl font-bold">{{ time }}</div>
     </div>
     <Calendar />

@@ -8,7 +8,6 @@
           justify-center
           items-center
           w-full
-          text-white
           rounded-sm
           focus:outline-none
           focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75
@@ -29,7 +28,7 @@
           :class="panelStyle"
         >
           <div class="overflow-hidden w-full h-full">
-            <div class="flex flex-col bg-background-dark w-full h-full p-2">
+            <div class="flex flex-col bg-coffee-900 w-full h-full p-2">
               <slot name="content" />
             </div>
           </div>
