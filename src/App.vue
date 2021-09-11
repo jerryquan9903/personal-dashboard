@@ -7,6 +7,7 @@
     <div id="grid-games" class="flex flex-col h-full"><Games /></div>
     <div id="grid-media" class="flex flex-col h-full"><SocialMedia /></div>
     <div id="grid-manga" class="flex flex-col h-full"><Manga /></div>
+    <!-- <div id="grid-other" class="w-full h-full bg-coffee-800 rounded outer-shadow"></div> -->
   </div>
 </template>
 
@@ -63,11 +64,11 @@ export default {
     "datetime datetime weather weather covid cats"
     "games media media manga manga manga"
     "games media media other other other";
-  grid-template-rows: 2fr 5fr 5fr;
+  grid-template-rows: 2fr minmax(0, 5fr) 5fr;
   grid-template-columns: 6fr 7fr 1fr 2fr 3fr 5fr;
   gap: 0.5rem;
   padding: 0.5rem;
-  min-height: 100vh;
+  height: 100vh;
   /* justify-items: stretch; */
 }
 
@@ -96,6 +97,10 @@ export default {
 }
 
 #app-grid > #grid-manga {
-  grid-area: manga;
+  grid-area: manga;  
+}
+
+#app-grid > #grid-other {
+  grid-area: other;
 }
 </style>

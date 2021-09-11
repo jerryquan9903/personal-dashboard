@@ -22,6 +22,7 @@
             bg-coffee-900
             rounded
             p-3
+            leading-6
           "
           v-html="'<div>' + gameDetails.desc + '</div>'"
         ></div>

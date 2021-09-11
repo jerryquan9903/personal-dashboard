@@ -90,7 +90,16 @@
       <div class="flex flex-col w-4/5 relative z-10">
         <div class="flex flex-row w-full h-full outer-shadow rounded-md">
           <input
-            class="w-4/5 h-full bg-coffee-900 outline-none text-sm pl-2 rounded-l-sm"
+            class="
+              w-4/5
+              h-full
+              bg-coffee-900
+              outline-none
+              placeholder-cornsilk-100 placeholder-opacity-50
+              text-sm
+              pl-2
+              rounded-l-sm
+            "
             type="text"
             placeholder="Search channel..."
             v-model="searchQuery"
@@ -192,17 +201,7 @@
                       <div class="rounded-full h-4 w-4 bg-coffee-900 absolute-center z-40" />
                       <div class="h-6 w-6 absolute-center bg-coffee-800 rounded-full z-20" />
                       <div
-                        class="
-                          rounded-tr-full
-                          h-3
-                          w-3
-                          absolute
-                          z-30
-                          bottom-1/2
-                          left-1/2
-                          bg-coffee-700
-                          loading-spin
-                        "
+                        class="rounded-tr-full h-3 w-3 absolute z-30 bottom-1/2 left-1/2 bg-coffee-600 loading-spin"
                       />
                     </div>
                   </div>
@@ -243,7 +242,7 @@
           duration-200
           bg-oldrose-500
           hover:bg-oldrose-600
-          text-xs
+          text-sm
           rounded-sm
           cursor-pointer
         "

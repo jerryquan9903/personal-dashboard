@@ -1,6 +1,6 @@
 <template>
   <a
-    class="flex flex-row items-start w-full rounded-sm bg-coffee-700 p-2 outer-shadow cursor-pointer"
+    class="flex flex-row items-start w-full rounded-sm bg-coffee-600 p-2 outer-shadow cursor-pointer"
     :href="'https://youtube.com/watch?v=' + id"
     target="_blank"
   >

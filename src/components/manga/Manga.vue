@@ -1,22 +1,29 @@
 <template>
-  <div class="w-full h-full bg-coffee-800 rounded outer-shadow p-2 overflow-hidden">
-    <div v-if="newChapters[0]" class="w-1/3 flex flex-col h-full overflow-y-scroll custom-scrollbar">
-      <div class="text-xl font-medium pb-2">New chapters</div>
-      <template v-for="manga in newChapters" :key="manga._id">
-        <a
-          class="flex flex-col relative cursor-pointer outer-shadow mb-2"
-          :href="manga.latestUrl"
-          target="_blank"
-        >
-          <img :src="manga.cover" class="line-ratio object-cover cover-position rounded-sm" />
-          <div class="flex flex-col justify-center absolute inset-0 bg-mask-dark rounded-sm w-full h-full px-1">
-            <div class="text-xs text-shadow max-w-full truncate">{{ manga.name.common }}</div>
-            <div class="text-sm font-medium text-shadow">
-              {{ manga.latestChapter === 0 ? "New chapter" : ("Chapter " + manga.latestChapter) }}
+  <div class="w-full h-full bg-coffee-800 rounded outer-shadow">
+    <div v-if="newChapters[0]" class="w-1/3 p-2 flex flex-col h-full border-r-2 border-coffee-900">
+      <div class="font-medium pb-2">New chapters</div>
+      <div class="overflow-y-scroll custom-scrollbar">
+        <template v-for="manga in newChapters" :key="manga._id">
+          <a
+            class="flex flex-col grid grid-cols-1 cursor-pointer outer-shadow mb-2"
+            :href="manga.latestUrl"
+            target="_blank"
+          >
+            <img :src="manga.cover" class="row-start-1 col-start-1 line-ratio object-cover cover-position rounded" />
+            <div
+              class="flex flex-col row-start-1 col-start-1 justify-center bg-mask-dark rounded w-full h-full px-1"
+            >
+              <div class="text-xs text-shadow max-w-full truncate">{{ manga.name.common }}</div>
+              <div class="text-sm font-medium text-shadow">
+                {{ manga.latestChapter === 0 ? "New chapter" : "Chapter " + manga.latestChapter }}
+              </div>
             </div>
-          </div>
-        </a>
-      </template>
+          </a>
+        </template>
+      </div>
+    </div>
+    <div v-else>
+      <div class="text-xs">No new chapters have been released in the last 3 days</div>
     </div>
   </div>
 </template>
@@ -61,7 +68,7 @@ export default {
 
 <style scoped>
 .line-ratio {
-  aspect-ratio: 5 / 1;
+  aspect-ratio: 4 / 1;
 }
 
 .cover-position {
