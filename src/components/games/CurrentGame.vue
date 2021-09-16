@@ -42,6 +42,7 @@ export default {
       image: null,
       data: null,
       id: null,
+      updateInterval: null,
     };
   },
   emits: ["details"],
@@ -73,11 +74,11 @@ export default {
 
   beforeMount() {
     this.getGameInfo();
-    setInterval(this.getGameInfo, 1800000);
+    this.updateInterval = setInterval(this.getGameInfo, 1800000);
   },
 
   beforeUnmount() {
-    clearInterval(this.getGameInfo);
+    clearInterval(this.updateInterval);
   },
 };
 </script>

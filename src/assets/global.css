@@ -109,3 +109,8 @@ body::-webkit-scrollbar {
 .cover-ratio {
   aspect-ratio: 3 / 4;
 }
+
+.manga-cover {
+  aspect-ratio: 4 / 1;
+  object-position: center 25%;
+}

@@ -1,12 +1,12 @@
 <template>
-  <div class="w-full h-full relative">
+  <div class="w-full h-full relative" @mouseleave="hover = false">
     <a href="https://covid19.ncsc.gov.vn" target="_blank">
       <div
         v-if="covid"
         @mouseenter="mouseEnter()"
         @mouseleave="hover = false"
-        class="absolute inset-0 outer-shadow rounded overflow-hidden bg-cover bg-top"
-        :class="hover ? 'z-100 zoom-in-all' : 'z-10 h-0 zoom-out-all'"
+        class="absolute z-100 inset-0 outer-shadow rounded overflow-hidden bg-cover bg-top"
+        :class="hover ? 'zoom-in-all' : 'h-0 zoom-out-all'"
         :style="backgroundImage"
       >
         <div class="w-full h-full p-2 text-shadow flex flex-col items-center bg-mask" :style="normalHeight">
@@ -21,16 +21,18 @@
       <div
         v-if="covid"
         @mouseenter="mouseEnter()"
-        @mouseleave="hover = false"
-        class="absolute inset-0 flex flex-col justify-center rounded items-center h-full p-2 text-shadow"
-        :class="hover ? 'z-100' : 'z-10'"
+        class="absolute z-100 inset-0 flex flex-col justify-center rounded items-center h-full p-2 text-shadow"
         ref="normalDiv"
       >
         <div class="text-3xl font-bold">{{ covid.newCases.toLocaleString() }}</div>
         <div class="text-sm">COVID-19 cases today</div>
       </div>
     </a>
+    
   </div>
+  <transition name="fade-fast">
+      <div v-show="hover" class="fixed z-90 top-0 left-0 w-screen h-screen bg-dark" @click="zoomWeather(false)" />
+    </transition>
 </template>
 
 <script>

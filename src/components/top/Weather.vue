@@ -1,7 +1,7 @@
 <template>
   <div class="w-full h-full relative rounded">
     <div
-      class="absolute bg-coffee-800 rounded overflow-hidden z-100 p-2"
+      class="absolute bg-coffee-800 rounded overflow-hidden z-200 p-2"
       :class="zoom ? 'zoom-in-all outer-shadow' : 'zoom-out-all'"
     >
       <transition name="fade-superfast">
@@ -12,7 +12,7 @@
     </div>
     <div
       v-if="now"
-      class="bg-cover bg-right outer-shadow absolute inset-0 z-100"
+      class="bg-cover bg-right outer-shadow absolute inset-0 z-200"
       :class="zoom ? 'rounded-t zoom-in-bg' : 'rounded zoom-out-bg cursor-pointer'"
       :style="{ backgroundImage: 'url(' + image + ')' }"
       @click="zoomWeather(true)"
@@ -68,7 +68,7 @@ export default {
       today: null,
       daily: null,
       image: null,
-      weatherInterval: null,
+      updateInterval: null,
       zoom: false,
       zoomDelay: false, // delay for today's weather to the right
       forecastDelay: false, // delay animation for forecast
@@ -152,10 +152,10 @@ export default {
       longitude: location.coords.longitude,
     };
     this.getWeather();
-    this.weatherInterval = setInterval(this.getWeather, 900000);
+    this.updateInterval = setInterval(this.getWeather, 900000);
   },
   beforeUnmount() {
-    clearInterval(this.weatherInterval);
+    clearInterval(this.updateInterval);
   },
 };
 </script>

@@ -15,29 +15,25 @@ let initTime = dayjs().format("HH:mm");
 
 export default {
   name: "datetime",
-
   components: {
     Calendar,
   },
-
   data() {
     return {
       time: initTime,
+      updateInterval: null,
     };
   },
-
   methods: {
     updateTime() {
       this.time = dayjs().format("HH:mm");
     },
   },
-
   beforeMount() {
-    setInterval(this.updateTime, 1000);
+    this.updateInterval = setInterval(this.updateTime, 1000);
   },
-
   beforeUnmount() {
-    clearInterval(this.updateTime);
+    clearInterval(this.updateInterval);
   },
 };
 </script>

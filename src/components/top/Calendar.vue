@@ -52,6 +52,7 @@ export default {
       month: month,
       week: week,
       today: today,
+      updateInterval: null,
     };
   },
   methods: {
@@ -60,10 +61,10 @@ export default {
     },
   },
   beforeMount() {
-    setInterval(this.updateToday, 1000);
+    this.updateInterval = setInterval(this.updateToday, 1000);
   },
   beforeUnmount() {
-    clearInterval(this.updateToday);
+    clearInterval(this.updateInterval);
   },
 };
 </script>

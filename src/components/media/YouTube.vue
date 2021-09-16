@@ -212,14 +212,13 @@
         </div>
       </div>
     </div>
-
     <!-- YouTube video info -->
     <div class="flex-1 grid grid-cols-1">
       <template v-for="(video, index) in newVideos" :key="video">
         <transition name="scroll" class="row-start-1 col-start-1">
           <div v-if="index === newVideoOnShow" class="w-full flex flex-col mt-4 transition-scroll">
             <div class="text-xs pl-2 mb-1 text-oldrose-500">
-              <span class="font-medium">{{ video.channel }}</span>
+              <span class="font-bold">{{ video.channel }}</span>
               <span class="">
                 released a new video
                 <b>·</b>
@@ -231,7 +230,6 @@
         </transition>
       </template>
     </div>
-
     <div class="flex flex-row-reverse w-full mt-4">
       <div
         class="
@@ -280,6 +278,8 @@ export default {
       listChannels: null,
       searchResult: [],
       searchQuery: "",
+      updateInterval: null,
+      cycleInterval: null,
     };
   },
   methods: {
@@ -359,23 +359,16 @@ export default {
         });
     },
   },
-  // mounted() {
-  //   let twitterScript = document.createElement('twitter');
-  //   twitterScript.setAttribute("src", "https://platform.twitter.com/widgets.js");
-  //   twitterScript.setAttribute("async", true);
-  //   twitterScript.setAttribute("charset", "utf-8");
-  //   document.head.appendChild(twitterScript);
-  // },
   beforeMount() {
     this.getNewVideos();
     this.getChannels();
 
-    setInterval(this.getNewVideos, 3600000);
-    setInterval(this.cycleNewVideo, 8000);
+    this.updateInterval = setInterval(this.getNewVideos, 3600000);
+    this.cycleInterval = setInterval(this.cycleNewVideo, 8000);
   },
   beforeUnmount() {
-    clearInterval(this.getNewVideos);
-    clearInterval(this.cycleNewVideo);
+    clearInterval(this.updateInterval);
+    clearInterval(this.cycleInterval);
   },
 };
 </script>

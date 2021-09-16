@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col h-full flex-1 rounded bg-coffee-800 outer-shadow">
-    <div class="font-medium text-xl w-full text-left p-2 border-b border-coffee-900">Planning to play</div>
+    <div class="font-medium text-xl w-full text-left p-2 border-b border-coffee-900">Plan to play</div>
     <div class="flex flex-col justify-start items-center m-2 flex-1 rounded-md">
       <div v-show="loaded" class="grid grid-cols-1">
         <template v-for="(display, index) in allNextGames" :key="display">
@@ -24,17 +24,7 @@
                   @click="getGameInfoFull(game.id)"
                 >
                   <img :src="game.image" class="w-full mx-auto rounded object-cover outer-shadow cover-ratio" />
-                  <div
-                    class="
-                      flex flex-col-reverse
-                      absolute
-                      inset-0
-                      image-gradient
-                      rounded-b
-                      px-2
-                      py-1
-                    "
-                  >
+                  <div class="flex flex-col-reverse absolute inset-0 image-gradient rounded-b px-2 py-1">
                     <div class="text-xs font-medium text-shadow">
                       {{ game.name }}
                     </div>
@@ -66,6 +56,7 @@ export default {
       allNextGames: null,
       page: null,
       loaded: false,
+      cycleInterval: null
     };
   },
   emits: ["details"],
@@ -75,7 +66,7 @@ export default {
     },
     cycleGames() {
       if (this.page === this.allNextGames.length - 1) this.page = 0;
-      else this.page += 1;
+      else this.page++;
     },
     setLoaded() {
       this.loaded = true;
@@ -101,7 +92,7 @@ export default {
         this.allNextGames = splitted;
         this.page = 0;
 
-        setInterval(this.cycleGames, 10000);
+        this.cycleInterval = setInterval(this.cycleGames, 10000);
         setTimeout(this.setLoaded, 500);
       })
       .catch((e) => {
@@ -109,7 +100,7 @@ export default {
       });
   },
   beforeUnmount() {
-    clearInterval(this.cycleGames);
+    clearInterval(this.cycleInterval);
   },
 };
 </script>
@@ -121,6 +112,6 @@ export default {
 }
 
 .image-gradient {
-  background: linear-gradient(0deg, #35261D99 30%, #35261D66 100%);
+  background: linear-gradient(0deg, #35261d99 30%, #35261d66 100%);
 }
 </style>    

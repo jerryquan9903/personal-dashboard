@@ -3,7 +3,7 @@
     class="w-full h-full bg-coffee-800 rounded outer-shadow bg-center bg-cover overflow-y-hidden"
     :style="backgroundImage"
   >
-    <div class="w-full h-full bg-mask px-2 py-1">
+    <div class="w-full h-full bg-mask-dark px-2 py-1">
       <div class="font-medium text-shadow">Did you know?</div>
       <div class="text-xs font-light text-shadow max-h-20 overflow-scroll custom-scrollbar">{{ catFact }}</div>
     </div>
@@ -18,7 +18,7 @@ export default {
     return {
       catFact: "",
       catFactId: -1,
-      catFactInterval: null,
+      updateInterval: null,
       backgroundImage: {
         backgroundImage: "url(" + process.env.BASE_URL + "cat.jpg" + ")",
       },
@@ -36,10 +36,10 @@ export default {
   },
   beforeMount() {
     this.getCatFact();
-    this.catFactInterval = setInterval(this.getCatFact, 15000);
+    this.updateInterval = setInterval(this.getCatFact, 15000);
   },
   beforeUnmount() {
-    clearInterval(this.catFactInterval);
+    clearInterval(this.updateInterval);
   },
 };
 </script>
