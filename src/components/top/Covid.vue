@@ -28,11 +28,10 @@
         <div class="text-sm">COVID-19 cases today</div>
       </div>
     </a>
-    
   </div>
   <transition name="fade-fast">
-      <div v-show="hover" class="fixed z-90 top-0 left-0 w-screen h-screen bg-dark" @click="zoomWeather(false)" />
-    </transition>
+    <div v-show="hover" class="fixed z-90 top-0 left-0 w-screen h-screen bg-dark" @click="zoomWeather(false)" />
+  </transition>
 </template>
 
 <script>

@@ -56,7 +56,7 @@ export default {
       allNextGames: null,
       page: null,
       loaded: false,
-      cycleInterval: null
+      cycleInterval: null,
     };
   },
   emits: ["details"],

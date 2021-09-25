@@ -5,13 +5,13 @@
       :class="zoom ? 'zoom-in-all outer-shadow' : 'zoom-out-all'"
     >
       <transition name="fade-superfast">
-        <div v-if="now" v-show="forecastDelay" class="absolute top-1/4 inset-x-0 bottom-0">
-          <Forecast :hourly="hourly.slice(0, 24)" :daily="daily" />
+        <div v-if="info" v-show="forecastDelay" class="absolute top-1/4 inset-x-0 bottom-0">
+          <Forecast :hourly="info.hourly.slice(0, 24)" :daily="info.daily" />
         </div>
       </transition>
     </div>
     <div
-      v-if="now"
+      v-if="info"
       class="bg-cover bg-right outer-shadow absolute inset-0 z-200"
       :class="zoom ? 'rounded-t zoom-in-bg' : 'rounded zoom-out-bg cursor-pointer'"
       :style="{ backgroundImage: 'url(' + image + ')' }"
@@ -22,23 +22,23 @@
         :class="zoom ? ' rounded-t' : 'rounded'"
       >
         <div class="flex flex-col flex-1 h-full p-2 text-shadow text-sm font-medium">
-          <div>{{ city + ", " + country }}</div>
-          <h3 class="flex flex-1 items-center text-5xl font-bold">{{ now.temp.toFixed(0) + "°C" }}</h3>
-          <div class="text-xs font-normal">{{ now.desc.replace("with", "w/") }}</div>
+          <div>{{ info.city + ", " + info.country }}</div>
+          <h3 class="flex flex-1 items-center text-5xl font-bold">{{ info.now.temp.toFixed(0) + "°C" }}</h3>
+          <div class="text-xs font-normal">{{ info.now.desc }}</div>
         </div>
         <transition name="fade-superfast">
           <div v-show="zoomDelay" class="p-2 text-shadow text-sm flex flex-col items-end font-light">
             <div class="text-2xl font-bold flex-1">
-              {{ today.temp.max.toFixed(0) + "°C / " + today.temp.min.toFixed(0) + "°C" }}
+              {{ info.today.temp.max.toFixed(0) + "°C / " + info.today.temp.min.toFixed(0) + "°C" }}
             </div>
             <div>
-              feels like <span class="font-medium">{{ now.feelsLike.toFixed(0) }}°C</span>
+              feels like <span class="font-medium">{{ info.now.feelsLike.toFixed(0) }}°C</span>
             </div>
             <div>
-              humidity <span class="font-medium">{{ now.humidity }}%</span>
+              humidity <span class="font-medium">{{ info.now.humidity }}%</span>
             </div>
             <div>
-              uv index <span class="font-medium">{{ now.uvIndex }}</span>
+              uv index <span class="font-medium">{{ info.now.uvIndex }}</span>
             </div>
           </div>
         </transition>
@@ -62,15 +62,11 @@ export default {
   data() {
     return {
       geolocation: null,
-      city: null,
-      country: null,
-      now: null,
-      today: null,
-      daily: null,
+      info: null,
       image: null,
       updateInterval: null,
       zoom: false,
-      zoomDelay: false, // delay for today's weather to the right
+      zoomDelay: false,     // delay for today's weather to the right
       forecastDelay: false, // delay animation for forecast
     };
   },
@@ -79,12 +75,14 @@ export default {
       api
         .get(`/weather/get-weather?lat=${this.geolocation.latitude}&lon=${this.geolocation.longitude}`)
         .then((success) => {
-          this.city = success.data.city;
-          this.country = success.data.country;
-          this.now = success.data.current;
-          this.today = success.data.daily[0];
-          this.hourly = success.data.hourly.slice(1);
-          this.daily = success.data.daily.slice(1);
+          this.info = {
+            city: success.data.city,
+            country: success.data.country,
+            now: success.data.current,
+            today: success.data.daily[0],
+            hourly: success.data.hourly.slice(1), 
+            daily: success.data.daily.slice(1)
+          }
           this.getWeatherImage();
         })
         .catch((e) => console.log(e));
@@ -92,28 +90,25 @@ export default {
     getWeatherImage() {
       let commonUrl = process.env.BASE_URL + "weather/banners/";
       let imageName = "";
-      let switchId = this.now.condId.toString()[0];
+      let weatherNow = this.info.now;
+      let switchId = weatherNow.condId.toString()[0];
 
       switch (switchId) {
         case "2":
-          imageName += this.now.descMain.toLowerCase();
+          imageName += weatherNow.descMain.toLowerCase();
           break;
-
-        // drizzle uses rain image
-        case "3":
+        case "3": // drizzle uses rain image
           imageName += "rain_" + this.getDayNight();
           break;
         case "5":
         case "6":
-          imageName += this.now.descMain.toLowerCase() + "_" + this.getDayNight();
+          imageName += weatherNow.descMain.toLowerCase() + "_" + this.getDayNight();
           break;
-
-        // will be updated later
-        case "7":
+        case "7": // will be updated later
           imageName += "fog";
           break;
         case "8":
-          if (this.now.condId === 800) imageName += "clear_" + this.getDayNight();
+          if (weatherNow.condId === 800) imageName += "clear_" + this.getDayNight();
           else imageName += "clouds_" + this.getDayNight();
           break;
         default:

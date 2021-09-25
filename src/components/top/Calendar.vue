@@ -8,17 +8,9 @@
         <div class="flex justify-evenly w-full">
           <template v-for="day in week" :key="day">
             <div
-              class="
-                flex flex-col flex-1
-                justify-center
-                items-center
-                bg-coffee-900
-                rounded
-                py-2
-                mx-1
-                cursor-pointer
-              "
+              class="flex flex-col flex-1 justify-center items-center bg-coffee-900 rounded py-2 mx-1 cursor-pointer"
               :class="day.ofWeek === today && 'bg-oldrose-500'"
+              @click="getOnThisDay(month.split(' ')[0], day.ofMonth)"
             >
               <div class="text-sm">{{ day.ofWeek }}</div>
               <div class="font-bold text-xl">{{ day.ofMonth }}</div>
@@ -32,6 +24,7 @@
 
 <script>
 import dayjs from "dayjs";
+import api from "../../services/api";
 
 const month = dayjs().format("MMMM YYYY");
 const today = dayjs().format("ddd");
@@ -58,6 +51,14 @@ export default {
   methods: {
     updateToday() {
       this.today = dayjs().format("ddd");
+    },
+    getOnThisDay(month, day) {
+      api
+        .get(`/calendar/on-this-day?month=${month}&day=${day}`)
+        .then((success) => {
+          console.log(success.data);
+        })
+        .catch((e) => console.log(e));
     },
   },
   beforeMount() {

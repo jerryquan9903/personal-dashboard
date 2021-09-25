@@ -2,21 +2,15 @@
   <div class="flex flex-col h-full rounded bg-coffee-800 outer-shadow mb-2 text-shadow">
     <div class="font-medium text-xl w-full text-left rounded-t p-2">Currently playing</div>
     <div class="flex flex-col flex-1 justify-start items-start h-full rounded-b">
-      <div v-show="noLastPlayed" class="italic text-xs mb-2 text-orange-500">
-        You are not currently playing any games. Here is one you haven't completed.
-      </div>
       <div
         class="w-full h-full rounded-b bg-cover bg-center cursor-pointer"
         :style="{ backgroundImage: 'url(' + image + ')' }"
         @click="getGameInfoFull()"
       >
-        <!-- card-style current game -->
-        <!-- <div
-          class="w-full bg-cover bg-center rounded cursor-pointer outer-shadow"
-          :style="{ backgroundImage: 'url(' + image + ')' }"
-          @click="getGameInfoFull()"
-        > -->
         <div class="w-full h-full bg-mask-dark flex flex-col justify-start items-start p-2 rounded-b">
+          <div v-show="noLastPlayed" class="italic text-xs mb-2 text-orange-500">
+            You are not currently playing any games. Here is one you haven't completed.
+          </div>
           <div class="font-medium text-lg -mt-1 mb-2">{{ name }}</div>
           <div class="current-grid text-sm font-light w-full" v-for="item in data" :key="item">
             <div class="mb-1 font-light pr-0">{{ item.label }}</div>

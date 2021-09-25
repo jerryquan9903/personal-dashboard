@@ -5,26 +5,7 @@
       <div class="w-1/5 relative">
         <Popover :panelStyle="'w-120 max-h-40 outer-shadow rounded-sm'">
           <template v-slot:button>
-            <div
-              class="
-                outer-shadow
-                transition-colors
-                duration-200
-                bg-oldrose-500
-                hover:bg-oldrose-600
-                text-sm
-                px-3
-                py-2
-                mr-2
-                w-full
-                text-center
-                rounded-sm
-                cursor-pointer
-                font-medium
-              "
-            >
-              Channels
-            </div>
+            <div class="youtube-button mr-2 w-full text-center rounded-sm">Channels</div>
           </template>
           <template v-slot:content>
             <template v-for="(channel, index) in listChannels" :key="channel.id">
@@ -47,40 +28,13 @@
                 </div>
                 <div class="flex flex-1 flex-row justify-end child-hover font-medium">
                   <a
-                    class="
-                      flex flex-nowrap
-                      px-2
-                      py-1
-                      transition-colors
-                      duration-200
-                      bg-oldrose-500
-                      hover:bg-oldrose-600
-                      text-xs
-                      rounded-sm
-                      mr-1
-                      cursor-pointer
-                    "
+                    class="flex flex-nowrap youtube-button-small mr-1"
                     :href="'https://youtube.com/channel/' + channel.id"
                     target="_blank"
                   >
                     View
                   </a>
-                  <div
-                    class="
-                      px-2
-                      py-1
-                      transition-colors
-                      duration-200
-                      bg-oldrose-500
-                      hover:bg-oldrose-600
-                      text-xs
-                      rounded-sm
-                      cursor-pointer
-                    "
-                    @click="removeChannel(channel.id, index)"
-                  >
-                    Remove
-                  </div>
+                  <div class="youtube-button-small" @click="removeChannel(channel.id, index)">Remove</div>
                 </div>
               </div>
             </template>
@@ -107,24 +61,7 @@
           <div class="w-1/5">
             <Menu as="div" class="flex justify-center">
               <MenuButton class="flex justify-center w-full h-full text-sm rounded-r-sm">
-                <div
-                  class="
-                    w-full
-                    px-3
-                    py-2
-                    rounded-r-sm
-                    text-sm
-                    cursor-pointer
-                    transition-colors
-                    duration-200
-                    bg-oldrose-500
-                    hover:bg-oldrose-600
-                    font-medium
-                  "
-                  @click="searchChannels()"
-                >
-                  Search
-                </div>
+                <div class="w-full rounded-l-0 rounded-r-sm youtube-button" @click="searchChannels()">Search</div>
               </MenuButton>
               <transition
                 enter-active-class="transition duration-100 ease-out"
@@ -165,21 +102,7 @@
                             <img :src="channel.thumbnail" class="w-6 h-6 rounded-full mr-2" />
                             <div class="text-sm flex-1">{{ channel.name }}</div>
                             <div
-                              class="
-                                flex
-                                justify-end
-                                px-2
-                                py-1
-                                transition-colors
-                                duration-200
-                                bg-oldrose-500
-                                hover:bg-oldrose-600
-                                text-xs
-                                rounded-sm
-                                mr-1
-                                cursor-pointer
-                                child-hover
-                              "
+                              class="flex justify-end youtube-button-small child-hover"
                               @click="insertChannel(channel.id)"
                             >
                               Add to channel list
@@ -231,23 +154,7 @@
       </template>
     </div>
     <div class="flex flex-row-reverse w-full mt-4">
-      <div
-        class="
-          px-3
-          py-2
-          font-medium
-          transition-colors
-          duration-200
-          bg-oldrose-500
-          hover:bg-oldrose-600
-          text-sm
-          rounded-sm
-          cursor-pointer
-        "
-        @click="feelingLucky()"
-      >
-        I'm Feeling Lucky
-      </div>
+      <div class="youtube-button" @click="feelingLucky()">I'm Feeling Lucky</div>
     </div>
   </div>
 </template>
@@ -374,6 +281,14 @@ export default {
 </script>
 
 <style scoped>
+.youtube-button {
+  @apply px-3 py-2 font-medium transition-colors duration-200 bg-oldrose-500 hover:bg-oldrose-600 text-sm rounded-sm cursor-pointer;
+}
+
+.youtube-button-small {
+  @apply px-2 py-1 transition-colors duration-200 bg-oldrose-500 hover:bg-oldrose-600 text-xs rounded-sm cursor-pointer;
+}
+
 .loading-spin {
   animation: spin 2s infinite linear;
   transform-origin: 0 100%;

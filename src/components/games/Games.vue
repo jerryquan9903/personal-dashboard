@@ -6,18 +6,7 @@
   <transition name="fade-fast">
     <div v-show="openDetails">
       <div
-        class="
-          fixed
-          z-200
-          top-0
-          left-0
-          w-screen
-          h-screen
-          bg-dark
-          flex
-          justify-center
-          items-center
-        "
+        class="fixed z-200 top-0 left-0 w-screen h-screen bg-dark flex justify-center items-center"
         @click.self="closeGameDetails()"
       >
         <div class="max-w-5xl">
