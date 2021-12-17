@@ -1,5 +1,5 @@
 <template>
-  <div class="flex w-4/5 h-full rounded bg-coffee-800 outer-shadow">
+  <div class="flex w-4/5 h-full card outer-shadow">
     <div class="flex flex-col justify-start items-start w-full h-full">
       <div class="flex items-center text-2xl font-bold flex-1 ml-4">
         {{ month }}
@@ -8,7 +8,7 @@
         <div class="flex justify-evenly w-full">
           <template v-for="day in week" :key="day">
             <div
-              class="flex flex-col flex-1 justify-center items-center bg-coffee-900 rounded py-2 mx-1 cursor-pointer"
+              class="flex flex-col flex-1 justify-center items-center bg-matteblack-500 rounded py-2 mx-1 cursor-pointer"
               :class="day.ofWeek === today && 'bg-oldrose-500'"
               @click="getOnThisDay(month.split(' ')[0], day.ofMonth)"
             >

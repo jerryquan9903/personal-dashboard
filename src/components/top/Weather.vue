@@ -1,8 +1,14 @@
 <template>
   <div class="w-full h-full relative rounded">
     <div
-      class="absolute bg-coffee-800 rounded overflow-hidden z-200 p-2"
-      :class="zoom ? 'zoom-in-all outer-shadow' : 'zoom-out-all'"
+      class="absolute card overflow-hidden p-2"
+      :class="{
+        'zoom-in-all': zoom,
+        'zoom-out-all': !zoom,
+        'outer-shadow': zoom,
+        'z-200': popup === 'weather',
+        'z-0': popup !== 'weather',
+      }"
     >
       <transition name="fade-superfast">
         <div v-if="info" v-show="forecastDelay" class="absolute top-1/4 inset-x-0 bottom-0">
@@ -12,14 +18,22 @@
     </div>
     <div
       v-if="info"
-      class="bg-cover bg-right outer-shadow absolute inset-0 z-200"
-      :class="zoom ? 'rounded-t zoom-in-bg' : 'rounded zoom-out-bg cursor-pointer'"
+      class="bg-cover bg-right outer-shadow absolute inset-0"
+      :class="{
+        'zoom-in-bg': zoom,
+        'rounded-t': zoom,
+        'zoom-out-bg': !zoom,
+        rounded: !zoom,
+        'cursor-pointer': !zoom,
+        'z-200': popup === 'weather',
+        'z-0': popup !== 'weather',
+      }"
       :style="{ backgroundImage: 'url(' + image + ')' }"
       @click="zoomWeather(true)"
     >
       <div
         class="flex absolute inset-0 flex-row w-full h-full bg-mask-light overflow-hidden"
-        :class="zoom ? ' rounded-t' : 'rounded'"
+        :class="zoom ? 'rounded-t' : 'rounded'"
       >
         <div class="flex flex-col flex-1 h-full p-2 text-shadow text-sm font-medium">
           <div>{{ info.city + ", " + info.country }}</div>
@@ -59,6 +73,11 @@ export default {
   components: {
     Forecast,
   },
+  computed: {
+    popup() {
+      return this.$store.state.popup;
+    },
+  },
   data() {
     return {
       geolocation: null,
@@ -66,23 +85,23 @@ export default {
       image: null,
       updateInterval: null,
       zoom: false,
-      zoomDelay: false,     // delay for today's weather to the right
+      zoomDelay: false, // delay for today's weather to the right
       forecastDelay: false, // delay animation for forecast
     };
   },
   methods: {
     getWeather() {
       api
-        .get(`/weather/get-weather?lat=${this.geolocation.latitude}&lon=${this.geolocation.longitude}`)
+        .get(`/weather?lat=${this.geolocation.latitude}&lon=${this.geolocation.longitude}`)
         .then((success) => {
           this.info = {
             city: success.data.city,
             country: success.data.country,
             now: success.data.current,
             today: success.data.daily[0],
-            hourly: success.data.hourly.slice(1), 
-            daily: success.data.daily.slice(1)
-          }
+            hourly: success.data.hourly.slice(1),
+            daily: success.data.daily.slice(1),
+          };
           this.getWeatherImage();
         })
         .catch((e) => console.log(e));
@@ -128,15 +147,26 @@ export default {
       return new Promise((success) => navigator.geolocation.getCurrentPosition(success));
     },
     zoomWeather(value) {
-      // delay a bit so that text does not appear wrapped
       if (value) {
+        this.$store.commit("showPopup", "weather");
         this.zoom = value;
+
+        // delay appearance of today details, avoiding wrapping text
         setTimeout(() => (this.zoomDelay = value), 100);
+
+        // delay appearance of forecast until completely opened, avoiding animation lag
         setTimeout(() => (this.forecastDelay = value), 250);
       } else {
         this.forecastDelay = value;
-        setTimeout(() => (this.zoom = value), 150);
-        setTimeout(() => (this.zoomDelay = value), 150);
+
+        // delay closing until forecast fades out, avoiding animation lag
+        setTimeout(() => {
+          this.zoom = value;
+          this.zoomDelay = value;
+        }, 150);
+
+        // change z-index back to 0 after closing popup
+        setTimeout(() => this.$store.commit("showPopup", ""), 350);
       }
     },
   },

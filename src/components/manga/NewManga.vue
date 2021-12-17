@@ -16,7 +16,7 @@
               loading="lazy"
               class="row-start-1 col-start-1 object-cover manga-cover rounded"
             />
-            <div v-else class="row-start-1 col-start-1 line-ratio object-cover cover-position rounded bg-coffee-200" />
+            <div v-else class="row-start-1 col-start-1 manga-cover object-cover cover-position rounded bg-coffee-200" />
             <div class="flex flex-col row-start-1 col-start-1 justify-center bg-mask-dark rounded w-full h-full px-1">
               <div class="text-sm font-medium text-shadow max-w-full truncate">{{ manga.name }}</div>
               <div class="text-xs text-shadow">

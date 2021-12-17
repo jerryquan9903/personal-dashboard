@@ -4,9 +4,15 @@
       <div
         v-if="covid"
         @mouseenter="mouseEnter()"
-        @mouseleave="hover = false"
-        class="absolute z-100 inset-0 outer-shadow rounded overflow-hidden bg-cover bg-top"
-        :class="hover ? 'zoom-in-all' : 'h-0 zoom-out-all'"
+        @mouseleave="mouseLeave()"
+        class="absolute inset-0 outer-shadow rounded overflow-hidden bg-cover bg-top"
+        :class="{
+          'zoom-in-all': hover,
+          'zoom-out-all': !hover,
+          'h-0': !hover,
+          'z-100': popup === 'covid',
+          'z-10': popup !== 'covid',
+        }"
         :style="backgroundImage"
       >
         <div class="w-full h-full p-2 text-shadow flex flex-col items-center bg-mask" :style="normalHeight">
@@ -21,7 +27,8 @@
       <div
         v-if="covid"
         @mouseenter="mouseEnter()"
-        class="absolute z-100 inset-0 flex flex-col justify-center rounded items-center h-full p-2 text-shadow"
+        class="absolute inset-0 flex flex-col justify-center rounded items-center h-full p-2 text-shadow"
+        :class="popup === 'covid' ? 'z-100' : 'z-10'"
         ref="normalDiv"
       >
         <div class="text-3xl font-bold">{{ covid.newCases.toLocaleString() }}</div>
@@ -30,13 +37,23 @@
     </a>
   </div>
   <transition name="fade-fast">
-    <div v-show="hover" class="fixed z-90 top-0 left-0 w-screen h-screen bg-dark" @click="zoomWeather(false)" />
+    <div
+      v-show="hover"
+      class="fixed top-0 left-0 w-screen h-screen bg-dark"
+      :class="popup === 'covid' ? 'z-90' : 'z-0'"
+      @click="zoomWeather(false)"
+    />
   </transition>
 </template>
 
 <script>
 import api from "../../services/api";
 export default {
+  computed: {
+    popup() {
+      return this.$store.state.popup;
+    },
+  },
   data() {
     return {
       covid: null,
@@ -53,6 +70,11 @@ export default {
     mouseEnter() {
       this.normalHeight.paddingTop = this.$refs.normalDiv?.offsetHeight + "px" || 400;
       this.hover = true;
+      this.$store.commit('showPopup', 'covid');
+    },
+    mouseLeave() {
+      this.hover = false;
+      setTimeout(() => this.$store.commit('showPopup', ''), 250);
     },
     handleResize() {
       this.normalHeight.paddingTop = this.$refs.normalDiv?.offsetHeight + "px" || 400;

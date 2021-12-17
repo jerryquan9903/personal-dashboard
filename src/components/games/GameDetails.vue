@@ -1,12 +1,16 @@
 <template>
-  <div class="p-4 rounded bg-coffee-800 shadow-sm" v-if="gameDetails">
+  <div class="card shadow-sm" :class="loaded ? 'p-4' : 'p-0'" v-if="gameDetails">
     <div v-show="loaded" class="flex flex-row items-start max-h-1/2">
-      <img :src="gameDetails.image" class="w-96 h-128 object-cover rounded outer-shadow mr-4" @load="setLoaded(true)" />
+      <img
+        :src="gameDetails.image"
+        class="w-96 h-128 object-cover rounded outer-shadow mr-4 bg-mask-light img-dark"
+        @load="setLoaded(true)"
+      />
       <div class="flex flex-col h-128">
         <div class="text-2xl font-medium mb-4">{{ gameDetails.name }}</div>
         <div class="pl-1 font-medium">Details</div>
-        <div class="mb-4 mt-1 bg-coffee-900 rounded px-3 pt-2 pb-1">
-          <div class="info-grid text-sm" v-for="item in gameDetails.info" :key="item">
+        <div class="mb-4 mt-1 bg-matteblack-900 rounded px-3 pt-2 pb-1">
+          <div class="info-grid text-sm" v-for="item in gameDetails.data" :key="item">
             <div class="w-full font-light pb-1">{{ item.label }}</div>
             <div class="w-full font-normal pb-1">{{ item.value }}</div>
           </div>
@@ -19,7 +23,7 @@
             overflow-x-hidden overflow-y-scroll
             custom-scrollbar
             mt-1
-            bg-coffee-900
+            bg-matteblack-900
             rounded
             p-3
             leading-6
@@ -28,28 +32,11 @@
         ></div>
       </div>
     </div>
-    <div v-show="!loaded">
-      <div class="animate-pulse flex flex-row items-start">
-        <div class="w-96 h-128 rounded bg-bluegray-500 mr-4"></div>
-        <div class="flex flex-col h-128 w-144">
-          <div class="w-64 h-8 mb-4 bg-bluegray-500 rounded"></div>
-          <div class="pl-1 w-20 h-6 font-medium bg-bluegray-500 rounded"></div>
-          <div class="mb-4 mt-1 bg-coffee-900 rounded-md px-3 pt-2 pb-1">
-            <div class="info-grid w-full text-sm" v-for="num in skeleton" :key="num">
-              <div class="h-5 w-3/4 rounded mb-1 bg-bluegray-500"></div>
-              <div class="h-5 w-3/4 rounded bg-bluegray-500"></div>
-            </div>
-          </div>
-          <div class="pl-1 w-28 h-6 font-medium bg-bluegray-500 rounded"></div>
-          <div class="text-sm font-light mt-1 bg-coffee-900 rounded-md p-3 flex-1"></div>
-        </div>
-      </div>
-    </div>
   </div>
 </template>
 
 <script>
-import parseGameInfo from "../../functions/parseGameInfo";
+import parseGameInfo from "../../services/parseGameInfo";
 import api from "../../services/api";
 
 export default {
@@ -57,7 +44,13 @@ export default {
   props: ["id"],
   data() {
     return {
-      gameDetails: null,
+      gameDetails: {
+        id: "",
+        name: "",
+        image: "",
+        desc: "",
+        data: [],
+      },
       loaded: false,
       skeleton: 6,
     };
@@ -72,12 +65,9 @@ export default {
       if (this.id) {
         this.setLoaded(false);
         api
-          .get(`/games/game-details?id=${this.id}`)
+          .get(`/games/details?id=${this.id}`)
           .then((success) => {
-            let rawDetails = { ...success.data };
-
-            rawDetails.info = parseGameInfo(success.data.info);
-            this.gameDetails = rawDetails;
+            this.gameDetails = parseGameInfo(success.data);
           })
           .catch((e) => console.log(e));
       }
@@ -90,5 +80,9 @@ export default {
 .info-grid {
   display: grid;
   grid-template-columns: 25% 75%;
+}
+
+.img-dark {
+  filter: brightness(75%)
 }
 </style>

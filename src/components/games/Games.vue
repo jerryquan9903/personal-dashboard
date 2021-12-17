@@ -37,7 +37,7 @@ export default {
   },
 
   methods: {
-    openGameDetails: function (args) {
+    openGameDetails: function(args) {
       this.gameId = args[0];
       this.openDetails = args[1];
     },

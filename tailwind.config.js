@@ -42,6 +42,17 @@ module.exports = {
         800: "#562527",
         900: "#39181A"
       },
+      matteblack: {
+        100: "#262626",
+        200: "#232323",
+        300: "#202020",
+        400: "#1D1D1D",
+        500: "#1A1A1A",
+        600: "#171717",
+        700: "#141414",
+        800: "#111111",
+        900: "#0E0E0E",
+      },
       bluegray: colors.blueGray,
       coolgray: colors.coolGray,
       gray: colors.gray,

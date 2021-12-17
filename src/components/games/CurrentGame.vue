@@ -1,23 +1,22 @@
 <template>
-  <div class="flex flex-col h-full rounded bg-coffee-800 outer-shadow mb-2 text-shadow">
+  <div class="flex flex-col h-full card outer-shadow mb-4 text-shadow">
     <div class="font-medium text-xl w-full text-left rounded-t p-2">Currently playing</div>
     <div class="flex flex-col flex-1 justify-start items-start h-full rounded-b">
       <div
         class="w-full h-full rounded-b bg-cover bg-center cursor-pointer"
-        :style="{ backgroundImage: 'url(' + image + ')' }"
+        :style="{ backgroundImage: 'url(' + game.image + ')' }"
         @click="getGameInfoFull()"
       >
         <div class="w-full h-full bg-mask-dark flex flex-col justify-start items-start p-2 rounded-b">
           <div v-show="noLastPlayed" class="italic text-xs mb-2 text-orange-500">
             You are not currently playing any games. Here is one you haven't completed.
           </div>
-          <div class="font-medium text-lg -mt-1 mb-2">{{ name }}</div>
-          <div class="current-grid text-sm font-light w-full" v-for="item in data" :key="item">
+          <div class="font-medium text-lg -mt-1 mb-2">{{ game.name }}</div>
+          <div class="current-grid text-sm font-light w-full" v-for="item in game.data" :key="item">
             <div class="mb-1 font-light pr-0">{{ item.label }}</div>
             <div class="font-normal">{{ item.value }}</div>
           </div>
         </div>
-        <!-- </div> -->
       </div>
     </div>
   </div>
@@ -25,17 +24,19 @@
 
 <script>
 import api from "../../services/api";
-import parseGameInfo from "../../functions/parseGameInfo";
+import parseGameInfo from "../../services/parseGameInfo";
 
 export default {
   name: "current-game",
   data() {
     return {
       noLastPlayed: false,
-      name: null,
-      image: null,
-      data: null,
-      id: null,
+      game: {
+        id: "",
+        name: "",
+        image: "",
+        data: []
+      },
       updateInterval: null,
     };
   },
@@ -46,19 +47,15 @@ export default {
     },
 
     getGameInfoFull() {
-      this.$emit("details", [this.id, true]);
+      this.$emit("details", [this.game.id, true]);
     },
 
     // get last played game's info
     getGameInfo() {
       api
-        .get("games/last-played")
+        .get("/games/current")
         .then((success) => {
-          this.name = success.data.name;
-          this.image = success.data.image;
-          this.data = parseGameInfo(success.data.info);
-          this.id = success.data.id;
-          this.noLastPlayed = success.data.no_last_played;
+          this.game = parseGameInfo(success.data);
         })
         .catch((e) => {
           console.log(e);

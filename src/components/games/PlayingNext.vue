@@ -1,6 +1,6 @@
 <template>
-  <div class="flex flex-col h-full flex-1 rounded bg-coffee-800 outer-shadow">
-    <div class="font-medium text-xl w-full text-left p-2 border-b border-coffee-900">Plan to play</div>
+  <div class="flex flex-col h-full flex-1 card outer-shadow">
+    <div class="font-medium text-xl w-full text-left p-2 border-b border-matteblack-900">Plan to play</div>
     <div class="flex flex-col justify-start items-center m-2 flex-1 rounded-md">
       <div v-show="loaded" class="grid grid-cols-1">
         <template v-for="(display, index) in allNextGames" :key="display">
@@ -36,12 +36,12 @@
         </template>
       </div>
       <!--Skeleton-->
-      <div v-show="!loaded">
+      <!-- <div v-show="!loaded">
         <div class="animate-pulse grid grid-cols-2 gap-2 h-full">
           <div class="w-36 h-48 rounded-sm bg-bluegray-500"></div>
           <div class="w-36 h-48 rounded-sm bg-bluegray-500"></div>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -74,7 +74,7 @@ export default {
   },
   beforeMount() {
     api
-      .get("games/next-games")
+      .get("games/next")
       .then((success) => {
         // change image to smaller size
         let dataWithSmallerImage = success.data.map((game) => {
@@ -112,6 +112,6 @@ export default {
 }
 
 .image-gradient {
-  background: linear-gradient(0deg, #35261d99 30%, #35261d66 100%);
+  background: linear-gradient(0deg, #17171799 30%, #17171766 100%);
 }
 </style>    

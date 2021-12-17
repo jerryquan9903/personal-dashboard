@@ -49,15 +49,15 @@ body::-webkit-scrollbar {
 }
 
 .bg-mask-light {
-  background-color: #1B130E33;
+  background-color: #29292933;
 }
 
 .bg-mask {
-  background-color: #1B130E66;
+  background-color: #20202066;
 }
 
 .bg-mask-dark {
-  background-color: #35261DAA;
+  background-color: #171717AA;
 }
 
 
@@ -83,20 +83,8 @@ body::-webkit-scrollbar {
   text-shadow: 0px 1px 2px #222;
 }
 
-.bg-card {
-  background-color: #1e263a;
-}
-
-.bg-card-content {
-  background-color: #141824;
-}
-
-.bg-card-light {
-  background-color: #293553;
-}
-
 .bg-dark {
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.75);
 }
 
 .absolute-center {
@@ -113,4 +101,14 @@ body::-webkit-scrollbar {
 .manga-cover {
   aspect-ratio: 4 / 1;
   object-position: center 25%;
+}
+
+h1 {
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.card {
+  @apply rounded-md bg-matteblack-700;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
