@@ -56,6 +56,7 @@ export default {
         .get("/games/current")
         .then((success) => {
           this.game = parseGameInfo(success.data);
+          if (success.data.isNotCurrent) this.noLastPlayed = true;
         })
         .catch((e) => {
           console.log(e);

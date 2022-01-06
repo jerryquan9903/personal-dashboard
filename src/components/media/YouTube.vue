@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full flex flex-col p-2 rounded bg-coffee-800 outer-shadow overflow-hidden">
+  <div class="w-full flex flex-col p-2 card outer-shadow overflow-hidden">
     <!-- Search bar and channel view/remove -->
     <div class="flex flex-row">
       <div class="w-1/5 relative">
@@ -16,7 +16,7 @@
                   w-full
                   p-1
                   rounded-sm
-                  bg-coffee-900
+                  bg-matteblack-100
                   hover:bg-background
                   text-sm
                   parent-hover
@@ -47,7 +47,7 @@
             class="
               w-4/5
               h-full
-              bg-coffee-900
+              bg-matteblack-100
               outline-none
               placeholder-cornsilk-100 placeholder-opacity-50
               text-sm
@@ -79,7 +79,7 @@
                     top-full
                     mt-2
                     origin-top-left
-                    bg-coffee-900
+                    bg-matteblack-100
                     rounded-sm
                     shadow-lg
                     ring-1 ring-black ring-opacity-5
@@ -121,10 +121,10 @@
                   >
                     <span class="mr-2">Searching...</span>
                     <div class="h-6 w-6 relative">
-                      <div class="rounded-full h-4 w-4 bg-coffee-900 absolute-center z-40" />
-                      <div class="h-6 w-6 absolute-center bg-coffee-800 rounded-full z-20" />
+                      <div class="rounded-full h-4 w-4 bg-matteblack-900 absolute-center z-40" />
+                      <div class="h-6 w-6 absolute-center bg-matteblack-800 rounded-full z-20" />
                       <div
-                        class="rounded-tr-full h-3 w-3 absolute z-30 bottom-1/2 left-1/2 bg-coffee-600 loading-spin"
+                        class="rounded-tr-full h-3 w-3 absolute z-30 bottom-1/2 left-1/2 bg-matteblack-600 loading-spin"
                       />
                     </div>
                   </div>
@@ -141,7 +141,7 @@
         <transition name="scroll" class="row-start-1 col-start-1">
           <div v-if="index === newVideoOnShow" class="w-full flex flex-col mt-4 transition-scroll">
             <div class="text-xs pl-2 mb-1 text-oldrose-500">
-              <span class="font-bold">{{ video.channel }}</span>
+              <span class="font-bold">{{ video.channelName }}</span>
               <span class="">
                 released a new video
                 <b>·</b>
@@ -192,7 +192,7 @@ export default {
   methods: {
     removeChannel(id, index) {
       api
-        .post("/youtube/remove-channel", { id: id })
+        .post("/youtube/channel/delete", { id: id })
         .then(() => {
           this.listChannels.splice(index, 1);
           this.getChannels();
@@ -209,7 +209,7 @@ export default {
     // Also replace old videos in the database
     getNewVideos() {
       api
-        .get("/youtube/get-new-videos")
+        .get("/youtube/video/new")
         .then((success) => {
           if (Array.isArray(success.data)) {
             this.newVideos = success.data;
@@ -226,7 +226,7 @@ export default {
     searchChannels() {
       if (this.searchQuery.length > 0)
         api
-          .get(`/youtube/search-channels?query=${this.searchQuery}`)
+          .get(`/youtube/channel/search?name=${this.searchQuery}`)
           .then((success) => {
             this.searchResult = [...success.data];
           })
@@ -234,7 +234,7 @@ export default {
     },
     insertChannel(id) {
       api
-        .post("/youtube/insert-channel", { id: id })
+        .post("/youtube/channel/insert", { id: id })
         .then(() => {
           this.searchQuery = "";
           this.getChannels();
@@ -244,7 +244,7 @@ export default {
     },
     getChannels() {
       api
-        .get("/youtube/get-channels")
+        .get("/youtube/channel/get")
         .then((success) => {
           let sorted = [...success.data].sort(function (a, b) {
             return a.name.localeCompare(b.name);

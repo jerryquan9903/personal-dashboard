@@ -6,15 +6,15 @@
     <!-- <div id="grid-covid" class="flex flex-row h-full"><Covid /></div> -->
     <!-- <div id="grid-cats" class="flex flex-row h-full"><Cats /></div> -->    
     <div id="grid-games" class="flex flex-col h-full"><Games /></div>
-    <!-- <div id="grid-media" class="flex flex-col h-full"><SocialMedia /></div>
-    <div id="grid-manga" class="flex flex-col h-full"><Manga /></div> -->
+    <div id="grid-media" class="flex flex-col h-full"><SocialMedia /></div>
+    <!-- <div id="grid-manga" class="flex flex-col h-full"><Manga /></div> -->
   </div>
 </template>
 
 <script>
 import Games from "./components/games/Games";
 import Datetime from "./components/top/Datetime";
-// import SocialMedia from "./components/media/SocialMedia";
+import SocialMedia from "./components/media/SocialMedia";
 import Weather from "./components/top/Weather";
 // import Covid from "./components/top/Covid";
 // // import Cats from "./components/top/Cats";
@@ -26,7 +26,7 @@ export default {
   components: {
     Datetime,
     Games,
-    // SocialMedia,
+    SocialMedia,
     Weather,
     // Covid,
     // Manga,
@@ -45,7 +45,7 @@ export default {
   /* color: #efebce; */
   /* background: #0d0907; */
   color: #EEE0CB;
-  background: #0E0E0E
+  background: #141414
 }
 
 #nav {

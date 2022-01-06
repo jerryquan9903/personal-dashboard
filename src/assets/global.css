@@ -109,6 +109,6 @@ h1 {
 }
 
 .card {
-  @apply rounded-md bg-matteblack-700;
+  @apply rounded-md bg-matteblack-400;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }

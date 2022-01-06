@@ -28,7 +28,7 @@
           :class="panelStyle"
         >
           <div class="overflow-hidden w-full h-full">
-            <div class="flex flex-col bg-coffee-900 w-full h-full p-2">
+            <div class="flex flex-col bg-matteblack-100 w-full h-full p-2">
               <slot name="content" />
             </div>
           </div>

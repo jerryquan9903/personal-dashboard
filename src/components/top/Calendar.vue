@@ -8,7 +8,7 @@
         <div class="flex justify-evenly w-full">
           <template v-for="day in week" :key="day">
             <div
-              class="flex flex-col flex-1 justify-center items-center bg-matteblack-500 rounded py-2 mx-1 cursor-pointer"
+              class="flex flex-col flex-1 justify-center items-center bg-matteblack-100 rounded py-2 mx-1 cursor-pointer"
               :class="day.ofWeek === today && 'bg-oldrose-500'"
               @click="getOnThisDay(month.split(' ')[0], day.ofMonth)"
             >
