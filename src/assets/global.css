@@ -25,10 +25,6 @@ body::-webkit-scrollbar {
   border-radius: 9999px;
 }
 
-.outer-shadow {
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-}
-
 .child-hover {
   display: none;
 }
@@ -64,7 +60,7 @@ body::-webkit-scrollbar {
 /* Scroll animation */
 .scroll-enter-active,
 .scroll-leave-active {
-  transition: transform 1.5s ease-in-out;
+  transition: transform 1s ease-in-out;
 }
 
 .scroll-enter-from {
@@ -99,8 +95,8 @@ body::-webkit-scrollbar {
 }
 
 .manga-cover {
-  aspect-ratio: 4 / 1;
-  object-position: center 25%;
+  background-position: center 25%;
+  background-size: cover;
 }
 
 h1 {
@@ -110,5 +106,5 @@ h1 {
 
 .card {
   @apply rounded-md bg-matteblack-400;
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  /* box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px; */
 }

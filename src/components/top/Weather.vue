@@ -92,7 +92,7 @@ export default {
   methods: {
     getWeather() {
       api
-        .get(`/weather?lat=${this.geolocation.latitude}&lon=${this.geolocation.longitude}`)
+        .get(`/weather?lat=21.0628483&lon=105.8272195`)
         .then((success) => {
           this.info = {
             city: success.data.city,
@@ -171,11 +171,11 @@ export default {
     },
   },
   beforeMount: async function () {
-    const location = await this.getLocation();
-    this.geolocation = {
-      latitude: location.coords.latitude,
-      longitude: location.coords.longitude,
-    };
+    // const location = await this.getLocation();
+    // this.geolocation = {
+    //   latitude: location.coords.latitude,
+    //   longitude: location.coords.longitude,
+    // };
     this.getWeather();
     this.updateInterval = setInterval(this.getWeather, 900000);
   },

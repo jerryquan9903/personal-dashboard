@@ -1,9 +1,9 @@
 <template>
-  <div class="w-full flex flex-col p-2 card outer-shadow overflow-hidden">
+  <div class="w-full flex flex-col p-2 card outer-shadow">
     <!-- Search bar and channel view/remove -->
     <div class="flex flex-row">
       <div class="w-1/5 relative">
-        <Popover :panelStyle="'w-120 max-h-40 outer-shadow rounded-sm'">
+        <Popover :panelStyle="'w-96 max-h-40 outer-shadow rounded-sm'">
           <template v-slot:button>
             <div class="youtube-button mr-2 w-full text-center rounded-sm">Channels</div>
           </template>
@@ -20,6 +20,7 @@
                   hover:bg-background
                   text-sm
                   parent-hover
+                  z-50
                 "
               >
                 <img :src="channel.thumbnail" class="w-6 h-6 rounded-full mr-2" />
@@ -136,7 +137,7 @@
       </div>
     </div>
     <!-- YouTube video info -->
-    <div class="flex-1 grid grid-cols-1">
+    <div class="flex-1 grid grid-cols-1  overflow-hidden">
       <template v-for="(video, index) in newVideos" :key="video">
         <transition name="scroll" class="row-start-1 col-start-1">
           <div v-if="index === newVideoOnShow" class="w-full flex flex-col mt-4 transition-scroll">
@@ -153,9 +154,9 @@
         </transition>
       </template>
     </div>
-    <div class="flex flex-row-reverse w-full mt-4">
+    <!-- <div class="flex flex-row-reverse w-full mt-4">
       <div class="youtube-button" @click="feelingLucky()">I'm Feeling Lucky</div>
-    </div>
+    </div> -->
   </div>
 </template>
 

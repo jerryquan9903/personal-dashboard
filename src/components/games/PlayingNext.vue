@@ -15,8 +15,6 @@
                     transition
                     duration-250
                     ease-in-out
-                    transform
-                    hover:scale-105
                     cursor-pointer
                     relative
                     rounded-sm

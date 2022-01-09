@@ -1,13 +1,13 @@
 <template>
   <div id="app-grid">
-    <div id="grid-datetime" class="flex flex-row h-full"><Datetime /></div>
+    <div id="grid-datetime" class="flex flex-row"><Datetime /></div>
     <!-- <div id="grid-today" class="flex flex-col h-full"><OnThisDay /></div> -->
-    <div id="grid-weather" class="flex flex-row h-full"><Weather /></div>
+    <div id="grid-weather" class=""><Weather /></div>
     <!-- <div id="grid-covid" class="flex flex-row h-full"><Covid /></div> -->
     <!-- <div id="grid-cats" class="flex flex-row h-full"><Cats /></div> -->    
-    <div id="grid-games" class="flex flex-col h-full"><Games /></div>
-    <div id="grid-media" class="flex flex-col h-full"><SocialMedia /></div>
-    <!-- <div id="grid-manga" class="flex flex-col h-full"><Manga /></div> -->
+    <div id="grid-games" class=""><Games /></div>
+    <div id="grid-media" class=""><SocialMedia /></div>
+    <div id="grid-manga" class=""><Manga /></div>
   </div>
 </template>
 
@@ -17,8 +17,8 @@ import Datetime from "./components/top/Datetime";
 import SocialMedia from "./components/media/SocialMedia";
 import Weather from "./components/top/Weather";
 // import Covid from "./components/top/Covid";
-// // import Cats from "./components/top/Cats";
-// import Manga from "./components/manga/Manga";
+// import Cats from "./components/top/Cats";
+import Manga from "./components/manga/Manga";
 // import OnThisDay from "./components/top/OnThisDay";
 
 export default {
@@ -29,7 +29,7 @@ export default {
     SocialMedia,
     Weather,
     // Covid,
-    // Manga,
+    Manga,
     // OnThisDay
   },
 };
@@ -64,11 +64,11 @@ export default {
 #app-grid {
   display: grid;
   grid-template-areas:
-    "datetime datetime weather weather covid today"
-    "games media media manga manga manga"
-    "games media media other other other";
-  grid-template-rows: 2fr minmax(0, 5fr) 5fr;
-  grid-template-columns: 6fr 7fr 1fr 2fr 3fr 5fr;
+    "datetime datetime weather covid today"
+    "games media manga manga manga"
+    "games media  other other other";
+  grid-template-rows: 2fr 5fr 5fr;
+  grid-template-columns: 6fr 8fr 3fr 2fr 5fr;
   gap: 1rem;
   padding: 1rem;
   height: 100vh;

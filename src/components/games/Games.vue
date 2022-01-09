@@ -3,15 +3,13 @@
     <CurrentGame @details="openGameDetails($event)" />
     <PlayingNext @details="openGameDetails($event)" />
   </div>
-  <transition name="fade-fast">
-    <div v-show="openDetails">
-      <div
-        class="fixed z-200 top-0 left-0 w-screen h-screen bg-dark flex justify-center items-center"
-        @click.self="closeGameDetails()"
-      >
-        <div class="max-w-5xl">
-          <GameDetails :id="gameId" />
-        </div>
+  <transition
+    name="fade-fast"
+    class="fixed z-200 top-0 left-0 w-screen h-screen bg-dark flex justify-center items-center"
+  >
+    <div v-show="openDetails" @click.self="closeGameDetails()">
+      <div class="max-w-5xl">
+        <GameDetails :id="gameId" />
       </div>
     </div>
   </transition>
@@ -37,7 +35,7 @@ export default {
   },
 
   methods: {
-    openGameDetails: function(args) {
+    openGameDetails: function (args) {
       this.gameId = args[0];
       this.openDetails = args[1];
     },
@@ -52,7 +50,6 @@ export default {
 .fade-fast-enter-active,
 .fade-fast-leave-active {
   transition: opacity 0.25s ease;
-  z-index: 200;
 }
 
 .fade-fast-enter-from,
